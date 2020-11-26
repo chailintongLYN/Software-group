@@ -1,0 +1,130 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    outline: 0;
+    -webkit-tap-highlight-color: transparent;
+}
+.head{
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    z-index: 1000;
+    width: 100%;
+    background-color: rgb(255, 133, 42);
+}
+.head .header-bd{
+    position: absolute;
+    top: 0px;left: 55px;
+    width: 320px;height: 50px;
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAD8AAAAwCAYAAACmCaIKAAAAGXRFW…wbqnjl3BeayIl1CJspHfQ8JeTyS5Rn4AbLdSp9jXdwnwkwAGXl2KVI+BEMAAAAAElFTkSuQmCC);
+    background-size: 27px 20px;
+    background-repeat: no-repeat;
+    background-position: 9px center;
+}
+.placeholder{
+    position: absolute;
+    top: 7px;
+    width: 300px;
+    height: 35px;
+    display: block;
+    font-size: 0px;
+    background-color: rgb(255, 78, 34);
+    text-align: center;
+    border-radius: 4px;
+    padding-left: 0px;
+    padding-right: 0px;
+    text-align: center;
+}
+.head .header-bd .placeholder .text{
+    position: absolute;
+    top: 5px;
+    left: 100px;
+    height: 25px;
+    line-height: 25px;
+    font-size: 13px;
+    display: inline-block;
+    color: rgb(240, 224, 220);
+}
+.iconfont{
+    font-family: h5index-iconfont;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-stroke-width: .2px;
+}
+.head .header-bd .placeholder .text::before {
+    width: 15px;height: 24px;
+    display: inline-block;
+    color: rgb(255, 255, 255);
+    margin-right: 5px;
+}
+.head .tao::before{
+    width: 30px;height: 30px;
+    position: absolute;
+    left: 10px;
+    color: white;
+}
+.lunbotu{
+    position: absolute;
+    width: 375px;
+    height: 120px;
+    top: 50px;
+    height: 120px;
+    overflow: hidden;
+}
+.space-carousel {
+    background: #DEF1E5;
+    overflow: hidden;
+  }
+  .am-wingblank .am-wingblank-lg{
+      height: 120px;
+  }
+  .shangpin{
+      display: inline-block;
+      margin-top: 180px;
+      width: 100%;
+      height: 1250px;
+      padding-left: 11px;
+      margin-right:10px;
+      background-color: #f2f2f2;
+  }
+  .list{
+      float:left;
+      top: 9px;
+      left: 4px;
+      width: 171px;height: 230px;
+      background-color: white;
+      border-radius: 6px;
+      margin-right: 10px;
+  }
+  .list img{
+      width:170px;
+      border-radius: 6px;
+      position: relative;
+      float:left;
+      top: 0px;left: 0px;
+  }
+  .p1{
+      position: relative;
+      float: left;
+      top: 10px;
+      left: 25px;
+  }
+  .p2 {
+      position: relative;
+      top: 18px;
+      float: left;
+      left: 15px;
+  }
+  .p2 .span1{
+      position: relative;
+      float: left;
+      left: -5px;
+      color: #ff5500;
+  }
+  .p2 .span2{
+      position: relative;
+      float: right;
+      right: -5px;
+  }
+ 

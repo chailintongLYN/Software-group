@@ -1,0 +1,35 @@
+*{
+    margin: 0px;
+}
+.container{
+    background-image: url(./login背景.jpg);
+    width:100% ;
+    background-repeat: no-repeat;
+    height: 700px;
+}
+form{
+    display: inline-block;
+    position: absolute;
+    top: 250px;
+    left: 50px;
+    font-size: 15px;
+    
+}
+input{
+    width: 275px;
+    height: 42px;
+    border-radius: 5px;
+    border: 1px;
+    background-color:rgb(255, 255, 255);
+    font-size: 12px;
+}
+.password{
+    position: absolute;
+    top: 60px;
+}
+.denglu{
+    position: absolute;
+    top: 125px;
+    background-color:#FF4A3D;
+    color:#fff;
+}
