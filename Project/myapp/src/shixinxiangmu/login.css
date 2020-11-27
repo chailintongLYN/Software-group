@@ -1,14 +1,23 @@
 *{
     margin: 0px;
 }
+body,html{
+	margin:0px;
+	height:100%;
+}
+
 .container{
     background-image: url(./login背景.jpg);
     width:100% ;
     background-repeat: no-repeat;
     height: 100%;
     background-size:100% 100%;
+    margin: 0 auto;
+    position: absolute;
+    top: 0px;bottom: 0px;
 
 }
+
 form{
     display: inline-block;
     position: absolute;
@@ -31,11 +40,26 @@ input{
 }
 .denglu{
     position: absolute;
-    top: 125px;
+    top: 130px;
+    width: 120px;
     background-color:#FF4A3D;
     color:#fff;
 }
-.ll{
+.zhuci{
+    position: absolute;
+    top: 130px;left: 155px;
+    width: 120px;
+    background-color:#FF4A3D;
+    color:#fff;
+    text-align: center;
+}
+.tishi{
+    position: absolute;
+    top: 110px;
+    font-size: 14px;
+    color:rgb(112, 7, 7);
+}
+/* .ll{
     width: 400px;
     height: 100px;
-}
+} */
