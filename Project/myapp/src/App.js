@@ -35,6 +35,7 @@ import { BrowserRouter as Router, Redirect, Route, NavLink, Switch } from 'react
 import Login from './shixinxiangmu/Login'
 import Home from './shixinxiangmu/Home'
 import Search from './shixinxiangmu/Search'
+import Logon from './shixinxiangmu/Logon'
 const App=()=>{
 	return(
 		<Router>
@@ -42,6 +43,7 @@ const App=()=>{
 				<Route exact path='/' component={Home}/>
 				<Route path='/login' component={Login}/>
 				<Route path='/search' component={Search}/>
+				<Route path='/logon' component={Logon}/>
 			</Switch>
 		
 		</Router>
