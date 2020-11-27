@@ -71,7 +71,7 @@ class Login extends Component {
         // 登陆成功之后的跳转
         this.props.history.push(RedirectUrl);
     }
-    render() {
+    render(props) {
         return (
             <body>
                 <div class="container">
@@ -100,7 +100,7 @@ class Login extends Component {
                         </div>
                         <span class='tishi'>若您没有账号，请先注册</span>
                         <input type="submit" value="登录" class="denglu" />
-                        <input type='botton' value="注册" class="zhuci"/>
+                        <input type='botton' value="注册" class="zhuci" onClick={()=>this.props.history.push('/logon')}/>
                     </form>
                 </div>
             </body>
