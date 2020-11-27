@@ -52,9 +52,8 @@ class Login extends Component {
         return (
             
             <div class="container">
-                <form className="login" onSubmit={this.handleSumit}>
+                <form onSubmit={this.handleSumit}>
                     <div>
-                        <label htmlFor="">
                             <input
                                 type="text"
                                 name="username"
@@ -63,10 +62,8 @@ class Login extends Component {
                                 onChange={this.handleChange}
                                 class="username"
                             />
-                        </label>
                     </div>
                     <div>
-                        <label htmlFor="">
                             
                             <input
                                 type="password"
@@ -76,7 +73,6 @@ class Login extends Component {
                                 onChange={this.handleChange}
                                 class="password"
                             />
-                        </label>
                     </div>
                     <input type="submit" value="登录" class="denglu" />
                 </form>

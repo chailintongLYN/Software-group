@@ -5,7 +5,9 @@
     background-image: url(./login背景.jpg);
     width:100% ;
     background-repeat: no-repeat;
-    height: 700px;
+    height: 100%;
+    background-size:100% 100%;
+
 }
 form{
     display: inline-block;
@@ -32,4 +34,8 @@ input{
     top: 125px;
     background-color:#FF4A3D;
     color:#fff;
+}
+.ll{
+    width: 400px;
+    height: 100px;
 }
