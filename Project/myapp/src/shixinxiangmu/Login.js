@@ -64,7 +64,7 @@ class Login extends Component {
               // });
               let RedirectUrl = this.props.location.state
                   ? this.props.location.state.from.pathname
-                  : "/";
+                  : "/home";
               // 登陆成功之后的跳转
               this.props.history.push(RedirectUrl);
             }else{

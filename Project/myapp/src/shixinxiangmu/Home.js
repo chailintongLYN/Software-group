@@ -4,7 +4,7 @@ const Home=(props)=>{
         <div>
             Home
             {/* 二级路由 */}
-            <input type='button' value="某个触发登录的按钮" onClick={()=>props.history.push('/login')}/>
+            <input type='button' value="某个触发登录的按钮" onClick={()=>props.history.push('/')}/>
         </div>
         
     )
