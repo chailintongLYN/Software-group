@@ -1,14 +1,14 @@
 import React, { Component } from "react";
 let newinfo={
     username:"",
-    password:""
+    passwd:""
 }
 class Logon extends Component{
     constructor(props) {
         super(props);
         this.state = {
             username: "",
-            password: ""
+            passwd: ""
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSumit = this.handleSumit.bind(this);
@@ -20,11 +20,11 @@ class Logon extends Component{
                 username: e.target.value,
             });
             newinfo.username=e.target.value;
-        } else if (e.target.name === "password") {
+        } else if (e.target.name === "passwd") {
             this.setState({
-                password: e.target.value,
+                passwd: e.target.value,
             });
-            newinfo.password=e.target.value;
+            newinfo.passwd=e.target.value;
             console.log(JSON.stringify(newinfo));
         }
         
@@ -34,12 +34,12 @@ class Logon extends Component{
         e.preventDefault();
         console.log(e.target)
         const username = this.state.username;
-        const password = this.state.password;
-        if (username.length === 0 || password.length === 0) {
+        const passwd = this.state.passwd;
+        if (username.length === 0 || passwd.length === 0) {
             alert("用户名或密码不能为空！");
             return;
         }
-        fetch('/newdata', {
+        fetch('http://localhost:1234/logon', {
             method : 'POST',
             headers : {
               'content-type' : 'application/json'
@@ -52,21 +52,24 @@ class Logon extends Component{
             //   location.href = '/login';
             alert("注册成功")
               console.log(response)
-            }else{
+              // 保存信息到sessionStorage
+              sessionStorage.setItem("username", username);
+              // 登录成功后，设置redirectToReferrer为true;
+              // this.setState({
+              //     rediectToReferrer: true,
+              // });
+              let RedirectUrl = this.props.location.state
+                  ? this.props.location.state.from.pathname
+                  : "/login";
+              // 登陆成功之后的跳转
+              this.props.history.push(RedirectUrl);
+            }else if(response.status === 'usernamefaild'){
+                alert('用户名已存在')
+            }
+            else{
               alert('注册失败')
             }
           });
-        // 保存信息到sessionStorage
-        sessionStorage.setItem("username", username);
-        // 登录成功后，设置redirectToReferrer为true;
-        // this.setState({
-        //     rediectToReferrer: true,
-        // });
-        let RedirectUrl = this.props.location.state
-            ? this.props.location.state.from.pathname
-            : "/login";
-        // 登陆成功之后的跳转
-        this.props.history.push(RedirectUrl);
     }
     render(props) {
         return (
@@ -88,9 +91,9 @@ class Logon extends Component{
                                 
                                 <input
                                     type="password"
-                                    name="password"
+                                    name="passwd"
                                     placeholder="请输入密码"
-                                    value={this.state.password}
+                                    value={this.state.passwd}
                                     onChange={this.handleChange}
                                     class="password"
                                 />

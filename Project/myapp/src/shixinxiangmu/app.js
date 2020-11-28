@@ -29,7 +29,7 @@ connection.connect();
 
 
 app.get('/',async c=>{
-    // c.res.body = fs.readFileSync('../index.js').toString('utf-8');
+    c.res.body = fs.readFileSync('../index.js').toString('utf-8');
 })
 
 app.post('/data',async c=>{
@@ -63,15 +63,22 @@ app.post('/logon',async c=>{
     }
     console.log(post);
     var result = await  new Promise((resolve) => {
-        connection.query('INSERT INTO login SET ?',post,function(error,results,fields){
+        connection.query('SELECT * FROM login where username=?',post.username,function(error,results,fields){
             if(error) throw error;
-            if(results.length == 0 ){
-                console.log(1)
-                resolve({'status': 'faild','code':'400'})
-            }
-            else{
-                console.log(2)
-                resolve({'status':'注册成功'}) 
+            if(results.length == 0){
+                connection.query('INSERT INTO login SET ?',post,function(error,results,fields){
+                    if(error) throw error;
+                    if(results.length == 0 ){
+                        console.log(1)
+                        resolve({'status': 'faild','code':'400'})
+                    }
+                    else{
+                        console.log(2)
+                        resolve({'status':'注册成功'}) 
+                    }
+                })
+            }else{
+                resolve({'status': 'usernamefaild','code':'400'})
             }
         })
     }) 
@@ -87,12 +94,12 @@ app.post('/logon',async c=>{
         // }
 })
 
-app.get('/login',async c=>{
-    c.res.body = fs.readFileSync('./login.js').toString('utf-8');
-})
+// app.get('/login',async c=>{
+//     c.res.body = fs.readFileSync('./login.js').toString('utf-8');
+// })
 
-app.get('/logon',async c=>{
-    c.res.body = fs.readFileSync('./Logon.js').toString('utf-8');
-})
+// app.get('/logon',async c=>{
+//     c.res.body = fs.readFileSync('./Logon.js').toString('utf-8');
+// })
 
 app.run(1234)
