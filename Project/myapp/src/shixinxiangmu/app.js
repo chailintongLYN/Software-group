@@ -1,8 +1,9 @@
 'use strict'
-const titbit = require('titbit'),
-fs = require('fs')
+const titbit = require('titbit')
 
-let index = fs.readFileSync('./login.html').toString('utf-8');
+const {cors} = require('titbit-toolkit')
+
+const fs = require('fs')
 
 const app = new titbit({
     debug: true,
@@ -10,6 +11,10 @@ const app = new titbit({
     globalLog:true
 
 })
+
+app.use( (new cors()).mid() )
+
+app.options('/*', async c => {})
 
 const mysql = require('mysql');
 
@@ -24,7 +29,7 @@ connection.connect();
 
 
 app.get('/',async c=>{
-    c.res.body = index
+    // c.res.body = fs.readFileSync('../index.js').toString('utf-8');
 })
 
 app.post('/data',async c=>{
@@ -83,11 +88,11 @@ app.post('/logon',async c=>{
 })
 
 app.get('/login',async c=>{
-    c.res.body = fs.readFileSync('./login.html').toString('utf-8');
+    c.res.body = fs.readFileSync('./login.js').toString('utf-8');
 })
 
 app.get('/logon',async c=>{
-    c.res.body = fs.readFileSync('./newdata.html').toString('utf-8');
+    c.res.body = fs.readFileSync('./Logon.js').toString('utf-8');
 })
 
-app.run(1234,2)
+app.run(1234)
