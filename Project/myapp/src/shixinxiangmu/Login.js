@@ -101,7 +101,7 @@ class Login extends Component {
                         </div>
                         <span class='tishi'>若您没有账号，请先注册</span>
                         <input type="submit" value="登录" class="denglu" />
-                        <input type='botton' value="注册" class="zhuci" onClick={()=>this.props.history.push('/logon')}/>
+                        <input type='botton' value="注册" class="zhuce" onClick={()=>this.props.history.push('/logon')}/>
                     </form>
                 </div>
             </body>

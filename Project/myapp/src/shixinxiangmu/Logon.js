@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+
+import './login.css'
 let newinfo={
     username:"",
     passwd:""
@@ -98,7 +100,8 @@ class Logon extends Component{
                                     class="password"
                                 />
                         </div>
-                        <input type="submit" value="完成注册" class="complete"/>
+                        <input type="submit" value="完成注册" class="zhuce"/>
+                        <input type="button" value="返回登录" class="denglu" onClick={()=>this.props.history.push('/')}/>
                     </form>
                 </div>
             </body>

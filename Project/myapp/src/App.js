@@ -40,8 +40,8 @@ const App=()=>{
 	return(
 		<Router>
 			<Switch>
-				<Route exact path='/' component={Home}/>
-				<Route path='/login' component={Login}/>
+				<Route exact path='/' component={Login}/>
+				<Route path='/home' component={Home}/>
 				<Route path='/search' component={Search}/>
 				<Route path='/logon' component={Logon}/>
 			</Switch>
