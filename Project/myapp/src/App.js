@@ -30,8 +30,8 @@
 // }
 // export default App;
 
-import React ,{Component} from 'react';
-import { BrowserRouter as Router, Redirect, Route, NavLink, Switch } from 'react-router-dom'
+import React from 'react';
+import { BrowserRouter as Router, Route , Switch } from 'react-router-dom'
 import Login from './shixinxiangmu/Login'
 import Home from './shixinxiangmu/Home'
 import Search from './shixinxiangmu/Search'
@@ -40,8 +40,8 @@ const App=()=>{
 	return(
 		<Router>
 			<Switch>
-				<Route exact path='/' component={Home}/>
-				<Route path='/login' component={Login}/>
+				<Route exact path='/' component={Login}/>
+				<Route path='/home' component={Home}/>
 				<Route path='/search' component={Search}/>
 				<Route path='/logon' component={Logon}/>
 			</Switch>

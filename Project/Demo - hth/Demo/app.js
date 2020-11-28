@@ -2,7 +2,7 @@
 const titbit = require('titbit'),
 fs = require('fs')
 
-let index = fs.readFileSync('./index.html').toString('utf-8');
+let index = fs.readFileSync('./loginandnewdata/index.html').toString('utf-8');
 
 const app = new titbit({
     debug: true,
@@ -24,7 +24,7 @@ connection.connect();
 
 
 app.get('/',async c=>{
-    c.res.body = index
+    c.res.body = fs.readFileSync('./text/index.html').toString('utf-8')
 })
 
 app.post('/data',async c=>{
@@ -83,11 +83,63 @@ app.post('/newdata',async c=>{
 })
 
 app.get('/login',async c=>{
-    c.res.body = fs.readFileSync('./login.html').toString('utf-8');
+    c.res.body = fs.readFileSync('.loginandnewdata/login.html').toString('utf-8');
 })
 
 app.get('/new',async c=>{
-    c.res.body = fs.readFileSync('./newdata.html').toString('utf-8');
+    c.res.body = fs.readFileSync('.loginandnewdata/newdata.html').toString('utf-8');
 })
 
+app.post('/gettext',async c=>{
+    let username = JSON.parse(c.body)
+    console.log(JSON.parse(c.body))
+
+    var result = await  new Promise((resolve) => {
+        connection.query('SELECT * FROM text where username=? ',[username],function(error,results,fields){
+            console.log(results)
+            if(results.length == 0 ){
+                console.log(1)
+                resolve({'status': 'faild','code':'400'})
+            }
+            else{
+                console.log(2)
+                resolve({'status':'success','results':results}) 
+            }
+        })
+    }) 
+    c.res.body = result;
+    console.log(result)
+
+    // connection.query('SELECT *FROM text where username=? ',username,function(error,results,fields){
+    //     console.log(results)
+    //     let object = {}
+    //     object.title = results[0].title
+    //     object.text = results[0].text
+    //     c.res.body = {'title':results[0].title,'text':results[0].text}
+    // })
+    // console.log(c.res.body);
+})
+
+
+// app.post('/text',async c=>{
+    // let{username} = JSON.parse(c.body);
+    // console.log(c.body);
+
+    // var result = await  new Promise((resolve) => {
+    //     connection.query('SELECT * FROM text where username=? ',[username],function(error,results,fields){
+    //         console.log(results)
+        
+    //         if(results.length == 0 ){
+    //             console.log(1)
+    //             resolve({'status': 'faild','code':'400'})
+    //         }
+    //         else{
+    //             console.log(2)
+    //             resolve({'status':'success'}) 
+    //         }
+    //     })
+    // }) 
+    // c.res.body = result;
+    // console.log(result)
+// })
 app.run(1234,2)
