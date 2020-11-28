@@ -39,7 +39,7 @@ class Logon extends Component{
             alert("用户名或密码不能为空！");
             return;
         }
-        fetch('/data', {
+        fetch('/newdata', {
             method : 'POST',
             headers : {
               'content-type' : 'application/json'
