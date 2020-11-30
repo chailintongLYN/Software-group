@@ -1,6 +1,9 @@
 'use strict'
 const titbit = require('titbit'),
-fs = require('fs')
+      fs = require('fs')
+      
+const {cors} = require('titbit-toolkit')
+
 
 let index = fs.readFileSync('./loginandnewdata/index.html').toString('utf-8');
 
@@ -10,6 +13,9 @@ const app = new titbit({
     globalLog:true
 
 })
+app.use( (new cors()).mid() )
+
+app.options('/*', async c => {})
 
 const mysql = require('mysql');
 
