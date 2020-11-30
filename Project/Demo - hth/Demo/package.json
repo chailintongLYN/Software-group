@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "mysql": "^2.18.1",
-    "titbit": "^21.8.8"
+    "titbit": "^21.8.8",
+    "titbit-toolkit": "^2.1.10-beta"
   }
 }

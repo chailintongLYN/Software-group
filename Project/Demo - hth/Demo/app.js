@@ -1,11 +1,8 @@
 'use strict'
 const titbit = require('titbit'),
       fs = require('fs')
-      
+
 const {cors} = require('titbit-toolkit')
-
-
-let index = fs.readFileSync('./loginandnewdata/index.html').toString('utf-8');
 
 const app = new titbit({
     debug: true,
@@ -28,7 +25,7 @@ var connection = mysql.createConnection({
 
 connection.connect();
 
-//登录页
+//登录页 //前端代码有了可以删除
 app.get('/',async c=>{
     c.res.body = fs.readFileSync('./loginandnewdata/index.html').toString('utf-8')
 })
@@ -52,68 +49,92 @@ app.post('/data',async c=>{
     c.res.body = result;
 })
 
-//注册页
+//注册页 //前端代码有了可以删除
 app.get('/new',async c=>{
     c.res.body = fs.readFileSync('.loginandnewdata/newdata.html').toString('utf-8');
 })
 
 //注册页 接口
-app.post('/newdata',async c=>{
+app.post('/logon',async c=>{
     let post={
         username:JSON.parse(c.body).username,
         passwd:JSON.parse(c.body).passwd
     }
     var result = await  new Promise((resolve) => {
-        connection.query('INSERT INTO login SET ?',post,function(error,results,fields){
+        connection.query('SELECT * FROM login where username=?',post.username,function(error,results,fields){
             if(error) throw error;
-            if(results.length == 0 ){
-                resolve({'status': 'failed','code':'400'})
-            }
-            else{
-                resolve({'status':'注册成功'}) 
+            if(results.length == 0){
+                connection.query('INSERT INTO login SET ?',post,function(error,results,fields){
+                    if(error) throw error;
+                    if(results.length == 0 ){
+                        console.log(1)
+                        resolve({'status': 'failed','code':'400'})
+                    }
+                    else{
+                        console.log(2)
+                        resolve({'status':'注册成功'}) 
+                    }
+                })
+            }else{
+                resolve({'status': 'usernamefailed','code':'400'})
             }
         })
-    }) 
+    })
+    
     c.res.body = result;
 })
 
-//首页
+//首页 //前端代码有了可以删除
 app.get('/login',async c=>{
     c.res.body = fs.readFileSync('.loginandnewdata/login.html').toString('utf-8');
 })
 
 
-//获取我的文章
+//首页接口 
+
+app.post('/gethomedata',async c=>{
+    let username = JSON.parse(c.body)
+
+    //*还没写完
+})
+
+//获取我的文章 //前端代码有了可以删除
 app.get('/gettext',async c=>{
     c.res.body = fs.readFileSync('./gettext/index.html').toString('utf-8')
 })
 
-
+//接口
 app.post('/gettexts',async c=>{
-    let username = JSON.parse(c.body)
+    let {searchtype,sevalue} = JSON.parse(c.body)
 
-    var result = await  new Promise((resolve) => {
-        connection.query('SELECT * FROM text where username=? ',[username],function(error,results,fields){
-            if(results.length == 0 ){
-                console.log(1)
-                resolve({'status': 'failed','code':'400'})
-            }
-            else{
-                console.log(2)
-                resolve({'status':'success','results':results}) 
-            }
-        })
-    }) 
-    c.res.body = result;
+    console.log(searchtype,sevalue)
+
+    // if(searchtype === 'textid'){
+        var result = await  new Promise((resolve) => {
+            connection.query('SELECT * FROM text where ' + searchtype + '=? ',[sevalue],function(error,results,fields){
+                if(results.length == 0 ){
+                    console.log(1)
+                    resolve({'status': 'failed','code':'400'})
+                }
+                else{
+                    console.log(2)
+                    resolve({'status':'success','results':results}) 
+                }
+            })
+        }) 
+        c.res.body = result;        
+    // }
+
 
 })
 
 
-//获取我的粉丝
+//获取我的粉丝 //前端代码有了可以删除
 app.get('/getfans',async c=>{
     c.res.body = fs.readFileSync('./getfans/index.html').toString('utf-8');
 })
 
+//接口
 app.post('/getmyfans', async c=>{
     let username = JSON.parse(c.body)
 
@@ -130,11 +151,13 @@ app.post('/getmyfans', async c=>{
     c.res.body = result;
 })
 
-//获取我的关注
+//获取我的关注 //前端代码有了可以删除
 app.get('/getfollows',async c=>{
     c.res.body = fs.readFileSync('./getfollows/index.html').toString('utf-8');
 })
 
+
+//接口
 app.post('/getmyfollows', async c=>{
     let username = JSON.parse(c.body)
 
@@ -152,7 +175,7 @@ app.post('/getmyfollows', async c=>{
 })
 
 
-//获取我的关注的人的文章
+//获取我的关注的人的文章 //前端代码有了可以删除
 app.get('/getfollowstext', async c=>{
     c.res.body = fs.readFileSync('./getfollowstext/index.html').toString('utf-8');
 })

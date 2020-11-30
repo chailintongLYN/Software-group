@@ -23,13 +23,13 @@
     </footer>
 </body>
 <script>
-    var username='郝天恒'
-    fetch('/gettext',{
+    var data={searchtype:'username',sevalue:'郝天恒'}
+    fetch('/gettexts',{
         method: 'POST',
         headers:{
             'content-type':'text'
         },
-        body : JSON.stringify(username)
+        body : JSON.stringify(data)
     })
         .then(function(response) {
             return response.json();
