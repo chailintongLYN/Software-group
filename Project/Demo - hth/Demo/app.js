@@ -36,7 +36,7 @@ app.post('/data',async c=>{
         connection.query('SELECT * FROM login where username=? and passwd=?',[username,passwd],function(error,results,fields){
         
             if(results.length == 0 ){
-                resolve({'status': 'faild','code':'400'})
+                resolve({'status': 'failed','code':'400'})
             }
             else{
                 resolve({'status':'success'}) 
@@ -61,7 +61,7 @@ app.post('/newdata',async c=>{
         connection.query('INSERT INTO login SET ?',post,function(error,results,fields){
             if(error) throw error;
             if(results.length == 0 ){
-                resolve({'status': 'faild','code':'400'})
+                resolve({'status': 'failed','code':'400'})
             }
             else{
                 resolve({'status':'注册成功'}) 
@@ -83,14 +83,14 @@ app.get('/gettext',async c=>{
 })
 
 
-app.post('/gettext',async c=>{
+app.post('/getmytext',async c=>{
     let username = JSON.parse(c.body)
 
     var result = await  new Promise((resolve) => {
         connection.query('SELECT * FROM text where username=? ',[username],function(error,results,fields){
             if(results.length == 0 ){
                 console.log(1)
-                resolve({'status': 'faild','code':'400'})
+                resolve({'status': 'failed','code':'400'})
             }
             else{
                 console.log(2)
@@ -108,13 +108,13 @@ app.get('/getfans',async c=>{
     c.res.body = fs.readFileSync('./getfans/index.html').toString('utf-8');
 })
 
-app.post('/getfans', async c=>{
+app.post('/getmyfans', async c=>{
     let username = JSON.parse(c.body)
 
     var result = await  new Promise((resolve) => {
         connection.query('SELECT * FROM fans where username=? ',[username],function(error,results,fields){
             if(results.length == 0 ){
-                resolve({'status': 'faild','code':'400'})
+                resolve({'status': 'failed','code':'400'})
             }
             else{
                 resolve({'status':'success','results':results}) 
@@ -129,13 +129,13 @@ app.get('/getfollows',async c=>{
     c.res.body = fs.readFileSync('./getfollows/index.html').toString('utf-8');
 })
 
-app.post('/getfollows', async c=>{
+app.post('/getmyfollows', async c=>{
     let username = JSON.parse(c.body)
 
     var result = await  new Promise((resolve) => {
         connection.query('SELECT * FROM fans where followuser=? ',[username],function(error,results,fields){
             if(results.length == 0 ){
-                resolve({'status': 'faild','code':'400'})
+                resolve({'status': 'failed','code':'400'})
             }
             else{
                 resolve({'status':'success','results':results}) 
@@ -152,7 +152,7 @@ app.get('/getfollowstext', async c=>{
 })
 
 //获取我的关注的人的文章 的接口
-app.post('/getfollowstext', async c=>{
+app.post('/getmyfollowstext', async c=>{
     let username = JSON.parse(c.body)
     let textarr = []
     console.log(JSON.parse(c.body))
@@ -161,7 +161,7 @@ app.post('/getfollowstext', async c=>{
         connection.query('SELECT * FROM fans where followuser=? ',[username],function(error,results,fields){
             if(results.length == 0 ){
                 console.log(1)
-                resolve({'status': 'faild','code':'400'})
+                resolve({'status': 'failed','code':'400'})
             }
             else{
                 console.log(2)
