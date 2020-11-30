@@ -12,7 +12,6 @@ const app = new titbit({
 })
 
 const mysql = require('mysql');
-const { connect } = require('http2');
 
 var connection = mysql.createConnection({
     host:'localhost',
@@ -23,12 +22,12 @@ var connection = mysql.createConnection({
 
 connection.connect();
 
-
+//登录页
 app.get('/',async c=>{
     c.res.body = fs.readFileSync('./loginandnewdata/index.html').toString('utf-8')
 })
 
-
+//登录页接口
 app.post('/data',async c=>{
 
     // console.log(c.body);
@@ -53,6 +52,12 @@ app.post('/data',async c=>{
     console.log(result)
 })
 
+//注册页
+app.get('/new',async c=>{
+    c.res.body = fs.readFileSync('.loginandnewdata/newdata.html').toString('utf-8');
+})
+
+//注册页 接口
 app.post('/newdata',async c=>{
     let post={
         username:JSON.parse(c.body).username,
@@ -74,24 +79,15 @@ app.post('/newdata',async c=>{
     }) 
     c.res.body = result;
     console.log(result)
-        // if(results.length == 0 ){
-        //     console.log(1)
-        //     resolve({'status': 'faild','code':'400'})
-        // }
-        // else{
-        //     console.log(2)
-        //     resolve({'status':'success'}) 
-        // }
 })
 
+//首页
 app.get('/login',async c=>{
     c.res.body = fs.readFileSync('.loginandnewdata/login.html').toString('utf-8');
 })
 
-app.get('/new',async c=>{
-    c.res.body = fs.readFileSync('.loginandnewdata/newdata.html').toString('utf-8');
-})
 
+//获取我的文章
 app.get('/gettext',async c=>{
     c.res.body = fs.readFileSync('./gettext/index.html').toString('utf-8')
 })
@@ -117,17 +113,10 @@ app.post('/gettext',async c=>{
     c.res.body = result;
     console.log(result)
 
-    // connection.query('SELECT *FROM text where username=? ',username,function(error,results,fields){
-    //     console.log(results)
-    //     let object = {}
-    //     object.title = results[0].title
-    //     object.text = results[0].text
-    //     c.res.body = {'title':results[0].title,'text':results[0].text}
-    // })
-    // console.log(c.res.body);
 })
 
 
+//获取我的粉丝
 app.get('/getfans',async c=>{
     c.res.body = fs.readFileSync('./getfans/index.html').toString('utf-8');
 })
@@ -153,6 +142,7 @@ app.post('/getfans', async c=>{
     console.log(result)
 })
 
+//获取我的关注
 app.get('/getfollows',async c=>{
     c.res.body = fs.readFileSync('./getfollows/index.html').toString('utf-8');
 })
@@ -179,15 +169,18 @@ app.post('/getfollows', async c=>{
 })
 
 
+
+//获取我的关注的人的文章
 app.get('/getfollowstext', async c=>{
     c.res.body = fs.readFileSync('./getfollowstext/index.html').toString('utf-8');
 })
 
 app.post('/getfollowstext', async c=>{
     let username = JSON.parse(c.body)
+    let textarr = []
     console.log(JSON.parse(c.body))
 
-    var result = await  new Promise((resolve) => {
+    var result = await new Promise((resolve) => {
         connection.query('SELECT * FROM fans where followuser=? ',[username],function(error,results,fields){
             // console.log(results)
             if(results.length == 0 ){
@@ -198,37 +191,23 @@ app.post('/getfollowstext', async c=>{
                 console.log(2)
                 results.forEach(item => {
                     console.log(item.username)
-                    
+                    var anotherresult = new Promise((resolve)=>{
+                        
+                        connection.query('SELECT * FROM text where username=? ',item.username,function(error,anotherresults,fields){
+                            textarr.push({'anotherresults':anotherresults})
+                            console.log(textarr);
+                            resolve(textarr)
+                        })
+                    })
                 });
-                
-                resolve({'status':'success','results':results}) 
+                console.log(1);
+                console.log(anotherresult);
+                resolve({'status':'success','results':anotherresult}) 
             }
         })
     }) 
     c.res.body = result;
-    // console.log(result)
+    console.log(result)
 })
 
-
-// app.post('/text',async c=>{
-    // let{username} = JSON.parse(c.body);
-    // console.log(c.body);
-
-    // var result = await  new Promise((resolve) => {
-    //     connection.query('SELECT * FROM text where username=? ',[username],function(error,results,fields){
-    //         console.log(results)
-        
-    //         if(results.length == 0 ){
-    //             console.log(1)
-    //             resolve({'status': 'faild','code':'400'})
-    //         }
-    //         else{
-    //             console.log(2)
-    //             resolve({'status':'success'}) 
-    //         }
-    //     })
-    // }) 
-    // c.res.body = result;
-    // console.log(result)
-// })
 app.run(1234,2)
