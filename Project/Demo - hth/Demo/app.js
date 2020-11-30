@@ -12,6 +12,7 @@ const app = new titbit({
 })
 
 const mysql = require('mysql');
+const { connect } = require('http2');
 
 var connection = mysql.createConnection({
     host:'localhost',
@@ -24,8 +25,9 @@ connection.connect();
 
 
 app.get('/',async c=>{
-    c.res.body = fs.readFileSync('./text/index.html').toString('utf-8')
+    c.res.body = fs.readFileSync('./loginandnewdata/index.html').toString('utf-8')
 })
+
 
 app.post('/data',async c=>{
 
@@ -90,6 +92,11 @@ app.get('/new',async c=>{
     c.res.body = fs.readFileSync('.loginandnewdata/newdata.html').toString('utf-8');
 })
 
+app.get('/gettext',async c=>{
+    c.res.body = fs.readFileSync('./gettext/index.html').toString('utf-8')
+})
+
+
 app.post('/gettext',async c=>{
     let username = JSON.parse(c.body)
     console.log(JSON.parse(c.body))
@@ -118,6 +125,88 @@ app.post('/gettext',async c=>{
     //     c.res.body = {'title':results[0].title,'text':results[0].text}
     // })
     // console.log(c.res.body);
+})
+
+
+app.get('/getfans',async c=>{
+    c.res.body = fs.readFileSync('./getfans/index.html').toString('utf-8');
+})
+
+app.post('/getfans', async c=>{
+    let username = JSON.parse(c.body)
+    console.log(JSON.parse(c.body))
+
+    var result = await  new Promise((resolve) => {
+        connection.query('SELECT * FROM fans where username=? ',[username],function(error,results,fields){
+            console.log(results)
+            if(results.length == 0 ){
+                console.log(1)
+                resolve({'status': 'faild','code':'400'})
+            }
+            else{
+                console.log(2)
+                resolve({'status':'success','results':results}) 
+            }
+        })
+    }) 
+    c.res.body = result;
+    console.log(result)
+})
+
+app.get('/getfollows',async c=>{
+    c.res.body = fs.readFileSync('./getfollows/index.html').toString('utf-8');
+})
+
+app.post('/getfollows', async c=>{
+    let username = JSON.parse(c.body)
+    console.log(JSON.parse(c.body))
+
+    var result = await  new Promise((resolve) => {
+        connection.query('SELECT * FROM fans where followuser=? ',[username],function(error,results,fields){
+            console.log(results)
+            if(results.length == 0 ){
+                console.log(1)
+                resolve({'status': 'faild','code':'400'})
+            }
+            else{
+                console.log(2)
+                resolve({'status':'success','results':results}) 
+            }
+        })
+    }) 
+    c.res.body = result;
+    console.log(result)
+})
+
+
+app.get('/getfollowstext', async c=>{
+    c.res.body = fs.readFileSync('./getfollowstext/index.html').toString('utf-8');
+})
+
+app.post('/getfollowstext', async c=>{
+    let username = JSON.parse(c.body)
+    console.log(JSON.parse(c.body))
+
+    var result = await  new Promise((resolve) => {
+        connection.query('SELECT * FROM fans where followuser=? ',[username],function(error,results,fields){
+            // console.log(results)
+            if(results.length == 0 ){
+                console.log(1)
+                resolve({'status': 'faild','code':'400'})
+            }
+            else{
+                console.log(2)
+                results.forEach(item => {
+                    console.log(item.username)
+                    
+                });
+                
+                resolve({'status':'success','results':results}) 
+            }
+        })
+    }) 
+    c.res.body = result;
+    // console.log(result)
 })
 
 
