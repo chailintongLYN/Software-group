@@ -97,7 +97,7 @@ render(props) {
                             />
                     </div>
                     <span class='tishi'>若您没有账号，请先注册</span>
-                    <a href='./editor.html'><button type="submit" value="登录">登录</button></a>
+                    <button type="submit" value="登录"><a href='./editor.html'>登录</a></button>
                     {/* <input type="submit" value="登录" class="denglu" /> */}
                     {/* <input type='botton' value="注册" class="zhuce" onClick={()=>this.props.history.push('/logon')}/> */}
                 </form>

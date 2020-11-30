@@ -34,7 +34,6 @@ app.get('/',async c=>{
 
 app.post('/data',async c=>{
 
-    // console.log(c.body);
     let{username,passwd} = JSON.parse(c.body);
     console.log(username,passwd);
 
@@ -84,14 +83,7 @@ app.post('/logon',async c=>{
     }) 
     c.res.body = result;
     console.log(result)
-        // if(results.length == 0 ){
-        //     console.log(1)
-        //     resolve({'status': 'faild','code':'400'})
-        // }
-        // else{
-        //     console.log(2)
-        //     resolve({'status':'success'}) 
-        // }
+        
 })
 
 // app.get('/login',async c=>{
