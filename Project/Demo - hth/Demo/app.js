@@ -83,7 +83,7 @@ app.get('/gettext',async c=>{
 })
 
 
-app.post('/getmytext',async c=>{
+app.post('/gettexts',async c=>{
     let username = JSON.parse(c.body)
 
     var result = await  new Promise((resolve) => {
