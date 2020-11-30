@@ -30,26 +30,20 @@ app.get('/',async c=>{
 //登录页接口
 app.post('/data',async c=>{
 
-    // console.log(c.body);
     let{username,passwd} = JSON.parse(c.body);
-    console.log(username,passwd);
 
     var result = await  new Promise((resolve) => {
         connection.query('SELECT * FROM login where username=? and passwd=?',[username,passwd],function(error,results,fields){
-            console.log(results)
         
             if(results.length == 0 ){
-                console.log(1)
                 resolve({'status': 'faild','code':'400'})
             }
             else{
-                console.log(2)
                 resolve({'status':'success'}) 
             }
         })
     }) 
     c.res.body = result;
-    console.log(result)
 })
 
 //注册页
@@ -63,22 +57,18 @@ app.post('/newdata',async c=>{
         username:JSON.parse(c.body).username,
         passwd:JSON.parse(c.body).passwd
     }
-    console.log(post);
     var result = await  new Promise((resolve) => {
         connection.query('INSERT INTO login SET ?',post,function(error,results,fields){
             if(error) throw error;
             if(results.length == 0 ){
-                console.log(1)
                 resolve({'status': 'faild','code':'400'})
             }
             else{
-                console.log(2)
                 resolve({'status':'注册成功'}) 
             }
         })
     }) 
     c.res.body = result;
-    console.log(result)
 })
 
 //首页
@@ -95,11 +85,9 @@ app.get('/gettext',async c=>{
 
 app.post('/gettext',async c=>{
     let username = JSON.parse(c.body)
-    console.log(JSON.parse(c.body))
 
     var result = await  new Promise((resolve) => {
         connection.query('SELECT * FROM text where username=? ',[username],function(error,results,fields){
-            console.log(results)
             if(results.length == 0 ){
                 console.log(1)
                 resolve({'status': 'faild','code':'400'})
@@ -111,7 +99,6 @@ app.post('/gettext',async c=>{
         })
     }) 
     c.res.body = result;
-    console.log(result)
 
 })
 
@@ -123,23 +110,18 @@ app.get('/getfans',async c=>{
 
 app.post('/getfans', async c=>{
     let username = JSON.parse(c.body)
-    console.log(JSON.parse(c.body))
 
     var result = await  new Promise((resolve) => {
         connection.query('SELECT * FROM fans where username=? ',[username],function(error,results,fields){
-            console.log(results)
             if(results.length == 0 ){
-                console.log(1)
                 resolve({'status': 'faild','code':'400'})
             }
             else{
-                console.log(2)
                 resolve({'status':'success','results':results}) 
             }
         })
     }) 
     c.res.body = result;
-    console.log(result)
 })
 
 //获取我的关注
@@ -149,25 +131,19 @@ app.get('/getfollows',async c=>{
 
 app.post('/getfollows', async c=>{
     let username = JSON.parse(c.body)
-    console.log(JSON.parse(c.body))
 
     var result = await  new Promise((resolve) => {
         connection.query('SELECT * FROM fans where followuser=? ',[username],function(error,results,fields){
-            console.log(results)
             if(results.length == 0 ){
-                console.log(1)
                 resolve({'status': 'faild','code':'400'})
             }
             else{
-                console.log(2)
                 resolve({'status':'success','results':results}) 
             }
         })
     }) 
     c.res.body = result;
-    console.log(result)
 })
-
 
 
 //获取我的关注的人的文章
@@ -175,6 +151,7 @@ app.get('/getfollowstext', async c=>{
     c.res.body = fs.readFileSync('./getfollowstext/index.html').toString('utf-8');
 })
 
+//获取我的关注的人的文章 的接口
 app.post('/getfollowstext', async c=>{
     let username = JSON.parse(c.body)
     let textarr = []
@@ -182,7 +159,6 @@ app.post('/getfollowstext', async c=>{
 
     var result = await new Promise((resolve) => {
         connection.query('SELECT * FROM fans where followuser=? ',[username],function(error,results,fields){
-            // console.log(results)
             if(results.length == 0 ){
                 console.log(1)
                 resolve({'status': 'faild','code':'400'})
@@ -194,15 +170,15 @@ app.post('/getfollowstext', async c=>{
                     var anotherresult = new Promise((resolve)=>{
                         
                         connection.query('SELECT * FROM text where username=? ',item.username,function(error,anotherresults,fields){
-                            textarr.push({'anotherresults':anotherresults})
-                            console.log(textarr);
+                            textarr.push(anotherresults)
+                            console.log('textarr:',textarr);
                             resolve(textarr)
                         })
                     })
                 });
                 console.log(1);
-                console.log(anotherresult);
-                resolve({'status':'success','results':anotherresult}) 
+                // console.log(anotherresult);
+                // resolve({'status':'success','results':anotherresult}) 
             }
         })
     }) 
