@@ -231,32 +231,6 @@ app.post('/getmyfollows', async c=>{
     c.res.body = result;
 })
 
-//删除我关注的人 //前端代码有了可以删除
-// app.get('/getfollows',async c=>{
-//     c.res.body = fs.readFileSync('./getfollows/index.html').toString('utf-8');
-// })
-
-
-//接口
-
-// app.post('/deletemyfollows',async c=>{
-//     let {username,followuser} = JSON.parse(c.body)
-//     console.log(username,followuser);
-
-//     var result = await  new Promise((resolve) => {
-//         connection.query('DELETE FROM fans where username=? and followuser=? ',[username,followuser],function(error,results,fields){
-//             console.log(results);
-//             if(results.length == 0 ){
-//                 resolve({'status': 'failed','code':'400'})
-//             }
-//             else{
-//                 resolve({'status':'success'})   
-//             }
-//         })
-//     }) 
-//     c.res.body = result;
-// })
-
 
 //获取我的关注的人的文章 //前端代码有了可以删除
 app.get('/getfollowstext', async c=>{
@@ -267,24 +241,25 @@ app.get('/getfollowstext', async c=>{
 app.post('/getmyfollowstext', async c=>{
     let username = JSON.parse(c.body)
 
+    let str = 'SELECT * FROM text where username =? ';
+
+    username.forEach((item,index) => {
+        if(index !==0){
+            str = str + 'or username =? '
+        }
+    })
+
     var result = await new Promise((resolve) => {
-        username.forEach(item => {
-            console.log(item);
-            connection.query('SELECT * FROM text where username=? ',[item],function(error,results,fields){
-                    console.log(results);
-                    if(results.length == 0 ){
-                        console.log(1)
-                        resolve({'status': 'failed','code':'400'})
-                    }
-                    else{
-                        console.log(2)
-                        resolve({'status':'success','results':results}) 
-                    }
-            })
-        });
+        connection.query(str,username,function(error,results,fields){
+                if(results.length == 0 ){
+                    resolve({'status': 'failed','code':'400'})
+                }
+                else{
+                    resolve({'status':'success','results':results}) 
+                }
+        })
     }) 
     c.res.body = result;
-    console.log(3);
     console.log(result)
 })
 
