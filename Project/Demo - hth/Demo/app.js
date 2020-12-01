@@ -158,13 +158,13 @@ app.post('/getmyfans', async c=>{
     c.res.body = result;
 })
 
-//删除我的粉丝 //前端代码有了可以删除
+//删除我的粉丝 ，取消关注//前端代码有了可以删除
 
 // app.get('/getfans')
 
 //接口
 
-app.post('/deletemyfans',async c=>{
+app.post('/deletemyfansorfollows',async c=>{
     let {username,followuser} = JSON.parse(c.body)
     console.log(username,followuser);
 
@@ -239,23 +239,23 @@ app.post('/getmyfollows', async c=>{
 
 //接口
 
-app.post('/deletemyfollows',async c=>{
-    let {username,followuser} = JSON.parse(c.body)
-    console.log(username,followuser);
+// app.post('/deletemyfollows',async c=>{
+//     let {username,followuser} = JSON.parse(c.body)
+//     console.log(username,followuser);
 
-    var result = await  new Promise((resolve) => {
-        connection.query('DELETE FROM fans where username=? and followuser=? ',[username,followuser],function(error,results,fields){
-            console.log(results);
-            if(results.length == 0 ){
-                resolve({'status': 'failed','code':'400'})
-            }
-            else{
-                resolve({'status':'success'})   
-            }
-        })
-    }) 
-    c.res.body = result;
-})
+//     var result = await  new Promise((resolve) => {
+//         connection.query('DELETE FROM fans where username=? and followuser=? ',[username,followuser],function(error,results,fields){
+//             console.log(results);
+//             if(results.length == 0 ){
+//                 resolve({'status': 'failed','code':'400'})
+//             }
+//             else{
+//                 resolve({'status':'success'})   
+//             }
+//         })
+//     }) 
+//     c.res.body = result;
+// })
 
 
 //获取我的关注的人的文章 //前端代码有了可以删除
@@ -266,35 +266,25 @@ app.get('/getfollowstext', async c=>{
 //获取我的关注的人的文章 的接口
 app.post('/getmyfollowstext', async c=>{
     let username = JSON.parse(c.body)
-    let textarr = []
-    console.log(JSON.parse(c.body))
 
     var result = await new Promise((resolve) => {
-        connection.query('SELECT * FROM fans where followuser=? ',[username],function(error,results,fields){
-            if(results.length == 0 ){
-                console.log(1)
-                resolve({'status': 'failed','code':'400'})
-            }
-            else{
-                console.log(2)
-                results.forEach(item => {
-                    console.log(item.username)
-                    var anotherresult = new Promise((resolve)=>{
-                        
-                        connection.query('SELECT * FROM text where username=? ',item.username,function(error,anotherresults,fields){
-                            textarr.push(anotherresults)
-                            console.log('textarr:',textarr);
-                            resolve(textarr)
-                        })
-                    })
-                });
-                console.log(1);
-                // console.log(anotherresult);
-                // resolve({'status':'success','results':anotherresult}) 
-            }
-        })
+        username.forEach(item => {
+            console.log(item);
+            connection.query('SELECT * FROM text where username=? ',[item],function(error,results,fields){
+                    console.log(results);
+                    if(results.length == 0 ){
+                        console.log(1)
+                        resolve({'status': 'failed','code':'400'})
+                    }
+                    else{
+                        console.log(2)
+                        resolve({'status':'success','results':results}) 
+                    }
+            })
+        });
     }) 
     c.res.body = result;
+    console.log(3);
     console.log(result)
 })
 
