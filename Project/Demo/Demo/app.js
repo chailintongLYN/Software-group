@@ -67,11 +67,9 @@ app.post('/newdata',async c=>{
                 connection.query('INSERT INTO login SET ?',post,function(error,results,fields){
                     if(error) throw error;
                     if(results.length == 0 ){
-                        console.log(1)
                         resolve({'status': 'failed','code':'400'})
                     }
                     else{
-                        console.log(2)
                         resolve({'status':'注册成功'}) 
                     }
                 })
@@ -93,61 +91,60 @@ app.get('/home',async c=>{
 //首页接口 
 
 var homedata ={};
+
 connection.query("SELECT textid,title from text  order by ctime desc limit 0,3",function (err, results){
     if(err){
         throw err
     }else{
-    // console.log(results);
         homedata.newtext=results;
     };
 })
+
 connection.query("SELECT textid,title from text where type='js' order by savenumber limit 0,3",function (err, results){
     if(err){
         throw err
     }else{
-    // console.log(results);
         homedata.js=results;
     };
 })
+
 connection.query("SELECT textid,title from text where type='react' order by savenumber limit 0,3",function (err, results){
     if(err){
         throw err
     }else{
-    // console.log(results);
         homedata.react=results;
     };
 })
+
 connection.query("SELECT textid,title from text where type='nodejs' order by savenumber limit 0,3",function (err, results){
     if(err){
         throw err
     }else{
-    // console.log(results);
         homedata.nodejs=results;
     };
 })
+
 connection.query("SELECT textid,title from text where type='html' order by savenumber limit 0,3",function (err, results){
     if(err){
         throw err
     }else{
-    // console.log(results);
         homedata.html=results;
     };
 })
+
 connection.query("SELECT textid,title from text where type='css' order by savenumber limit 0,3",function (err, results){
     if(err){
         throw err
     }else{
-    // console.log(results);
         homedata.css=results;
     };
 })
+
 app.get('/gethomedata',async (c)=>{
     c.res.body = JSON.stringify(homedata)
-    console.log('homedata:',homedata);
 
 })
 
-console.log('homedata:',homedata);
 
 //获取发表的文章 //前端代码有了可以删除
 app.get('/gettext',async c=>{
@@ -157,8 +154,6 @@ app.get('/gettext',async c=>{
 //接口
 app.post('/gettexts',async c=>{
     let {searchtype,sevalue} = JSON.parse(c.body)
-
-    console.log(searchtype,sevalue)
     
     let str = '';
     
@@ -170,18 +165,42 @@ app.post('/gettexts',async c=>{
         }else{
             str = "SELECT * FROM text where title like '%"+ sevalue +"%'"
         }
+
         connection.query(str,[sevalue],function(error,results,fields){
             if(results.length == 0 ){
-                console.log(1);
                 resolve({'status': 'failed','code':'400'})
             }
             else{
                 resolve({'status':'success','results':results}) 
             }
         })
-    }) 
-    c.res.body = result;
+    })
 
+    c.res.body = result;
+})
+
+
+//获取我的粉丝数量和关注数量 //前端代码有了可以删除
+
+// app.get
+
+//接口
+
+app.post('/getmyfansandfollowusernumber',async c=>{
+    let username = JSON.parse(c.body);
+
+    var result = await new Promise((resolve)=>{
+        connection.query('SELECT fansnumber,followusernumber from login where username = ?',username,function(error,results){
+            
+            if(results.length === 0){
+                resolve({'status':'failed','code':'400'})
+            }else{
+                resolve({'status':'success','results':results})
+            }
+        })
+    })
+
+    c.res.body = result;
 })
 
 
@@ -196,6 +215,7 @@ app.post('/getmyfans', async c=>{
 
     var result = await  new Promise((resolve) => {
         connection.query('SELECT * FROM fans where username=? ',[username],function(error,results,fields){
+            
             if(results.length == 0 ){
                 resolve({'status': 'failed','code':'400'})
             }
@@ -203,7 +223,8 @@ app.post('/getmyfans', async c=>{
                 resolve({'status':'success','results':results}) 
             }
         })
-    }) 
+    })
+
     c.res.body = result;
 })
 
@@ -215,19 +236,30 @@ app.post('/getmyfans', async c=>{
 
 app.post('/deletemyfansorfollows',async c=>{
     let {username,followuser} = JSON.parse(c.body)
-    console.log(username,followuser);
 
     var result = await  new Promise((resolve) => {
         connection.query('DELETE FROM fans where username=? and followuser=? ',[username,followuser],function(error,results,fields){
-            console.log(results);
+
             if(results.length == 0 ){
                 resolve({'status': 'failed','code':'400'})
             }
             else{
+
+                connection.query('UPDATE login SET fansnumber = fansnumber - 1 where username = ?',username,function(error,results){
+                    if(error) throw error;
+                    console.log('删除我的粉丝成功，',username,'的粉丝数量减1');
+                })
+
+                connection.query('UPDATE login SET followusernumber = followusernumber - 1 where username = ? ',followuser,function(error,results){
+                    if(error) throw error;
+                    console.log('取消关注或被删除粉丝成功',followuser,'的关注数量减一');
+                })
+
                 resolve({'status':'success'})   
             }
         })
     }) 
+
     c.res.body = result;
 })
 
@@ -239,16 +271,35 @@ app.post('/deletemyfansorfollows',async c=>{
 
 app.post('/addmyfollows',async c=>{
     let {username,followuser} = JSON.parse(c.body)
-    console.log(username,followuser);
 
     var result = await  new Promise((resolve) => {
-        connection.query('INSERT INTO fans SET ?',{username,followuser},function(error,results,fields){
-            console.log(results);
-            if(results.length == 0 ){
-                resolve({'status': 'failed','code':'400'})
+        connection.query('SELECT * FROM fans where username=? and followuser=? ',[username,followuser],function(error,results,fields){
+            
+            if(results.length !== 0) {
+                resolve({'status':'Already exists','code':'400'})
             }
             else{
-                resolve({'status':'success'})   
+
+                connection.query('UPDATE login SET followusernumber = followusernumber + 1 where username = ? ',followuser,function(error,results){
+                    if(error) throw error;
+                    console.log('关注成功，',followuser,'的关注数量加1');
+                })
+
+                connection.query('UPDATE login SET fansnumber = fansnumber + 1 where username = ? ',username,function(error,results){
+                    if(error) throw error;
+                    console.log('关注成功，',username,'的粉丝数量加1');
+                })
+
+                connection.query('INSERT INTO fans SET ?',{username,followuser},function(error,results,fields){
+                    console.log(results);
+
+                    if(results.length == 0 ){
+                        resolve({'status': 'failed','code':'400'})
+                    }
+                    else{
+                        resolve({'status':'success'})   
+                    }
+                })
             }
         })
     }) 
@@ -269,6 +320,7 @@ app.post('/getmyfollows', async c=>{
 
     var result = await  new Promise((resolve) => {
         connection.query('SELECT * FROM fans where followuser=? ',[username],function(error,results,fields){
+          
             if(results.length == 0 ){
                 resolve({'status': 'failed','code':'400'})
             }
@@ -276,7 +328,8 @@ app.post('/getmyfollows', async c=>{
                 resolve({'status':'success','results':results}) 
             }
         })
-    }) 
+    })
+
     c.res.body = result;
 })
 
@@ -300,16 +353,17 @@ app.post('/getmyfollowstext', async c=>{
 
     var result = await new Promise((resolve) => {
         connection.query(str,username,function(error,results,fields){
-                if(results.length == 0 ){
-                    resolve({'status': 'failed','code':'400'})
-                }
-                else{
-                    resolve({'status':'success','results':results}) 
-                }
+            
+            if(results.length == 0 ){
+                resolve({'status': 'failed','code':'400'})
+            }
+            else{
+                resolve({'status':'success','results':results}) 
+            }
         })
     }) 
+    
     c.res.body = result;
-    console.log(result)
 })
 
 
@@ -324,23 +378,33 @@ app.post('/getmyfollowstext', async c=>{
 app.post('/addsave', async c => {
     let {username, textid} = JSON.parse(c.body)
     var result = await new Promise((resolve) => {
-        connection.query('INSERT INTO save VALUES(?,?)',[username,textid],function(error,results,fields){
-                if(results.length == 0 ){
-                    resolve({'status': 'failed','code':'400'})
-                }
-                else{
-                    resolve({'status':'success','results':results})
-                    console.log('插入成功');
-                }
-        })
-    }) 
-    connection.query('UPDATE text SET savenumber = savenumber+1 WHERE textid = ?',[textid],function (err, results){
-        if(err) throw err;
-        console.log('收藏+1');
-    })
-    c.res.body = result;
-    console.log(result)
 
+        connection.query('SELECT * FROM save where username =? and textid =? ',[username,textid],function(error,results,fields){
+            
+            if(results.length !==0){
+                resolve({'status': 'Already save','code':'400'})
+            }else{
+                
+                connection.query('INSERT INTO save VALUES(?,?)',[username,textid],function(error,results,fields){
+                        if(results.length == 0 ){
+                            resolve({'status': 'failed','code':'400'})
+                        }
+                        else{
+                            
+                            connection.query('UPDATE text SET savenumber = savenumber+1 WHERE textid = ?',[textid],function (err, results){
+                                if(err) throw err;
+                                console.log('收藏+1');
+                            })
+                            
+                            resolve({'status':'success','results':results})
+                            console.log('插入成功');
+                        }
+                    })
+            }
+        }) 
+    })
+
+    c.res.body = result;
 });
 
 //删除我收藏的文章 //前端代码有了可以删除
@@ -352,24 +416,29 @@ app.post('/addsave', async c => {
 //接口
 
 app.post('/deletemysave', async c => {
+    
     let {username, textid} = JSON.parse(c.body)
+    
     var result = await new Promise((resolve) => {
         connection.query('delete from save where username=? and textid=?',[username,textid],function(error,results,fields){
-                if(results.length == 0 ){
-                    resolve({'status': 'failed','code':'400'})
-                }
-                else{
-                    resolve({'status':'success','results':results})
-                    console.log('删除成功');
-                }
+            
+            if(results.length == 0 ){
+                resolve({'status': 'failed','code':'400'})
+            }
+            else{
+                
+                connection.query('UPDATE text SET savenumber = savenumber-1 WHERE textid = ?',[textid],function (err, results){
+                        if(err) throw err;
+                        console.log('收藏-1');
+                })
+                
+                resolve({'status':'success','results':results})
+                console.log('删除成功');
+            }
         })
     })
-    connection.query('UPDATE text SET savenumber = savenumber-1 WHERE textid = ?',[textid],function (err, results){
-            if(err) throw err;
-            console.log('收藏-1');
-    })
+
     c.res.body = result;
-    console.log(result)
 });
 
 
@@ -388,8 +457,8 @@ app.post('/getmysavetext', async c=>{
 
     var result = await new Promise((resolve) => {
         connection.query(str,username,function(error,results,fields){
-                if(results.length == 0 ){
-                    console.log(1);
+                
+            if(results.length == 0 ){
                     resolve({'status':'nosave','code':'400'})
                 }
                 else{
@@ -397,8 +466,9 @@ app.post('/getmysavetext', async c=>{
                 }
         })
     })
+
     if(result.status === 'nosave'){
-        console.log(2);
+    
         c.res.body = result
         return
     }
@@ -408,7 +478,6 @@ app.post('/getmysavetext', async c=>{
     result.results.forEach((item,)=>{
         textidarr.push(item.textid)
     })
-    // console.log(textidarr)
     
     let strr = 'SELECT * FROM text where textid =? ';
     
@@ -420,18 +489,17 @@ app.post('/getmysavetext', async c=>{
 
     var result = await new Promise((resolve) => {
         connection.query(strr,textidarr,function(error,results,fields){
-                if(results.length == 0 ){
-                    resolve({'status': 'failed','code':'400'})
-                }
-                else{
-                    resolve({'status':'success','results':results}) 
-                }
+            
+            if(results.length == 0 ){
+                resolve({'status': 'failed','code':'400'})
+            }
+            else{
+                resolve({'status':'success','results':results}) 
+            }
         })
     }) 
 
-
     c.res.body = result;
-    console.log(result);
 })
 
 
@@ -469,7 +537,7 @@ app.use(async (c,next)=>{
 },{method : 'POST',name : 'upload-image'});
 
 app.get('/upload',async c=>{
-    c.res.body = fs.readFileSync()
+    c.res.body = fs.readFileSync('./upload/index.html').toString('utf-8')
 })
 
 app.post('/uploadtext',async c=>{

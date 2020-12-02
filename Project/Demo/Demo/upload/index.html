@@ -27,7 +27,6 @@
         username:'郝天恒',
         followuser : '崔宫健'
     }
-    var username = '郝天恒'
     // fetch('/getmyfans',{
     //     method: 'POST',
     //     headers:{
@@ -54,25 +53,12 @@
     // .then(res => console.log(res)
     // )
 
-    // fetch('/addmyfollows',{
-    //     method: 'POST',
-    //     headers:{
-    //         'content-type':'text'
-    //     },
-    //     body : JSON.stringify(data)
-    // })
-    // .then(function(response) {
-    //     return response.json();
-    // })
-    // .then(res => console.log(res)
-    // )
-
-    fetch('/getmyfansandfollowusernumber',{
+    fetch('/uploadtext',{
         method: 'POST',
         headers:{
             'content-type':'text'
         },
-        body : JSON.stringify(username)
+        body : JSON.stringify(data)
     })
     .then(function(response) {
         return response.json();
