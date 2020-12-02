@@ -92,11 +92,62 @@ app.get('/home',async c=>{
 
 //首页接口 
 
-app.post('/gethomedata',async c=>{
-    let username = JSON.parse(c.body)
-
-    //*还没写完
+var homedata ={};
+connection.query("SELECT textid,title from text  order by ctime desc limit 0,3",function (err, results){
+    if(err){
+        throw err
+    }else{
+    // console.log(results);
+        homedata.newtext=results;
+    };
 })
+connection.query("SELECT textid,title from text where type='js' order by savenumber limit 0,3",function (err, results){
+    if(err){
+        throw err
+    }else{
+    // console.log(results);
+        homedata.js=results;
+    };
+})
+connection.query("SELECT textid,title from text where type='react' order by savenumber limit 0,3",function (err, results){
+    if(err){
+        throw err
+    }else{
+    // console.log(results);
+        homedata.react=results;
+    };
+})
+connection.query("SELECT textid,title from text where type='nodejs' order by savenumber limit 0,3",function (err, results){
+    if(err){
+        throw err
+    }else{
+    // console.log(results);
+        homedata.nodejs=results;
+    };
+})
+connection.query("SELECT textid,title from text where type='html' order by savenumber limit 0,3",function (err, results){
+    if(err){
+        throw err
+    }else{
+    // console.log(results);
+        homedata.html=results;
+    };
+})
+connection.query("SELECT textid,title from text where type='css' order by savenumber limit 0,3",function (err, results){
+    if(err){
+        throw err
+    }else{
+    // console.log(results);
+        homedata.css=results;
+    };
+})
+app.get('/gethomedata',async (c)=>{
+    c.res.body = JSON.stringify(homedata)
+    console.log('homedata:',homedata);
+
+})
+
+console.log('homedata:',homedata);
 
 //获取发表的文章 //前端代码有了可以删除
 app.get('/gettext',async c=>{
@@ -384,6 +435,54 @@ app.post('/getmysavetext', async c=>{
 })
 
 
+//text
+
+app.get('/p',async c=>{
+    c.res.body = `${c.method} ${c.routepath}`
+});
+
+app.post('/p',async c=>{
+    console.log('c.body:',c.body);
+    c.res.body = c.body;
+})
+
+app.get('/q',async c=>{
+    c.res.body = c.query;
+})
+
+//上传文件
+
+app.use(async (c,next)=>{
+    let upf = c.getFile('image')
+
+    if(!upf){
+        c.res.body = 'file not found'
+        return
+    }
+    //100k
+    else if(upf.data.length > 100000){
+        c.res.body = 'max file size : 100k'
+        return
+    }
+
+    await next()
+},{method : 'POST',name : 'upload-image'});
+
+app.get('/upload',async c=>{
+    c.res.body = fs.readFileSync()
+})
+
+app.post('/uploadtext',async c=>{
+    let f = c.getFile('image')
+
+    let fname = `${c.helper.makeNmae()}${c.helper.extName(f.filename)}`
+
+    try{
+        c.res.body = await c.moveFile(f,fname)
+    }catch(err){
+        c.res.body = err.message
+    }
+},'upload-image')
 
 
 app.run(1234,2)
