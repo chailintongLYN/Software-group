@@ -28,9 +28,6 @@ var connection = mysql.createConnection({
 connection.connect();
 
 
-// app.get('/',async c=>{
-//     c.res.body = fs.readFileSync('../index.js').toString('utf-8');
-// })
 
 app.post('/data',async c=>{
 

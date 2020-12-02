@@ -55,7 +55,7 @@ app.get('/new',async c=>{
 })
 
 //注册页 接口
-app.post('/logon',async c=>{
+app.post('/newdata',async c=>{
     let post={
         username:JSON.parse(c.body).username,
         passwd:JSON.parse(c.body).passwd
@@ -85,7 +85,7 @@ app.post('/logon',async c=>{
 })
 
 //首页 //前端代码有了可以删除
-app.get('/login',async c=>{
+app.get('/home',async c=>{
     c.res.body = fs.readFileSync('.loginandnewdata/login.html').toString('utf-8');
 })
 
