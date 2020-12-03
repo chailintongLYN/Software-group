@@ -23,49 +23,49 @@
     </footer>
 </body>
 <script>
-    var username='郝天恒'
-    fetch('/getfans',{
+    var data = {
+        username:'郝天恒',
+        followuser : '崔宫健2'
+    }
+    // fetch('/getmyfans',{
+    //     method: 'POST',
+    //     headers:{
+    //         'content-type':'text'
+    //     },
+    //     body : JSON.stringify(username)
+    // })
+    // .then(function(response) {
+    //     return response.json();
+    // })
+    // .then(res => console.log(res)
+    // )
+
+    // fetch('/deletemyfansorfollows',{
+    //     method: 'POST',
+    //     headers:{
+    //         'content-type':'text'
+    //     },
+    //     body : JSON.stringify(data)
+    // })
+    // .then(function(response) {
+    //     return response.json();
+    // })
+    // .then(res => console.log(res)
+    // )
+
+    fetch('/addmyfollows',{
         method: 'POST',
         headers:{
             'content-type':'text'
         },
-        body : JSON.stringify(username)
+        body : JSON.stringify(data)
     })
-        .then(function(response) {
-            return response.json();
-        })
-        .then(
-            res => {
-                console.log(res)
-            })
-            // function(myJson) {
-            // var bloglist = myJson;
-            // console.log(myJson)
-            // var blogCon = document.getElementById("bloglist");
-            // for (var i = 0; i < bloglist.length; i++) {
-            //     var innerNode = `<h2><a title="${bloglist[i].chapterName}" href="/detail?chapterId=${bloglist[i].chapterId}">${bloglist[i].chapterName}</a></h2>
-            //                     <figure><img src='${bloglist[i].imgPath}' border='0' width='120' height='120' alt='${bloglist[i].chapterName}'></figure>
-            //                     <ul class="nlist">
-            //                         <p>${bloglist[i].chapterDes}</p>
-            //                         <a title="${bloglist[i].chapterName}" href="/detail?chapterId=${bloglist[i].chapterId}" target="_blank" class="readmore">阅读全文>></a>
-            //                     </ul>
-            //                     <p class="dateview">
-            //                         <span>发布时间：${bloglist[i].publishTimer}</span>
-            //                         <span>作者：${bloglist[i].author}</span>
-            //                         <span>分类：[<a href="##">悠客</a>]</span>
-            //                         <span class="nl">浏览（${bloglist[i].views}）</span>
-            //                         <span class="n2">评论（<a href="##">0</a>）</span>
-            //                         <div class="line"></div>
-            //                     </p>`;
-            //     var el = document.createElement("div");
-            //     el.className = "oneblog";
-            //     el.innerHTML = innerNode;
-            //     console.log(el);
-            //     blogCon.appendChild(el);
-            // }
-
-        // }
-        // );
+    .then(function(response) {
+        return response.json();
+    })
+    .then(res => console.log(res)
+    )
+          
 </script>
 
 </html>

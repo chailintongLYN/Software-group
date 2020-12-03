@@ -1,0 +1,39 @@
+.am-search {
+    border-bottom: 1px solid #ddd;
+    position: fixed;
+    top: 10px;
+    width: 325px;
+    height: 30px;
+    left: 20px;
+    border-radius: 5px;
+    background-color: #fff;
+  }
+.am-search-input{
+    border-radius: 2px;
+    background-color: gray;
+}
+
+.sub-title {
+color: #888;
+font-size: 14px;
+padding: 30px 0 18px 0;
+}
+.bangdan{
+    position: fixed;
+    top: 70px;
+    left: 20px;
+    font-size: 15px;
+    font-weight: 600;
+}
+.am-search-cancel{
+    font-weight: 550;
+}
+.list{
+    position: fixed;
+    top: 120px;
+}
+.list li{
+    position: relative;
+    font-size: 15px;
+    font-weight: 600;
+}

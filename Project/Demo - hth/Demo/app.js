@@ -108,23 +108,30 @@ app.post('/gettexts',async c=>{
     let {searchtype,sevalue} = JSON.parse(c.body)
 
     console.log(searchtype,sevalue)
-
-    // if(searchtype === 'textid'){
-        var result = await  new Promise((resolve) => {
-            connection.query('SELECT * FROM text where ' + searchtype + '=? ',[sevalue],function(error,results,fields){
-                if(results.length == 0 ){
-                    console.log(1)
-                    resolve({'status': 'failed','code':'400'})
-                }
-                else{
-                    console.log(2)
-                    resolve({'status':'success','results':results}) 
-                }
-            })
-        }) 
-        c.res.body = result;        
-    // }
-
+    
+    let str = '';
+    
+    var result = await  new Promise((resolve) => {
+        
+        if(searchtype !=='title'){
+            str = 'SELECT * FROM text where ' + searchtype + '=? '
+            console.log(1);
+    
+        }else{
+            str = "SELECT * FROM text where title like '%"+ sevalue +"%'"
+            console.log(2);
+        }
+        console.log(3);
+        connection.query(str,[sevalue],function(error,results,fields){
+            if(results.length == 0 ){
+                resolve({'status': 'failed','code':'400'})
+            }
+            else{
+                resolve({'status':'success','results':results}) 
+            }
+        })
+    }) 
+    c.res.body = result;
 
 })
 
@@ -151,6 +158,56 @@ app.post('/getmyfans', async c=>{
     c.res.body = result;
 })
 
+//删除我的粉丝 ，取消关注//前端代码有了可以删除
+
+// app.get('/getfans')
+
+//接口
+
+app.post('/deletemyfansorfollows',async c=>{
+    let {username,followuser} = JSON.parse(c.body)
+    console.log(username,followuser);
+
+    var result = await  new Promise((resolve) => {
+        connection.query('DELETE FROM fans where username=? and followuser=? ',[username,followuser],function(error,results,fields){
+            console.log(results);
+            if(results.length == 0 ){
+                resolve({'status': 'failed','code':'400'})
+            }
+            else{
+                resolve({'status':'success'})   
+            }
+        })
+    }) 
+    c.res.body = result;
+})
+
+//添加关注 //前端代码有了可以删除
+
+// app.get('/getfans')
+
+//接口
+
+app.post('/addmyfollows',async c=>{
+    let {username,followuser} = JSON.parse(c.body)
+    console.log(username,followuser);
+
+    var result = await  new Promise((resolve) => {
+        connection.query('INSERT INTO fans SET ?',{username,followuser},function(error,results,fields){
+            console.log(results);
+            if(results.length == 0 ){
+                resolve({'status': 'failed','code':'400'})
+            }
+            else{
+                resolve({'status':'success'})   
+            }
+        })
+    }) 
+    c.res.body = result;
+})
+
+
+
 //获取我的关注 //前端代码有了可以删除
 app.get('/getfollows',async c=>{
     c.res.body = fs.readFileSync('./getfollows/index.html').toString('utf-8');
@@ -174,6 +231,32 @@ app.post('/getmyfollows', async c=>{
     c.res.body = result;
 })
 
+//删除我关注的人 //前端代码有了可以删除
+// app.get('/getfollows',async c=>{
+//     c.res.body = fs.readFileSync('./getfollows/index.html').toString('utf-8');
+// })
+
+
+//接口
+
+// app.post('/deletemyfollows',async c=>{
+//     let {username,followuser} = JSON.parse(c.body)
+//     console.log(username,followuser);
+
+//     var result = await  new Promise((resolve) => {
+//         connection.query('DELETE FROM fans where username=? and followuser=? ',[username,followuser],function(error,results,fields){
+//             console.log(results);
+//             if(results.length == 0 ){
+//                 resolve({'status': 'failed','code':'400'})
+//             }
+//             else{
+//                 resolve({'status':'success'})   
+//             }
+//         })
+//     }) 
+//     c.res.body = result;
+// })
+
 
 //获取我的关注的人的文章 //前端代码有了可以删除
 app.get('/getfollowstext', async c=>{
@@ -183,35 +266,25 @@ app.get('/getfollowstext', async c=>{
 //获取我的关注的人的文章 的接口
 app.post('/getmyfollowstext', async c=>{
     let username = JSON.parse(c.body)
-    let textarr = []
-    console.log(JSON.parse(c.body))
 
     var result = await new Promise((resolve) => {
-        connection.query('SELECT * FROM fans where followuser=? ',[username],function(error,results,fields){
-            if(results.length == 0 ){
-                console.log(1)
-                resolve({'status': 'failed','code':'400'})
-            }
-            else{
-                console.log(2)
-                results.forEach(item => {
-                    console.log(item.username)
-                    var anotherresult = new Promise((resolve)=>{
-                        
-                        connection.query('SELECT * FROM text where username=? ',item.username,function(error,anotherresults,fields){
-                            textarr.push(anotherresults)
-                            console.log('textarr:',textarr);
-                            resolve(textarr)
-                        })
-                    })
-                });
-                console.log(1);
-                // console.log(anotherresult);
-                // resolve({'status':'success','results':anotherresult}) 
-            }
-        })
+        username.forEach(item => {
+            console.log(item);
+            connection.query('SELECT * FROM text where username=? ',[item],function(error,results,fields){
+                    console.log(results);
+                    if(results.length == 0 ){
+                        console.log(1)
+                        resolve({'status': 'failed','code':'400'})
+                    }
+                    else{
+                        console.log(2)
+                        resolve({'status':'success','results':results}) 
+                    }
+            })
+        });
     }) 
     c.res.body = result;
+    console.log(3);
     console.log(result)
 })
 
