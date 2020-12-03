@@ -13,11 +13,12 @@ import youzhi from  "./HomeImg/youzhi.png"
 import jingxuan from  "./HomeImg/jingxuan.png"
 import BttomBar from '../components/BttomBar'
 const Home=(props)=>{
+    console.log(sessionStorage.getItem('username'));
     return(
         <div class="home">
 
             <div class="home_head">
-                <div   class="home_headInput"  onClick={()=>props.history.push('/')}>
+                <div   class="home_headInput"  onClick={()=>props.history.push('/search')}>
                    <span class="home_headInput_search"></span> 专题搜索
                 </div>
                 <span class="head_btn">

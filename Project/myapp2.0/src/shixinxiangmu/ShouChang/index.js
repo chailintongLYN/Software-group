@@ -15,7 +15,7 @@ const ShouChang = (props)=>{
             <img src={heart}/> 我的收藏
         </div>
         <div className="sc_container">
-        <div className="sc_list">
+        <div className="sc_list" onClick={()=>props.history.push('/detail')}>
             <img src={img} />
             <div className="sc_list_text" >
                 <div className="sc_list_head">react使用setState注意事项</div>
@@ -27,7 +27,7 @@ const ShouChang = (props)=>{
                 </div>
             </div>
         </div>
-        <div className="sc_list">
+        <div className="sc_list" onClick={()=>props.history.push('/detail')}>
             <img src={remen1} />
             <div className="sc_list_text" >
                 <div className="sc_list_head">react使用setState注意事项react使用setState注意事项</div>
@@ -39,7 +39,7 @@ const ShouChang = (props)=>{
                 </div>
             </div>
         </div>
-        <div className="sc_list">
+        <div className="sc_list" onClick={()=>props.history.push('/detail')}>
             <img src={remen2} />
             <div className="sc_list_text" >
                 <div className="sc_list_head">react---------------------------</div>
@@ -51,7 +51,7 @@ const ShouChang = (props)=>{
                 </div>
             </div>
         </div>
-        <div className="sc_list">
+        <div className="sc_list" onClick={()=>props.history.push('/detail')}>
             <img src={remen3} />
             <div className="sc_list_text" >
                 <div className="sc_list_head">vueaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</div>
@@ -63,7 +63,7 @@ const ShouChang = (props)=>{
                 </div>
             </div>
         </div>
-        <div className="sc_list">
+        <div className="sc_list" onClick={()=>props.history.push('/detail')}>
             <img src={dashen} />
             <div className="sc_list_text" >
                 <div className="sc_list_head">nodenodenodenodenodenodenodenodenode</div>
@@ -75,7 +75,7 @@ const ShouChang = (props)=>{
                 </div>
             </div>
         </div>
-        <div className="sc_list">
+        <div className="sc_list" onClick={()=>props.history.push('/detail')}>
             <img src={dashen} />
             <div className="sc_list_text" >
                 <div className="sc_list_head">nodenodenodenodenodenodenodenodenode</div>

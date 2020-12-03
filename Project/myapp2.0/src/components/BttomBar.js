@@ -12,6 +12,7 @@ import bottom_btn3 from  "../Img/bottom_btn3.png"
 
 import bottom_btn4_active from "../Img/bottom_btn4_active.png"
 import bottom_btn4 from  "../Img/bottom_btn4.png"
+import ShouChang from '../shixinxiangmu/ShouChang'
 const BttomBar=(props)=>{
     let [activeUrl,setActiveUrl] = useState("/home")
     useEffect(()=>{
@@ -29,11 +30,67 @@ const BttomBar=(props)=>{
     }, [window.location.pathname])
 
     let activeClick=(url)=>{
-        if(url == activeUrl){
+        if(url == activeUrl){            
             return;
         }
         setActiveUrl(url)
         props.history.push(url)
+
+        if(url === '/jiequ'){
+            fetch('http://localhost:1234/getmyfollowstext',{
+                method:'POST',
+                headers:{
+                    'content-type' : 'application/json'
+                },
+                body:JSON.stringify(sessionStorage.getItem('username'))
+            }).then(res => res.json())
+            .then(res=>{
+
+                console.log(res);
+            })
+        }
+
+        if(url === '/shouchang'){
+            fetch('http://localhost:1234/getmysavetext',{
+                method:'POST',
+                headers:{
+                    'content-type' : 'application/json'
+                },
+                body:JSON.stringify(sessionStorage.getItem('username'))
+            }).then(res => res.json())
+            .then(res=>{
+                console.log(res);
+                
+            })
+        }
+
+        if(url === '/myself'){
+            fetch('http://localhost:1234/getmyfansandfollowusernumber',{
+                method:'POST',
+                headers:{
+                    'content-type' : 'application/json'
+                },
+                body:JSON.stringify(sessionStorage.getItem('username'))
+            }).then(res => res.json())
+            .then(res=>{
+                console.log(res);
+                
+            })
+            let data = {}
+            data.searchtype = 'username';
+            data.sevalue = sessionStorage.getItem('username')
+            fetch('http://localhost:1234/gettexts',{
+                method:'POST',
+                headers:{
+                    'content-type' : 'application/json'
+                },
+                body:JSON.stringify(data)
+            }).then(res => res.json())
+            .then(res=>{
+                console.log(res);
+                
+            })
+        }
     }
 
     return(
@@ -59,7 +116,7 @@ const BttomBar=(props)=>{
                     }
                 </div>
                 <div className="BttomBar_container_div_text"> 
-                    街区
+                    关注
                 </div>
             </div>
             <div className="BttomBar_container_div" onClick={()=>activeClick("/shouchang")}> 
