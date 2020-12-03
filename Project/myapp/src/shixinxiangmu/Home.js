@@ -30,7 +30,7 @@ const Home=(props)=>{
             </div>
 
             <div class="home_tuiJian">
-                <div class="home_tuijian_btn_container">
+                <div class="home_tuijian_btn_container" >
                     <div class="home_tuijian_btn">
                         <img src={tuijian1_btn}/>
                     </div>
@@ -68,14 +68,14 @@ const Home=(props)=>{
                 <h2 class="home_remen_title">热门专贴</h2>
                 <div class="home_remen_container">
                     <div class="home_remen_container_div">
-                        <div class="home_remen_container_div_img">
+                        <div class="home_remen_container_div_img" onClick={()=>props.history.push('/detail')}>
                             <img src={remen1} />
                         </div>
                         <div class="home_remen_container_div_text">
                         MAC更新险遭灾难
                         </div>
                     </div>
-                    <div class="home_remen_container_div">
+                    <div class="home_remen_container_div" onClick={()=>props.history.push('/detail')}>
                         <div class="home_remen_container_div_img">
                         <img src={remen2} />
                         </div>
@@ -83,7 +83,7 @@ const Home=(props)=>{
                         Vokenization：一种比GPT-3更有常识的视觉语言模型
                         </div>
                     </div>
-                    <div class="home_remen_container_div">
+                    <div class="home_remen_container_div" onClick={()=>props.history.push('/detail')}>
                         <div class="home_remen_container_div_img">
                         <img src={remen3} />
                         </div>
@@ -138,7 +138,7 @@ const Home=(props)=>{
             <div class="home_youzhi home_remen">
                 <h2 class="home_remen_title">优质团队</h2>
                 <div class="home_remen_container">
-                    <div class="home_remen_container_div">
+                    <div class="home_remen_container_div" >
                         <div class="home_remen_container_div_img">
                             <img src={youzhi} />
                         </div>
@@ -170,7 +170,7 @@ const Home=(props)=>{
             <div class="home_jingxuan home_remen">
                 <h2 class="home_remen_title">精选活动</h2>
                 <div class="home_remen_container">
-                    <div class="home_remen_container_div">
+                    <div class="home_remen_container_div" onClick={()=>props.history.push('/detail')}>
                         <div class="home_remen_container_div_img">
                             <img src={jingxuan} />
                         </div>
@@ -178,7 +178,7 @@ const Home=(props)=>{
                         程序员是怎么炫富的
                         </div>
                     </div>
-                    <div class="home_remen_container_div">
+                    <div class="home_remen_container_div" onClick={()=>props.history.push('/detail')}>
                         <div class="home_remen_container_div_img">
                         <img src={jingxuan} />
                         </div>
@@ -186,7 +186,7 @@ const Home=(props)=>{
                         程序员的凡尔赛文学
                         </div>
                     </div>
-                    <div class="home_remen_container_div">
+                    <div class="home_remen_container_div" onClick={()=>props.history.push('/detail')}>
                         <div class="home_remen_container_div_img">
                         <img src={jingxuan} />
                         </div>

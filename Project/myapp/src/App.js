@@ -30,6 +30,7 @@
 // }
 // export default App;
 
+
 import React from 'react';
 import { BrowserRouter as Router, Route , Switch } from 'react-router-dom'
 import Login from './shixinxiangmu/Login'
@@ -38,6 +39,7 @@ import Search from './shixinxiangmu/Search'
 import Logon from './shixinxiangmu/Logon'
 import Loginn from './shixinxiangmu/pc/Loginn'
 import Editor from "./shixinxiangmu/pc/Editor"
+import Detail from './shixinxiangmu/Detail'
 const App=()=>{
 	return(
 		<Router>
@@ -48,6 +50,7 @@ const App=()=>{
 				<Route path='/logon' component={Logon}/>
 				<Route path='/loginn' component={Loginn}/>
 				<Route path='/editor' component={Editor}/>
+				<Route path='/detail' component={Detail}/>
 			</Switch>
 		
 		</Router>

@@ -57,7 +57,7 @@ class Login extends Component {
             //   location.href = '/login';
               console.log(response)
               // 保存信息到sessionStorage
-              sessionStorage.setItem("username", username);
+              var username=sessionStorage.setItem("username", username);
               // 登录成功后，设置redirectToReferrer为true;
               // this.setState({
               //     rediectToReferrer: true,
@@ -77,7 +77,7 @@ class Login extends Component {
             <body>
                 <div class="container">
                     {/* <div class="ll"></div> */}
-                    <form onSubmit={this.handleSumit}>
+                    <form onSubmit={this.handleSumit} class="biaodan1">
                         <div>
                                 <input
                                     type="text"
