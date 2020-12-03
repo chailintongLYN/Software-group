@@ -552,11 +552,16 @@ app.post('/uploadtext',async c=>{
 
     try{
         await c.moveFile(f,'./uploadimg/'+fname)
-        // c.res.body =  
+        c.res.body =  JSON.stringify('../uploadimg/'+fname)
     }catch(err){
         c.res.body = err.message
     }
 },'uploadtext-image')
+
+app.get('/uploadimg/*',async c=>{
+    console.log(c.path);
+    c.res.body = fs.readFileSync('.'+c.path)
+})
 
 
 app.run(1234)

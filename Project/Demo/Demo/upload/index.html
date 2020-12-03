@@ -7,7 +7,7 @@
 
 <body>
   <input type="file" accept="image/*" id="fileUpload" />
-  <canvas id="myCanvas"></canvas>
+  <img src="">
   <!-- <form>
     <div>
       <label>Select file to upload</label>
@@ -32,7 +32,7 @@
     })
     .then(response => response.json())
     .then(res => {
-     
+      document.getElementsByTagName('img')[0].src=res
       console.log(res)
     })
   }
