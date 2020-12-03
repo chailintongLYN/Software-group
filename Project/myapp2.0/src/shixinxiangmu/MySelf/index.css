@@ -1,0 +1,114 @@
+.myse_avatr{
+    width: 92px;
+    height: 92px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 1px solid white;
+    margin: 0px auto;
+}
+.myse_kongbai{
+    height: 40px;
+}
+.myse,.myse_bg{
+    width: 100%;
+    height: 100%;
+
+}
+.myse,.myse_bg{
+    width: 100%;
+    height: 100%;
+    background-position: center center ;
+    background-size: cover;
+    background-repeat: no-repeat;
+ 
+}
+.myse_bg{
+    position: fixed;
+    top: 0;
+    z-index: -1;
+    filter: blur(15px);
+    opacity: 0.8;
+}
+
+.myse_name,.myse_gz_fs {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(33, 33, 33, 100);
+font-size: 16px;
+text-align: left;
+font-family: PingFangSC-bold;
+}
+.myse_gz_fs{
+    margin-top: 10px;
+}
+.myse_name{
+    margin-top: 10px;
+    font-weight: bold;
+}
+.myse_gz{
+    margin-right: 19px;
+}
+.myse_fs{
+    margin-left: 19px;
+}
+
+.myse_project{
+    width: 335px;
+    border-radius: 10px 10px 10px 10px;
+    text-align: center;
+    /* border: 1px solid rgba(255, 255, 255, 100); */
+    margin: 0 auto;
+    min-height: 380px;
+    margin-top: 90px;
+    overflow: hidden;
+}
+.myse_project_content{
+    background:linear-gradient(to bottom,  #ccc 0%,#ffffff 100%)
+
+}
+.myse_project_head{
+    width: 100%;
+    height: 60px;
+    line-height: 60px;
+    color: rgba(16, 16, 16, 100);
+    font-size: 14px;
+    font-family: PingFangSC-regular;
+    background-color: rgba(255, 255, 255, 80);
+    margin-bottom: 2px;
+}
+.myse_project_content{
+    display: flex;
+    justify-content:space-between;
+    flex-wrap: wrap;
+
+}
+
+.myse_project_list_add{
+    width: 103px;
+    height: 103px;
+    border: 1px dashed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 10px;
+}
+
+.myse_project_content .kongbai_bottom{
+    height: 80px;
+    width: 100%;
+}
+
+.myse_project_list{
+    margin-bottom: 4px;
+}
+
+.myse_kongbai {
+    height: 40px;
+    position: relative;
+}
+.myse_shezhi {
+    position: absolute;
+    right: 15px;
+    top: 20px;
+}
