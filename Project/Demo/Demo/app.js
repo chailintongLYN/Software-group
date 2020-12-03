@@ -341,7 +341,28 @@ app.get('/getfollowstext', async c=>{
 
 //获取我的关注的人的文章 的接口
 app.post('/getmyfollowstext', async c=>{
-    let username = JSON.parse(c.body)
+
+    let username1 = JSON.parse(c.body)
+    var result1 = await new Promise((resolve) => {
+        connection.query('SELECT * FROM fans where followuser = ? ',username1,function(error,results,fields){
+            
+            if(results.length == 0 ){
+                resolve({'status': 'failed','code':'400'})
+            }
+            else{
+                resolve({'status':'success','results':results}) 
+            }
+        })
+    }) 
+
+    let username = []
+
+    result1.results.forEach((item,index)=>{
+        username.push(item.username)
+    })
+    console.log(username);
+    
+    
 
     let str = 'SELECT * FROM text where username =? ';
 
