@@ -6,65 +6,50 @@
 </head>
 
 <body>
-    <article class="blogs">
-        <h2 class="title_tj">
-            <p>文章<span>推荐</span></p>
-        </h2>
-        <div class="newblog left" id="bloglist">
-
-        </div>
-    </article>
-    <footer>
-        <p class="ft-copyright">个人博客</p>
-        <div id="tbox">
-            <a id="togbook" href=""></a>
-            <a id="gotop" href="javascript:void(0)"></a>
-        </div>
-    </footer>
+  <input type="file" accept="image/*" id="fileUpload" />
+  <canvas id="myCanvas"></canvas>
+  <!-- <form>
+    <div>
+      <label>Select file to upload</label>
+      <input type="file">
+    </div>
+    <button type="submit">Convert</button>
+  </form> -->
 </body>
 <script>
-    var data = {
-        username:'郝天恒',
-        followuser : '崔宫健'
-    }
-    // fetch('/getmyfans',{
-    //     method: 'POST',
-    //     headers:{
-    //         'content-type':'text'
-    //     },
-    //     body : JSON.stringify(username)
-    // })
-    // .then(function(response) {
-    //     return response.json();
-    // })
-    // .then(res => console.log(res)
-    // )
+  document.querySelector('#fileUpload').addEventListener('change', event => {
+    handleImageUpload(event)
+  })
+  const handleImageUpload = event => {
+    // console.log(event);
+    const files = event.target.files
+    let formData = new FormData()
+    formData.append('image', files[0])
 
-    // fetch('/deletemyfansorfollows',{
-    //     method: 'POST',
-    //     headers:{
-    //         'content-type':'text'
-    //     },
-    //     body : JSON.stringify(data)
-    // })
-    // .then(function(response) {
-    //     return response.json();
-    // })
-    // .then(res => console.log(res)
-    // )
+    fetch('/uploadtext', {
+      method: 'POST',
+      body: formData
+    })
+    .then(response => response.json())
+    .then(res => {
+     
+      console.log(res)
+    })
+  }
+  // function fetchupload() {
+  //   var formData = new FormData();
+  //   var fileField = document.querySelector("input[type='file']");
 
-    fetch('/uploadtext',{
-        method: 'POST',
-        headers:{
-            'content-type':'text'
-        },
-        body : JSON.stringify(data)
-    })
-    .then(function(response) {
-        return response.json();
-    })
-    .then(res => console.log(res)
-    )
+  //   formData.append('image', fileField.files[0]);
+
+  //   fetch('/uploadtext', {
+  //     method: 'POST',
+  //     body: formData
+  //   })
+  //   .then(response => response.json())
+  //   .catch(error => console.error('Error:', error))
+  //   .then(response => console.log('Success:', response));
+  // }
           
 </script>
 

@@ -521,36 +521,42 @@ app.get('/q',async c=>{
 //上传文件
 
 app.use(async (c,next)=>{
-    let upf = c.getFile('image')
 
+    let upf = c.getFile('image')
     if(!upf){
         c.res.body = 'file not found'
         return
     }
     //100k
-    else if(upf.data.length > 100000){
+    else if(upf.length > 100000){
         c.res.body = 'max file size : 100k'
         return
     }
 
     await next()
-},{method : 'POST',name : 'upload-image'});
+},{method : 'POST',name : 'uploadtext-image'});
 
 app.get('/upload',async c=>{
     c.res.body = fs.readFileSync('./upload/index.html').toString('utf-8')
 })
 
-app.post('/uploadtext',async c=>{
-    let f = c.getFile('image')
 
-    let fname = `${c.helper.makeNmae()}${c.helper.extName(f.filename)}`
+
+app.post('/uploadtext',async c=>{
+    console.log(2);
+
+    let f = c.getFile('image')
+    console.log(f);
+
+    let fname = `${c.helper.makeName()}${c.helper.extName(f.filename)}`
 
     try{
-        c.res.body = await c.moveFile(f,fname)
+        await c.moveFile(f,'./uploadimg/'+fname)
+        // c.res.body =  
     }catch(err){
         c.res.body = err.message
     }
-},'upload-image')
+},'uploadtext-image')
 
 
-app.run(1234,2)
+app.run(1234)
