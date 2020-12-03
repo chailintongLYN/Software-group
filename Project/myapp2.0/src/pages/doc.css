@@ -1,0 +1,10 @@
+.doc{
+    display: flex;
+}
+.doc .content{
+    flex: 1;
+    padding-left: 10px;
+}
+.doc ol{
+    width: 200px;
+}
