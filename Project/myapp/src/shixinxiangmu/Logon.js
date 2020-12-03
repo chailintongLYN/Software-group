@@ -41,7 +41,7 @@ class Logon extends Component{
             alert("用户名或密码不能为空！");
             return;
         }
-        fetch('http://localhost:1234/logon', {
+        fetch('http://localhost:1234/newdata', {
             method : 'POST',
             headers : {
               'content-type' : 'application/json'
@@ -65,7 +65,7 @@ class Logon extends Component{
                   : "/login";
               // 登陆成功之后的跳转
               this.props.history.push(RedirectUrl);
-            }else if(response.status === 'usernamefaild'){
+            }else if(response.status === 'usernamefailed'){
                 alert('用户名已存在')
             }
             else{
