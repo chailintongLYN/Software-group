@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from 'react'
+import React,{useState,useEffect,Component} from 'react'
 import "./index.css"
 import BttomBar from '../../components/BttomBar'
 import img from '../ShoouChangImg/img.png'
@@ -9,13 +9,28 @@ import remen3 from  "../HomeImg/remen3.png"
 import dashen from  "../HomeImg/dashen.png"
 
 
-const ShouChang = (props)=>{
-    return (<div className="sc">
+class ShouChang extends Component{
+    constructor(props){
+        super(props);
+        fetch('http://localhost:1234/getmysavetext',{
+                method:'POST',
+                headers:{
+                    'content-type' : 'application/json'
+                },
+                body:JSON.stringify(sessionStorage.getItem('username'))
+            }).then(res => res.json())
+            .then(res=>{
+                console.log(res);
+                })
+            }
+    
+    render(props){
+        return (<div className="sc">
         <div className="sc_header">
             <img src={heart}/> 我的收藏
         </div>
         <div className="sc_container">
-        <div className="sc_list" onClick={()=>props.history.push('/detail')}>
+        <div className="sc_list" onClick={()=>this.props.history.push('/detail')}>
             <img src={img} />
             <div className="sc_list_text" >
                 <div className="sc_list_head">react使用setState注意事项</div>
@@ -91,6 +106,8 @@ const ShouChang = (props)=>{
         <div className="kongbai_bottom"></div>
         <BttomBar />
         </div>)
+    }
+    
 
 }
 export default ShouChang

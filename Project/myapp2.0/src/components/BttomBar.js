@@ -50,19 +50,22 @@ const BttomBar=(props)=>{
             })
         }
 
-        if(url === '/shouchang'){
-            fetch('http://localhost:1234/getmysavetext',{
-                method:'POST',
-                headers:{
-                    'content-type' : 'application/json'
-                },
-                body:JSON.stringify(sessionStorage.getItem('username'))
-            }).then(res => res.json())
-            .then(res=>{
-                console.log(res);
-                
-            })
-        }
+        // if(url === '/shouchang'){
+        //     fetch('http://localhost:1234/getmysavetext',{
+        //         method:'POST',
+        //         headers:{
+        //             'content-type' : 'application/json'
+        //         },
+        //         body:JSON.stringify(sessionStorage.getItem('username'))
+        //     }).then(res => res.json())
+        //     .then(res=>{
+        //         console.log(res);
+        //         props.history.push({
+        //             pathname:'/shouchang',
+        //             state:res
+        //         })
+        //     })
+        // }
 
         if(url === '/myself'){
             fetch('http://localhost:1234/getmyfansandfollowusernumber',{
