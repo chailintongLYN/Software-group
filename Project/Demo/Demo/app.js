@@ -396,7 +396,7 @@ app.post('/getmyfollowstext', async c=>{
 
 //接口
 
-app.post('/addsave', async c => {
+app.post('/addmysave', async c => {
     let {username, textid} = JSON.parse(c.body)
     var result = await new Promise((resolve) => {
 
