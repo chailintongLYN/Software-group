@@ -164,7 +164,7 @@ app.get('/gethomedata',async c=>{
 
      })
      c.res.body = datalist;
-     
+
 })
 
 
@@ -418,7 +418,7 @@ app.post('/getmyfollowstext', async c=>{
 
 //接口
 
-app.post('/addsave', async c => {
+app.post('/addmysave', async c => {
     let {username, textid} = JSON.parse(c.body)
     var result = await new Promise((resolve) => {
 
@@ -615,6 +615,19 @@ app.get('/changepassword',async c=>{
 
 app.post('/changemypassword',async c=>{
     let username = JSON.parse(c.body)
+    var result = await new Promise((resolve) => {
+        connection.query('',textidarr,function(error,results,fields){
+            
+            if(results.length == 0 ){
+                resolve({'status': 'failed','code':'400'})
+            }
+            else{
+                resolve({'status':'success'}) 
+            }
+        })
+    }) 
+
+    c.res.body = result;
 })
 
 
