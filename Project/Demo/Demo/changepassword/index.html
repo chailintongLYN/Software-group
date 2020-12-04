@@ -1,0 +1,85 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset = 'utf-8'>
+</head>
+
+<body>
+    <article class="blogs">
+        <h2 class="title_tj">
+            <p>文章<span>推荐</span></p>
+        </h2>
+        <div class="newblog left" id="bloglist">
+
+        </div>
+    </article>
+    <footer>
+        <p class="ft-copyright">个人博客</p>
+        <div id="tbox">
+            <a id="togbook" href=""></a>
+            <a id="gotop" href="javascript:void(0)"></a>
+        </div>
+    </footer>
+</body>
+<script>
+    var data = {
+        username:'郝天恒',
+        followuser : '崔宫健'
+    }
+    var username = '郝天恒'
+    // fetch('/getmyfans',{
+    //     method: 'POST',
+    //     headers:{
+    //         'content-type':'text'
+    //     },
+    //     body : JSON.stringify(username)
+    // })
+    // .then(function(response) {
+    //     return response.json();
+    // })
+    // .then(res => console.log(res)
+    // )
+
+    // fetch('/deletemyfansorfollows',{
+    //     method: 'POST',
+    //     headers:{
+    //         'content-type':'text'
+    //     },
+    //     body : JSON.stringify(data)
+    // })
+    // .then(function(response) {
+    //     return response.json();
+    // })
+    // .then(res => console.log(res)
+    // )
+
+    // fetch('/addmyfollows',{
+    //     method: 'POST',
+    //     headers:{
+    //         'content-type':'text'
+    //     },
+    //     body : JSON.stringify(data)
+    // })
+    // .then(function(response) {
+    //     return response.json();
+    // })
+    // .then(res => console.log(res)
+    // )
+
+    fetch('/getmyfansandfollowusernumber',{
+        method: 'POST',
+        headers:{
+            'content-type':'text'
+        },
+        body : JSON.stringify(username)
+    })
+    .then(function(response) {
+        return response.json();
+    })
+    .then(res => console.log(res)
+    )
+          
+</script>
+
+</html>

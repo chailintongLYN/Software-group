@@ -92,57 +92,79 @@ app.get('/home',async c=>{
 
 var homedata ={};
 
-connection.query("SELECT textid,title from text  order by ctime desc limit 0,3",function (err, results){
-    if(err){
-        throw err
-    }else{
-        homedata.newtext=results;
-    };
-})
+app.get('/gethomedata',async c=>{
+    var datalist = await Promise.all(
+            [new Promise((resolve) => {  
+                    connection.query("SELECT textid,title from text  order by ctime desc limit 0,3",function (err, results){
+                            if(err){
+                                    throw err
+                            }else{
+                                    homedata.newtext = results;
+                                    resolve({'result':homedata.newtext})
 
-connection.query("SELECT textid,title from text where type='js' order by savenumber limit 0,3",function (err, results){
-    if(err){
-        throw err
-    }else{
-        homedata.js=results;
-    };
-})
+                            };
+                    })
+                    }),
+            new Promise((resolve) => {  
+                    connection.query("SELECT textid,title from text where type='js' order by savenumber limit 0,3",function (err, results){
+                                    if(err){
+                                            throw err
+                                    }else{
+                                            homedata.js=results;
+                                            resolve({'result':homedata.js})
 
-connection.query("SELECT textid,title from text where type='react' order by savenumber limit 0,3",function (err, results){
-    if(err){
-        throw err
-    }else{
-        homedata.react=results;
-    };
-})
+                                    };
+                            })
+                    }),
+            new Promise((resolve) => {  
+                    connection.query("SELECT textid,title from text where type='react' order by savenumber limit 0,3",function (err, results){
+                                    if(err){
+                                            throw err
+                                    }else{
+                                            homedata.react=results;
+                                            resolve({'result':homedata.react})
 
-connection.query("SELECT textid,title from text where type='nodejs' order by savenumber limit 0,3",function (err, results){
-    if(err){
-        throw err
-    }else{
-        homedata.nodejs=results;
-    };
-})
+                            };
+                    })
+                    }),
+            new Promise((resolve) => {  
+                    connection.query("SELECT textid,title from text where type='nodejs' order by savenumber limit 0,3",function (err, results){
+                            if(err){
+                                    throw err
+                            }else{
+                                    homedata.nodejs=results;
+                                    resolve({'result':homedata.nodejs})
 
-connection.query("SELECT textid,title from text where type='html' order by savenumber limit 0,3",function (err, results){
-    if(err){
-        throw err
-    }else{
-        homedata.html=results;
-    };
-})
+                            };
+                    })
+                    }), 
+            new Promise((resolve) => {  
+                    connection.query("SELECT textid,title from text where type='html' order by savenumber limit 0,3",function (err, results){
+                            if(err){
+                                    throw err
+                            }else{
+                                    homedata.html=results;
+                                    resolve({'result':homedata.html})
 
-connection.query("SELECT textid,title from text where type='css' order by savenumber limit 0,3",function (err, results){
-    if(err){
-        throw err
-    }else{
-        homedata.css=results;
-    };
-})
+                            };
+                    })
+                    }),
+            new Promise((resolve) => {  
+                    connection.query("SELECT textid,title from text where type='css' order by savenumber limit 0,3",function (err, results){
+                            if(err){
+                                    throw err
+                            }else{
+                                    homedata.css=results;
+                                    resolve({'result':homedata.css})
+                            };
+                    })
+            })           
+    ]).then(function(result){
+            return homedata;
 
-app.get('/gethomedata',async (c)=>{
-    c.res.body = JSON.stringify(homedata)
-
+     })
+     c.res.body = datalist;
+     
 })
 
 
@@ -555,7 +577,7 @@ app.use(async (c,next)=>{
     }
 
     await next()
-},{method : 'POST',name : 'uploadtext-image'});
+},{method : 'POST',name : 'uploadimg-image'});
 
 app.get('/upload',async c=>{
     c.res.body = fs.readFileSync('./upload/index.html').toString('utf-8')
@@ -563,7 +585,7 @@ app.get('/upload',async c=>{
 
 
 
-app.post('/uploadtext',async c=>{
+app.post('/uploadimg',async c=>{
     console.log(2);
 
     let f = c.getFile('image')
@@ -577,11 +599,22 @@ app.post('/uploadtext',async c=>{
     }catch(err){
         c.res.body = err.message
     }
-},'uploadtext-image')
+},'uploadimg-image')
 
 app.get('/uploadimg/*',async c=>{
     console.log(c.path);
     c.res.body = fs.readFileSync('.'+c.path)
+})
+
+
+//修改我的密码   //前端代码有了可以删除
+
+app.get('/changepassword',async c=>{
+    c.res.body = fs.readFileSync('./changepassword')
+})
+
+app.post('/changemypassword',async c=>{
+    let username = JSON.parse(c.body)
 })
 
 
