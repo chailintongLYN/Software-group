@@ -36,19 +36,19 @@ const BttomBar=(props)=>{
         setActiveUrl(url)
         props.history.push(url)
 
-        if(url === '/jiequ'){
-            fetch('http://localhost:1234/getmyfollowstext',{
-                method:'POST',
-                headers:{
-                    'content-type' : 'application/json'
-                },
-                body:JSON.stringify(sessionStorage.getItem('username'))
-            }).then(res => res.json())
-            .then(res=>{
+        // if(url === '/jiequ'){
+        //     fetch('http://localhost:1234/getmyfollowstext',{
+        //         method:'POST',
+        //         headers:{
+        //             'content-type' : 'application/json'
+        //         },
+        //         body:JSON.stringify(sessionStorage.getItem('username'))
+        //     }).then(res => res.json())
+        //     .then(res=>{
 
-                console.log(res);
-            })
-        }
+        //         console.log(res);
+        //     })
+        // }
 
         // if(url === '/shouchang'){
         //     fetch('http://localhost:1234/getmysavetext',{

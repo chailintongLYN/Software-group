@@ -78,7 +78,7 @@ class Logon extends Component{
             <body>
                 <div class="container">
                     {/* <div class="ll"></div> */}
-                    <form onSubmit={this.handleSumit}>
+                    <form onSubmit={this.handleSumit} class='biaodan1'>
                         <div>
                                 <input
                                     type="text"
