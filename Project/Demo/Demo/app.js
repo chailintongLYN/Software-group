@@ -90,9 +90,10 @@ app.get('/home',async c=>{
 
 //首页接口 
 
-var homedata ={};
 
 app.get('/gethomedata',async c=>{
+    var homedata ={};
+    
     var datalist = await Promise.all(
             [new Promise((resolve) => {  
                     connection.query("SELECT textid,title from text  order by ctime desc limit 0,3",function (err, results){
@@ -610,22 +611,30 @@ app.get('/uploadimg/*',async c=>{
 //修改我的密码   //前端代码有了可以删除
 
 app.get('/changepassword',async c=>{
-    c.res.body = fs.readFileSync('./changepassword')
+    c.res.body = fs.readFileSync('./changepassword/index.html').toString('utf-8')
 })
 
 app.post('/changemypassword',async c=>{
-    let username = JSON.parse(c.body)
+    let {username,passwd,newpasswd} = JSON.parse(c.body)
+    console.log(username,passwd,newpasswd);
     var result = await new Promise((resolve) => {
-        connection.query('',textidarr,function(error,results,fields){
-            
-            if(results.length == 0 ){
-                resolve({'status': 'failed','code':'400'})
+        connection.query('SELECT * FROM login where username = ? and passwd = ? ',[username,passwd],function(error,results,fields){
+            if(results.length === 0 ){
+                resolve({'status': 'passwdfailed','code':'400'})
             }
             else{
-                resolve({'status':'success'}) 
+                connection.query('UPDATE login SET passwd = ? where username = ? ',[newpasswd,username],function(error,results,fields){
+                    if(results.length === 0 ){
+                        resolve({'status': 'failed','code':'400'})
+                    }
+                    else{
+                        resolve({'status':'success'}) 
+                    }
+                })
             }
         })
-    }) 
+    })
+
 
     c.res.body = result;
 })
