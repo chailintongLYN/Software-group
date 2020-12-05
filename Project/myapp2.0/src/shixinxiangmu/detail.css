@@ -50,3 +50,30 @@
     font-size: 14px;
     line-height: 2em;
 }
+.bottondiv{
+    position: relative;
+    width: 100%;
+}
+.shoucang{
+  display: inline-block;
+  position: absolute;
+  right: 15%;
+  margin-top: 10px;
+  background-color: #fff;
+  
+}
+.shoucang-img{
+    width: 30px;height: 30px;
+   
+}
+.shoucang-number{
+    position: absolute;
+    top: 7px;
+    left: 30px;
+}
+.time{
+    margin-top: 20px;
+    display: inline-block;
+    width: 50%;
+    margin-right: 0px;
+}
