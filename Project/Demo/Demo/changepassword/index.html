@@ -25,9 +25,9 @@
 <script>
     var data = {
         username:'郝天恒',
-        followuser : '崔宫健'
+        passwd : 123123123,
+        newpasswd: 123
     }
-    var username = '郝天恒'
     // fetch('/getmyfans',{
     //     method: 'POST',
     //     headers:{
@@ -67,12 +67,12 @@
     // .then(res => console.log(res)
     // )
 
-    fetch('/getmyfansandfollowusernumber',{
+    fetch('/changemypassword',{
         method: 'POST',
         headers:{
             'content-type':'text'
         },
-        body : JSON.stringify(username)
+        body : JSON.stringify(data)
     })
     .then(function(response) {
         return response.json();

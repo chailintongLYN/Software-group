@@ -55,7 +55,7 @@ app.get('/new',async c=>{
 })
 
 //注册页 接口
-app.post('/newdata',async c=>{
+app.post('/logon',async c=>{
     let post={
         username:JSON.parse(c.body).username,
         passwd:JSON.parse(c.body).passwd
@@ -164,7 +164,7 @@ app.get('/gethomedata',async c=>{
 
      })
      c.res.body = datalist;
-     
+
 })
 
 
@@ -610,11 +610,32 @@ app.get('/uploadimg/*',async c=>{
 //修改我的密码   //前端代码有了可以删除
 
 app.get('/changepassword',async c=>{
-    c.res.body = fs.readFileSync('./changepassword')
+    c.res.body = fs.readFileSync('./changepassword/index.html').toString('utf-8')
 })
 
 app.post('/changemypassword',async c=>{
-    let username = JSON.parse(c.body)
+    let {username,passwd,newpasswd} = JSON.parse(c.body)
+    console.log(username,passwd,newpasswd);
+    var result = await new Promise((resolve) => {
+        connection.query('SELECT * FROM login where username = ? and passwd = ? ',[username,passwd],function(error,results,fields){
+            if(results.length === 0 ){
+                resolve({'status': 'passwdfailed','code':'400'})
+            }
+            else{
+                connection.query('UPDATE login SET passwd = ? where username = ? ',[newpasswd,username],function(error,results,fields){
+                    if(results.length === 0 ){
+                        resolve({'status': 'failed','code':'400'})
+                    }
+                    else{
+                        resolve({'status':'success'}) 
+                    }
+                })
+            }
+        })
+    })
+
+
+    c.res.body = result;
 })
 
 
