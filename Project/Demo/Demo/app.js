@@ -93,7 +93,7 @@ app.get('/home',async c=>{
 
 app.get('/gethomedata',async c=>{
     var homedata ={};
-    
+
     var datalist = await Promise.all(
             [new Promise((resolve) => {  
                     connection.query("SELECT textid,title from text  order by ctime desc limit 0,3",function (err, results){
@@ -348,7 +348,7 @@ app.post('/getmyfollows', async c=>{
                 resolve({'status': 'failed','code':'400'})
             }
             else{
-                resolve({'status':'success','results':results}) 
+                resolve({'status':'success' ,'results':results}) 
             }
         })
     })
