@@ -564,7 +564,6 @@ app.get('/q',async c=>{
 //上传文件
 
 app.use(async (c,next)=>{
-
     let upf = c.getFile('image')
     if(!upf){
         c.res.body = 'file not found'
@@ -577,7 +576,8 @@ app.use(async (c,next)=>{
     }
 
     await next()
-},{method : 'POST',name : 'uploadimg-image'});
+
+},{method : 'POST',name : 'uploadtextimg-image'});
 
 app.get('/upload',async c=>{
     c.res.body = fs.readFileSync('./upload/index.html').toString('utf-8')
@@ -585,23 +585,32 @@ app.get('/upload',async c=>{
 
 
 
-app.post('/uploadimg',async c=>{
-    console.log(2);
+app.post('/uploadtextimg',async c=>{
 
+    // console.log(c.body.textid);
     let f = c.getFile('image')
-    console.log(f);
+    let textid = c.body.textid
 
     let fname = `${c.helper.makeName()}${c.helper.extName(f.filename)}`
 
+    console.log(c.path);
+    console.log(fname);
+
+    
     try{
-        await c.moveFile(f,'./uploadimg/'+fname)
-        c.res.body =  JSON.stringify('../uploadimg/'+fname)
+        await c.moveFile(f,'./uploadtextimg/'+fname)
+        c.res.body =  JSON.stringify('../uploadtextimg/'+fname)
     }catch(err){
         c.res.body = err.message
     }
-},'uploadimg-image')
 
-app.get('/uploadimg/*',async c=>{
+    connection.query('UPDATE text SET titleimg = ? WHERE textid = ?',[c.path+'/'+fname,textid],function(error,results,fields){
+        if(error) throw error;
+    })
+
+},'uploadtextimg-image')
+
+app.get('/uploadtextimg/*',async c=>{
     console.log(c.path);
     c.res.body = fs.readFileSync('.'+c.path)
 })
@@ -638,5 +647,109 @@ app.post('/changemypassword',async c=>{
     c.res.body = result;
 })
 
+//后台管理系统
+
+//登录接口
+
+app.post('/getdata',async c=>{
+
+    let{username,passwd} = JSON.parse(c.body);
+
+    var result = await  new Promise((resolve) => {
+        connection.query('SELECT * FROM login where username=? and passwd=? and role = 1',[username,passwd],function(error,results,fields){
+        
+            if(results.length == 0 ){
+                resolve({'status': 'failed','code':'400'})
+            }
+            else{
+                resolve({'status':'success'}) 
+            }
+        })
+    }) 
+    c.res.body = result;
+})
+
+//获取用户信息的接口
+
+app.get('/getusersdata',async c=>{
+
+    var result = await  new Promise((resolve) => {
+        connection.query('SELECT * FROM login',function(error,results,fields){
+        
+            if(results.length == 0 ){
+                resolve({'status': 'failed','code':'400'})
+            }
+            else{
+                resolve({'status':'success','results':results}) 
+            }
+        })
+    }) 
+    c.res.body = result;
+})
+
+//获取文章信息的接口
+
+app.get('/gettextsdata',async c=>{
+
+    var result = await  new Promise((resolve) => {
+        connection.query('SELECT * FROM text',function(error,results,fields){
+        
+            if(results.length == 0 ){
+                resolve({'status': 'failed','code':'400'})
+            }
+            else{
+                resolve({'status':'success','results':results}) 
+            }
+        })
+    }) 
+    c.res.body = result;
+})
+
+//删除用户信息的接口
+
+app.get('/deleteuserdata',async c=>{
+    c.res.body = fs.readFileSync('./deleteuserdata/index.html').toString('utf-8')
+})
+
+app.post('/deleteuserdata',async c=>{
+
+    let{username} = JSON.parse(c.body);
+
+    var result = await  new Promise((resolve) => {
+        //delete from save where username=? and textid=?
+        connection.query('DELETE FROM login where username=? ',[username],function(error,results,fields){
+        
+            if(results.length == 0 ){
+                resolve({'status': 'failed','code':'400'})
+            }
+            else{
+                resolve({'status':'success'}) 
+            }
+        })
+    }) 
+    c.res.body = result;
+})
+
+
+//删除文章信息的接口
+
+app.post('/deletetextdata',async c=>{
+
+    let{textid} = JSON.parse(c.body);
+
+    var result = await  new Promise((resolve) => {
+        //delete from save where username=? and textid=?
+        connection.query('DELETE FROM text where textid=? ',[textid],function(error,results,fields){
+        
+            if(results.length == 0 ){
+                resolve({'status': 'failed','code':'400'})
+            }
+            else{
+                resolve({'status':'success'}) 
+            }
+        })
+    }) 
+    c.res.body = result;
+})
 
 app.run(1234)
