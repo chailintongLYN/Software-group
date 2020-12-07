@@ -25,8 +25,17 @@
     const files = event.target.files
     let formData = new FormData()
     formData.append('image', files[0])
+    formData.append('textid', '1')
 
-    fetch('/uploadtext', {
+    let data ={
+      textid : 1,
+      formData:formData
+    }
+
+    console.log(formData.get('image'));
+    console.log(formData.get('textid'));
+
+    fetch('/uploadtextimg', {
       method: 'POST',
       body: formData
     })
@@ -36,20 +45,6 @@
       console.log(res)
     })
   }
-  // function fetchupload() {
-  //   var formData = new FormData();
-  //   var fileField = document.querySelector("input[type='file']");
-
-  //   formData.append('image', fileField.files[0]);
-
-  //   fetch('/uploadtext', {
-  //     method: 'POST',
-  //     body: formData
-  //   })
-  //   .then(response => response.json())
-  //   .catch(error => console.error('Error:', error))
-  //   .then(response => console.log('Success:', response));
-  // }
           
 </script>
 
