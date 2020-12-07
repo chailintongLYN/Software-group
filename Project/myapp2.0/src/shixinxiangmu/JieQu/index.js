@@ -1,4 +1,6 @@
 import React, {useState, useEffect,Component} from 'react'
+import { connect } from 'react-redux'
+
 import "./index.css"
 import BttomBar from '../../components/BttomBar'
 import jq_header_logo from '../JieQuImg/header_logo.svg'
@@ -8,75 +10,43 @@ import pinglun from '../JieQuImg/pinglun.png'
 import share from '../JieQuImg/share.png'
 import comment from '../JieQuImg/comment.png'
 import hot from '../JieQuImg/hot.png'
-import fetchJsonp from 'fetch-jsonp';
+import {guanzhu} from '../action/attentionaction' 
+// import { connect } from 'react-redux'
 
 
 class JieQu extends Component {
-    // constructor(props){
-    //     super(props);
-    //     this.state={
-    //         list:[]
-    //     }
-    //     console.log(2);
+    constructor(props){
+        super(props);
+          console.log(4);
         
-    // }
-    async componentWillMount(){
-        var  list={}
-        await fetch('http://localhost:1234/getmyfollowstext',{
-            method:'POST',
-            headers:{
-                'content-type' : 'application/json'
-            },
-            body:JSON.stringify(sessionStorage.getItem('username'))
-        }).then(res => res.json())
-        .then(res=>{
-            console.log(res);
-            
-            list = res.results
-            // this.setState({
-            //     list:res.results,
-                
-            // })
-            console.log(3);
-            // console.log('list:',list);
-            
-        })
-        console.log(list);
-        console.log('123');
+       this.props.dispatch(guanzhu())
+       console.log(this.props.content);
         
     }
+//     componentWillMount(){
+      
+//     }
+// componentDidUpdate(){
+//     console.log(3);
+        
+//        this.props.dispatch(guanzhu())
+//        console.log(this.props.content);
+// }
+// componentDidMount(){
+//     console.log(3);
+        
+//        this.props.dispatch(guanzhu())
+//        console.log(this.props.content);
+// }
     // let [headerIdx,setHeaderIdx] =JuseState(0)
     
     //  headClick=(idx)=>{
     //     setHeaderIdx(idx)
     //     document.querySelectorAll(".jq_center")[0].scrollIntoView(true)
-    // }
-    // let data=[ //换成从接口请求来的数据就行了
-    //     {
-    //         avatr:avatr,
-    //         name:"土豆不哭不闹",
-    //         time:"刚刚",
-    //         text:"这只是一个例子！",
-    //         img:[pinglun,pinglun,pinglun],
-    //         biaoqian:["说唱江湖1","说唱江湖2"],
-    //         share:99,
-    //         hot:88,
-    //         comment:66,
-    //     },
-    //     {
-    //         avatr:pinglun,
-    //         name:"xxxx",
-    //         time:"3分钟前",
-    //         text:"这只是二个例子！",
-    //         img:[pinglun,pinglun,pinglun],
-    //         biaoqian:["说唱江湖1说唱江湖1","说唱江湖2"],
-    //         share:9,
-    //         hot:18,
-    //         comment:26,
-    //     },
-    // ]
+    // } 
 render(props){
      console.log(1);
+     console.log(this.props.content)
     return (
         <div className="jq">
             <div className="jq_header">
@@ -150,12 +120,17 @@ render(props){
 
 
 
-                <div className="jq_content">
+                <div className="jq_content" onClick={()=>this.props.history.push('/detail')}>
                     <div className="jq_content_header">
                         <img src={avatr}  className="jq_content_header_img"></img>
                         <div className="jq_content_header_text">
                                 <div className="jq_content_header_text_name">
-                                        {/* {this.state.list[0].title} */}
+                                    {this.props.content.map((item,index)=>{
+                                        return(
+                                            <div>{this.props.content[index].title}</div>
+                                        )
+                                    })}
+                                    {/* {this.props.content[0].title} */}
                                 </div>
                                 <div className="jq_content_header_text_time">
                                         刚刚
@@ -303,4 +278,9 @@ render(props){
     )
  }
 }
-export default JieQu
+const mapStateToProps=(state)=>({
+    content:state.content
+    
+})
+export default connect(mapStateToProps)(JieQu);
+// export default JieQu;

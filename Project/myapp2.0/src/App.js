@@ -39,27 +39,33 @@ import Logon from './shixinxiangmu/Logon'
 import Loginn from './shixinxiangmu/pc/Loginn'
 import Editor from "./shixinxiangmu/pc/Editor"
 import Detail from './shixinxiangmu/Detail'
+import Liebiao from './shixinxiangmu/guanzhu&&fans/index'
+import store from './shixinxiangmu/store'
+import { Provider } from 'react-redux';
 
 import JieQu from "./shixinxiangmu/JieQu"
 import ShouChang from "./shixinxiangmu/ShouChang"
 import MySelf from "./shixinxiangmu/MySelf"
 const App=()=>{
 	return(
-		<Router>
-			<Switch>
-				<Route exact path='/' component={Login}/>
-				<Route path='/home' component={Home}/>
-				<Route path='/jiequ' component={JieQu}/>
-				<Route path='/shouchang' component={ShouChang}/>
-				<Route path='/myself' component={MySelf}/>
-				<Route path='/search' component={Search}/>
-				<Route path='/logon' component={Logon}/>
-				<Route path='/loginn' component={Loginn}/>
-				<Route path='/editor' component={Editor}/>
-				<Route path='/detail' component={Detail}/>
-			</Switch>
+		<Provider store={store}>
+			<Router>
+				<Switch>
+					<Route exact path='/' component={Login}/>
+					<Route path='/home' component={Home}/>
+					<Route path='/jiequ' component={JieQu}/>
+					<Route path='/shouchang' component={ShouChang}/>
+					<Route path='/myself' component={MySelf}/>
+					<Route path='/search' component={Search}/>
+					<Route path='/logon' component={Logon}/>
+					<Route path='/loginn' component={Loginn}/>
+					<Route path='/editor' component={Editor}/>
+					<Route path='/detail' component={Detail}/>
+					<Route path='/liebiao' component={Liebiao}/>
+				</Switch>
 		
 		</Router>
+		</Provider>
 	)
 }
 export default App

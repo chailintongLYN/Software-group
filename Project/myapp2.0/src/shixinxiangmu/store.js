@@ -1,6 +1,7 @@
 import { createStore, compose, combineReducers, applyMiddleware } from 'redux';
 import guanzhureducer from './reducer/attentionReducer';
-const stroe=createStore(
-    guanzhureducer
+import thunk from 'redux-thunk'
+const store=createStore(
+    guanzhureducer,applyMiddleware(thunk)
 );
-export default stroe;
+export default store;

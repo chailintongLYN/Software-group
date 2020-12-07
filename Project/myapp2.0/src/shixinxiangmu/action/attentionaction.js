@@ -8,9 +8,12 @@ const guanzhu=(username)=>{
             body:JSON.stringify(sessionStorage.getItem('username'))
         }).then(res => res.json())
         .then(res=>{
+            console.log(2);
+            console.log(res.results);
             dispatch({
                 type:'GUANZHU',
-                content:res.resluts
+                content:res.results
+                
             })
             // list = res.results
             
