@@ -67,33 +67,33 @@ const BttomBar=(props)=>{
         //     })
         // }
 
-        if(url === '/myself'){
-            fetch('http://localhost:1234/getmyfansandfollowusernumber',{
-                method:'POST',
-                headers:{
-                    'content-type' : 'application/json'
-                },
-                body:JSON.stringify(sessionStorage.getItem('username'))
-            }).then(res => res.json())
-            .then(res=>{
-                console.log(res);
+        // if(url === '/myself'){
+        //     fetch('http://localhost:1234/getmyfansandfollowusernumber',{
+        //         method:'POST',
+        //         headers:{
+        //             'content-type' : 'application/json'
+        //         },
+        //         body:JSON.stringify(sessionStorage.getItem('username'))
+        //     }).then(res => res.json())
+        //     .then(res=>{
+        //         console.log(res);
                 
-            })
-            let data = {}
-            data.searchtype = 'username';
-            data.sevalue = sessionStorage.getItem('username')
-            fetch('http://localhost:1234/gettexts',{
-                method:'POST',
-                headers:{
-                    'content-type' : 'application/json'
-                },
-                body:JSON.stringify(data)
-            }).then(res => res.json())
-            .then(res=>{
-                console.log(res);
+        //     })
+        //     let data = {}
+        //     data.searchtype = 'username';
+        //     data.sevalue = sessionStorage.getItem('username')
+        //     fetch('http://localhost:1234/gettexts',{
+        //         method:'POST',
+        //         headers:{
+        //             'content-type' : 'application/json'
+        //         },
+        //         body:JSON.stringify(data)
+        //     }).then(res => res.json())
+        //     .then(res=>{
+        //         console.log(res);
                 
-            })
-        }
+        //     })
+        // }
     }
 
     return(

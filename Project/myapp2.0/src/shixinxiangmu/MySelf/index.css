@@ -9,14 +9,25 @@
 .myse_kongbai{
     height: 40px;
 }
-.myse,.myse_bg{
+.myse{
     width: 100%;
     height: 100%;
-
+    background-color: rgba(119, 115, 115, 0.4);
+}
+.myse_bg{
+    width: 100%;
+    height: 100%;
+    background-image: url(../MySelfImg/avatr.png);
+    opacity: 0.5;
+}
+.root{
+    width: 100%;
+    height: 100%;
+    background-color:rgba(245, 244, 244, 0.5);
 }
 .myse,.myse_bg{
     width: 100%;
-    height: 100%;
+    height: 95%;
     background-position: center center ;
     background-size: cover;
     background-repeat: no-repeat;

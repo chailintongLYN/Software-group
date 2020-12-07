@@ -138,12 +138,18 @@
     font-size: 13px;
     text-align: left;
     font-family: PingFangSC-regular;
+    border-radius: 3px 3px 3px 3px;
+    margin-top: 10px;
 }
 .jq_content_foot>div>img{
     margin-right: 4px;
 }
 .jq_content_foot_share {
     float: left;
+    border-radius: 3px 3px 3px 3px;
+    border: 1px solid rgba(187, 187, 187, 100);
+    padding: 0 5px;
+    margin: 2px;
 }
 
 .jq_content_foot_comment {
@@ -153,4 +159,7 @@
 
 .jq_content_foot_hot {
     float: right;
+}
+.jq_content_foot_hot>span{
+    margin-left: 5px;
 }

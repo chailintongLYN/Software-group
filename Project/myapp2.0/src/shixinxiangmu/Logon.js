@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import './login.css'
+import './logon.css'
 let newinfo={
     username:"",
     passwd:""
@@ -86,7 +86,7 @@ class Logon extends Component{
                                     placeholder="请输入用户名"
                                     value={this.state.username}
                                     onChange={this.handleChange}
-                                    class="username"
+                                    class="logon-username"
                                 />
                         </div>
                         <div>

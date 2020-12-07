@@ -23,27 +23,7 @@ class JieQu extends Component {
        console.log(this.props.content);
         
     }
-//     componentWillMount(){
-      
-//     }
-// componentDidUpdate(){
-//     console.log(3);
-        
-//        this.props.dispatch(guanzhu())
-//        console.log(this.props.content);
-// }
-// componentDidMount(){
-//     console.log(3);
-        
-//        this.props.dispatch(guanzhu())
-//        console.log(this.props.content);
-// }
-    // let [headerIdx,setHeaderIdx] =JuseState(0)
-    
-    //  headClick=(idx)=>{
-    //     setHeaderIdx(idx)
-    //     document.querySelectorAll(".jq_center")[0].scrollIntoView(true)
-    // } 
+
 render(props){
      console.log(1);
      console.log(this.props.content)
@@ -51,12 +31,6 @@ render(props){
         <div className="jq">
             <div className="jq_header">
                 <div className="jq_header_title">
-                    {/* <div className={`jq_header_title1 ${headerIdx==0?"jq_header_title_active":""}`} onClick={()=>headClick(0)}>
-                        推荐
-                    </div> */}
-                    {/* <div className={`jq_header_title2 ${headerIdx==1?"jq_header_title_active":""}`} onClick={()=>headClick(1)}>
-                        关注
-                    </div> */}
                     <div>关注</div>
                 </div>
                 <div className="jq_header_logo">
@@ -65,209 +39,42 @@ render(props){
             </div>
            
             <div className="jq_center">
-
-                {/* {
-                    // 模拟数据
-                    data.map((item,idx)=>{
-                      return  <div className="jq_content" key={idx}>
-                        <div className="jq_content_header">
-                            <img src={item.avatr}  className="jq_content_header_img"></img>
-                            <div className="jq_content_header_text">
-                                    <div className="jq_content_header_text_name">
-                                            {item.name}
-                                    </div>
-                                    <div className="jq_content_header_text_time">
-                                            {item.time}
-                                    </div>
-                            </div>
-                        </div>  
-                        <div className="jq_content_center">
-                            <div className="jq_content_center_text">
-                            {item.text}
+                {this.props.content.map((item,index)=>{
+                    return(
+                        <div className="jq_content" onClick={()=>this.props.history.push('/detail')}>
+                            <div className="jq_content_header">
+                                <img src={avatr}  className="jq_content_header_img"></img>
+                                <div className="jq_content_header_text">
+                                        <div className="jq_content_header_text_name">
+                                            {this.props.content[index].username}
+                                        </div>
+                                        <div className="jq_content_header_text_time">
+                                                {this.props.content[index].ctime.substring(0,10)+" "+this.props.content[index].ctime.substring(11,16)}
+                                        </div>
+                                </div>
+                            </div>  
+                            <div className="jq_content_center">
+                                <div className="jq_content_center_text">
+                                    {this.props.content[index].text}
+                                </div> 
+                                <div className="jq_content_center_img">
+                                    <img src={pinglun}></img>
+                                    <img src={pinglun}></img>
+                                    <img src={pinglun}></img>
+                                </div> 
                             </div> 
-                            <div className="jq_content_center_img">
-                                {
-                                    item.img.map((url,urlIdx)=>{
-                                        return <img src={url} key={urlIdx}></img>
-                                    })
-                                }
+                            <div className="jq_content_foot">
+                                <div  className="jq_content_foot_share">
+                                #{this.props.content[index].type}
+                                </div>
+                                <div  className="jq_content_foot_hot">
+                                    {/* <img src={hot}/> */}
+                                    收藏<span>{this.props.content[index].savenumber}</span>
+                                </div>
                             </div> 
-                            <div className="jq_content_center_bq">
-                                {
-                                    item.biaoqian.map((bq,bqIdx)=>{
-                                    return <span key={bqIdx}>#{bq}</span>
-                                    })
-                                }
-                            </div> 
-                        </div> 
-                        <div className="jq_content_foot">
-                            <div  className="jq_content_foot_share">
-                                <img src={share}/>
-                              {item.share}
-                            </div>
-                            <div  className="jq_content_foot_hot">
-                                <img src={hot}/>
-                                {item.hot}
-                            </div>
-                            <div  className="jq_content_foot_comment">
-                                <img src={comment} className="jq_content_foot_comment"/>
-                                {item.comment}
-                            </div>
-                        </div> 
-                    </div>
-                    })
-                } */}
-
-
-
-                <div className="jq_content" onClick={()=>this.props.history.push('/detail')}>
-                    <div className="jq_content_header">
-                        <img src={avatr}  className="jq_content_header_img"></img>
-                        <div className="jq_content_header_text">
-                                <div className="jq_content_header_text_name">
-                                    {this.props.content.map((item,index)=>{
-                                        return(
-                                            <div>{this.props.content[index].title}</div>
-                                        )
-                                    })}
-                                    {/* {this.props.content[0].title} */}
-                                </div>
-                                <div className="jq_content_header_text_time">
-                                        刚刚
-                                </div>
                         </div>
-                    </div>  
-                    <div className="jq_content_center">
-                        <div className="jq_content_center_text">
-                        喜欢更高兄弟的看过来！喜欢更高兄弟的看过来！喜欢更高兄弟的看过来！
-                        喜欢更高兄弟的看过来！喜欢更高兄弟的看过来！
-                        喜欢更高兄弟的看过来！喜欢更高兄弟的看过来！
-                        喜欢更高兄弟的看过来！喜欢更高兄弟的看过来！
-                        喜欢更高兄弟的看过来！喜欢更高兄弟的看过来！
-                        喜欢更高兄弟的看过来！喜欢更高兄弟的看过来！
-                        喜欢更高兄弟的看过来！喜欢更高兄弟的看过来！
-                        喜欢更高兄弟的看过来！喜欢更高兄弟的看过来！
-                        喜欢更高兄弟的看过来！喜欢更高兄弟的看过来！
-                        </div> 
-                        <div className="jq_content_center_img">
-                            <img src={pinglun}></img>
-                            <img src={pinglun}></img>
-                            <img src={pinglun}></img>
-                        </div> 
-                        <div className="jq_content_center_bq">
-                           <span>#说唱江湖</span>
-                           <span>#说唱江湖说唱江湖</span>
-                           <span>#说唱江湖</span>
-                           <span>#说唱江湖</span>
-                           <span>#说唱江湖说唱江湖</span>
-                        </div> 
-                    </div> 
-                    <div className="jq_content_foot">
-                        <div  className="jq_content_foot_share">
-                            <img src={share}/>
-                           123
-                        </div>
-                        <div  className="jq_content_foot_hot">
-                            <img src={hot}/>
-                            53
-                        </div>
-                        <div  className="jq_content_foot_comment">
-                            <img src={comment} className="jq_content_foot_comment"/>
-                            66
-                        </div>
-                    </div> 
-                </div>
-              
-                <div className="jq_content">
-                    <div className="jq_content_header">
-                        <img src={pinglun}  className="jq_content_header_img"></img>
-                        <div className="jq_content_header_text">
-                                <div className="jq_content_header_text_name">
-                                        土豆不哭不闹
-                                </div>
-                                <div className="jq_content_header_text_time">
-                                        刚刚
-                                </div>
-                        </div>
-                    </div>  
-                    <div className="jq_content_center">
-                        <div className="jq_content_center_text">
-                        喜欢更高兄弟的看过来！
-                        </div> 
-                        <div className="jq_content_center_img">
-                            <img src={pinglun}></img>
-                            <img src={pinglun}></img>
-                            <img src={pinglun}></img>
-                        </div> 
-                        <div className="jq_content_center_bq">
-                           <span>#说唱江湖</span>
-                           <span>#说唱江湖说唱江湖</span>
-                           <span>#说唱江湖</span>
-                           <span>#说唱江湖</span>
-                           <span>#说唱江湖说唱江湖</span>
-                        </div> 
-                    </div> 
-                    <div className="jq_content_foot">
-                        <div  className="jq_content_foot_share">
-                            <img src={share}/>
-                           123
-                        </div>
-                        <div  className="jq_content_foot_hot">
-                            <img src={hot}/>
-                            53
-                        </div>
-                        <div  className="jq_content_foot_comment">
-                            <img src={comment} className="jq_content_foot_comment"/>
-                            66
-                        </div>
-                    </div> 
-                </div>
-              
-                <div className="jq_content">
-                    <div className="jq_content_header">
-                        <img src={avatr}  className="jq_content_header_img"></img>
-                        <div className="jq_content_header_text">
-                                <div className="jq_content_header_text_name">
-                                        土豆不哭不闹
-                                </div>
-                                <div className="jq_content_header_text_time">
-                                        刚刚
-                                </div>
-                        </div>
-                    </div>  
-                    <div className="jq_content_center">
-                        <div className="jq_content_center_text">
-                        喜欢更高兄弟的看过来！喜欢更高兄弟的看过来！
-                        </div> 
-                        <div className="jq_content_center_img">
-                            <img src={pinglun}></img>
-                            <img src={pinglun}></img>
-                            <img src={pinglun}></img>
-                        </div> 
-                        <div className="jq_content_center_bq">
-                           <span>#说唱江湖</span>
-                           <span>#说唱江湖说唱江湖</span>
-                           <span>#说唱江湖</span>
-                           <span>#说唱江湖</span>
-                           <span>#说唱江湖说唱江湖</span>
-                        </div> 
-                    </div> 
-                    <div className="jq_content_foot">
-                        <div  className="jq_content_foot_share">
-                            <img src={share}/>
-                           123
-                        </div>
-                        <div  className="jq_content_foot_hot">
-                            <img src={hot}/>
-                            53
-                        </div>
-                        <div  className="jq_content_foot_comment">
-                            <img src={comment} className="jq_content_foot_comment"/>
-                            66
-                        </div>
-                    </div> 
-                </div>
-              
+                    )
+                })}  
             </div>
 
 
@@ -279,7 +86,7 @@ render(props){
  }
 }
 const mapStateToProps=(state)=>({
-    content:state.content
+    content:state.guanzhureducer.content
     
 })
 export default connect(mapStateToProps)(JieQu);

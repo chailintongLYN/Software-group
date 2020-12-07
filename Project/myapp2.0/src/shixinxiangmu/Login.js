@@ -85,7 +85,7 @@ class Login extends Component {
                                     placeholder="请输入用户名"
                                     value={this.state.username}
                                     onChange={this.handleChange}
-                                    class="username"
+                                    class="login-username"
                                 />
                         </div>
                         <div>
