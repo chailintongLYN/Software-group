@@ -95,7 +95,7 @@ var homedata ={};
 app.get('/gethomedata',async c=>{
     var datalist = await Promise.all(
             [new Promise((resolve) => {  
-                    connection.query("SELECT textid,title from text  order by ctime desc limit 0,3",function (err, results){
+                    connection.query("SELECT textid,title,titleimg from text  order by ctime desc limit 0,3",function (err, results){
                             if(err){
                                     throw err
                             }else{
@@ -106,7 +106,7 @@ app.get('/gethomedata',async c=>{
                     })
                     }),
             new Promise((resolve) => {  
-                    connection.query("SELECT textid,title from text where type='js' order by savenumber limit 0,3",function (err, results){
+                    connection.query("SELECT textid,title,titleimg from text where type='js' order by savenumber limit 0,3",function (err, results){
                                     if(err){
                                             throw err
                                     }else{
@@ -117,7 +117,7 @@ app.get('/gethomedata',async c=>{
                             })
                     }),
             new Promise((resolve) => {  
-                    connection.query("SELECT textid,title from text where type='react' order by savenumber limit 0,3",function (err, results){
+                    connection.query("SELECT textid,title,titleimg from text where type='react' order by savenumber limit 0,3",function (err, results){
                                     if(err){
                                             throw err
                                     }else{
@@ -128,7 +128,7 @@ app.get('/gethomedata',async c=>{
                     })
                     }),
             new Promise((resolve) => {  
-                    connection.query("SELECT textid,title from text where type='nodejs' order by savenumber limit 0,3",function (err, results){
+                    connection.query("SELECT textid,title,titleimg from text where type='nodejs' order by savenumber limit 0,3",function (err, results){
                             if(err){
                                     throw err
                             }else{
@@ -139,7 +139,7 @@ app.get('/gethomedata',async c=>{
                     })
                     }), 
             new Promise((resolve) => {  
-                    connection.query("SELECT textid,title from text where type='html' order by savenumber limit 0,3",function (err, results){
+                    connection.query("SELECT textid,title,titleimg from text where type='html' order by savenumber limit 0,3",function (err, results){
                             if(err){
                                     throw err
                             }else{
@@ -150,7 +150,7 @@ app.get('/gethomedata',async c=>{
                     })
                     }),
             new Promise((resolve) => {  
-                    connection.query("SELECT textid,title from text where type='css' order by savenumber limit 0,3",function (err, results){
+                    connection.query("SELECT textid,title,titleimg from text where type='css' order by savenumber limit 0,3",function (err, results){
                             if(err){
                                     throw err
                             }else{
@@ -166,6 +166,33 @@ app.get('/gethomedata',async c=>{
      c.res.body = datalist;
 
 })
+
+//首页获取新锐推荐的文章 //前端代码有了可以删除
+
+app.get('/1getrecommendtext',async c=>{
+    c.res.body = fs.readFileSync('./getrecommendtexts/index.html').toString('utf-8')
+})
+
+//接口
+
+app.get('/getrecommendtext',async c=>{
+    // let username = JSON.parse(c.body);
+
+    var result = await new Promise((resolve)=>{
+        //SELECT textid,title from text  order by ctime desc limit 0,3
+        connection.query('SELECT * from text order by savenumber desc limit 0,4',function(error,results){
+            console.log('results:',results);
+            if(results.length === 0){
+                resolve({'status':'failed','code':'400'})
+            }else{
+                resolve({'status':'success','results':results})
+            }
+        })
+    })
+
+    c.res.body = result;
+})
+
 
 
 //获取发表的文章 //前端代码有了可以删除
@@ -561,7 +588,7 @@ app.get('/q',async c=>{
     c.res.body = c.query;
 })
 
-//上传文件
+//上传文件 文章图片
 
 app.use(async (c,next)=>{
     let upf = c.getFile('image')
@@ -611,6 +638,60 @@ app.post('/uploadtextimg',async c=>{
 },'uploadtextimg-image')
 
 app.get('/uploadtextimg/*',async c=>{
+    console.log(c.path);
+    c.res.body = fs.readFileSync('.'+c.path)
+})
+
+//上传用户头像
+
+app.use(async (c,next)=>{
+    let upf = c.getFile('image')
+    if(!upf){
+        c.res.body = 'file not found'
+        return
+    }
+    //100k
+    else if(upf.length > 100000){
+        c.res.body = 'max file size : 100k'
+        return
+    }
+
+    await next()
+
+},{method : 'POST',name : 'uploaduserimg-image'});
+
+// app.get('/upload',async c=>{
+//     c.res.body = fs.readFileSync('./upload/index.html').toString('utf-8')
+// })
+
+
+
+app.post('/uploaduserimg',async c=>{
+
+    // console.log(c.body.textid);
+    let f = c.getFile('image')
+    let username = c.body.username
+
+    let fname = `${c.helper.makeName()}${c.helper.extName(f.filename)}`
+
+    console.log(c.path);
+    console.log(fname);
+
+    
+    try{
+        await c.moveFile(f,'./uploaduserimg/'+fname)
+        c.res.body =  JSON.stringify('../uploaduserimg/'+fname)
+    }catch(err){
+        c.res.body = err.message
+    }
+
+    connection.query('UPDATE login SET userimg = ? WHERE username = ?',[c.path+'/'+fname,username],function(error,results,fields){
+        if(error) throw error;
+    })
+
+},'uploaduserimg-image')
+
+app.get('/uploaduserimg/*',async c=>{
     console.log(c.path);
     c.res.body = fs.readFileSync('.'+c.path)
 })
