@@ -277,7 +277,7 @@ app.post('/getmyfans', async c=>{
     c.res.body = result;
 })
 
-//删除我的粉丝 ，取消关注//前端代码有了可以删除
+//删除我的粉丝 ，取消关注 //前端代码有了可以删除
 
 // app.get('/getfans')
 
