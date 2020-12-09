@@ -159,6 +159,9 @@ let [columns,setColumns] = useState(userColumns)
 let time = null;
 
 useEffect(()=>{
+  fetch('http://localhost:1234/getusersdata')
+      .then(res=>res.json())
+      .then(res=>console.log(res))
     if(window.location.pathname.includes("user")){
       fetch('http://localhost:1234/getusersdata')
       .then(res=>res.json())
