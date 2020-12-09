@@ -2,7 +2,7 @@
 const titbit = require('titbit'),
       fs = require('fs')
 
-const {cors} = require('titbit-toolkit')
+const {cors,resource} = require('titbit-toolkit')
 
 const app = new titbit({
     debug: true,
@@ -11,6 +11,31 @@ const app = new titbit({
 
 })
 app.use( (new cors()).mid() )
+
+//启用静态文件组件
+let st = new resource({
+    //设定静态资源所在目录
+    staticPath: './public',
+
+    //默认就是/static/*,
+    //这个是访问静态资源的路由，你必须要有一个路由前缀的，否则容易导致路由冲突。
+    /*
+      假设在public目录存在文件 css/a.css
+      这里设定好/static/*，在前端页面访问css则可以这样使用：
+        <link rel="stylesheet" href="/static/css/a.css">
+
+      /static后面的是路径参数。
+    */
+    routePath : '/static/*',
+
+    //静态资源路由所在分组。
+    routeGroup: '_static',
+
+    //设置最大缓存100M，这会缓存读取过的文件，缓存在内存中不会再次去读取文件。
+    maxCacheSize: 100000000
+  })
+
+  st.init(app)
 
 app.options('/*', async c => {})
 
@@ -239,7 +264,7 @@ app.post('/getmyfansandfollowusernumber',async c=>{
     let username = JSON.parse(c.body);
 
     var result = await new Promise((resolve)=>{
-        connection.query('SELECT fansnumber,followusernumber from login where username = ?',username,function(error,results){
+        connection.query('SELECT fansnumber,followusernumber,userimg from login where username = ?',username,function(error,results){
             
             if(results.length === 0){
                 resolve({'status':'failed','code':'400'})
@@ -631,13 +656,13 @@ app.post('/uploadtextimg',async c=>{
         c.res.body = err.message
     }
 
-    connection.query('UPDATE text SET titleimg = ? WHERE textid = ?',[c.path+'/'+fname,textid],function(error,results,fields){
+    connection.query('UPDATE text SET titleimg = ? WHERE textid = ?',['/static'+c.path+'/'+fname,textid],function(error,results,fields){
         if(error) throw error;
     })
 
 },'uploadtextimg-image')
 
-app.get('/uploadtextimg/*',async c=>{
+app.get('/static/uploadtextimg/*',async c=>{
     console.log(c.path);
     c.res.body = fs.readFileSync('.'+c.path)
 })
