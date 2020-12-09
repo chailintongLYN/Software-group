@@ -631,7 +631,7 @@ app.post('/uploadtextimg',async c=>{
         c.res.body = err.message
     }
 
-    connection.query('UPDATE text SET titleimg = ? WHERE textid = ?',[c.path+'/'+fname,textid],function(error,results,fields){
+    connection.query('UPDATE text SET titleimg = ? WHERE textid = ?',['http://localhost:1234/static'+c.path+'/'+fname,textid],function(error,results,fields){
         if(error) throw error;
     })
 
@@ -685,7 +685,7 @@ app.post('/uploaduserimg',async c=>{
         c.res.body = err.message
     }
 
-    connection.query('UPDATE login SET userimg = ? WHERE username = ?',[c.path+'/'+fname,username],function(error,results,fields){
+    connection.query('UPDATE login SET userimg = ? WHERE username = ?',['http://localhost:1234/static'+c.path+'/'+fname,username],function(error,results,fields){
         if(error) throw error;
     })
 
