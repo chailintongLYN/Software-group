@@ -1,0 +1,71 @@
+.index_head{
+    height: 50px;
+    border-bottom: 1px solid #CCC;
+    position: relative;
+}
+.index_head>div{
+    position: absolute;
+    transform: translate(0,50%);
+    font-weight: bold;
+}
+.index_head_title{
+    left: 6%;
+    color:rgba(0,0,0,.85);
+}
+.index_head_time{
+    right:38%;
+    transform: translate(50%,0);
+}
+
+.index_left{
+    width: 15%;
+    min-height: 800px;
+    float: left;
+    border-right: 1px solid #f2f4f5;
+
+}
+
+.index_right{
+    width: 85%;
+    min-height: 800px;
+    float: right;
+}
+
+.index_left_title{
+    width:100%;
+    height: 50px;
+    text-align: center;
+    line-height: 50px;
+    cursor:pointer;
+    border-right: 3px solid transparent;
+
+}
+.active{
+ 
+    border-right: 3px solid #1890ff;
+    color: #1890ff;
+    background: #f2f4f5;
+}
+
+.index_left_title:hover{
+    color: #1890ff;
+}
+
+.index_right_head{
+    width:600px;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+
+}
+
+input.ant-input {
+    width: 415px;
+    margin-left: 10px;
+}
+.index_head_btn{
+    right: 1%;
+    top: -21%;
+}
