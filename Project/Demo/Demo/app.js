@@ -50,7 +50,7 @@ var connection = mysql.createConnection({
 
 connection.connect();
 
-//登录页 //前端代码有了可以删除
+//1.登录页 //前端代码有了可以删除
 app.get('/',async c=>{
     c.res.body = fs.readFileSync('./loginandnewdata/index.html').toString('utf-8')
 })
@@ -79,7 +79,7 @@ app.get('/new',async c=>{
     c.res.body = fs.readFileSync('.loginandnewdata/newdata.html').toString('utf-8');
 })
 
-//注册页 接口
+//2.注册页 接口
 app.post('/logon',async c=>{
     let post={
         username:JSON.parse(c.body).username,
@@ -113,7 +113,7 @@ app.get('/home',async c=>{
 })
 
 
-//首页接口 
+//3.首页接口 
 
 var homedata ={};
 
@@ -198,7 +198,7 @@ app.get('/1getrecommendtext',async c=>{
     c.res.body = fs.readFileSync('./getrecommendtexts/index.html').toString('utf-8')
 })
 
-//接口
+//4.接口
 
 app.get('/getrecommendtext',async c=>{
     // let username = JSON.parse(c.body);
@@ -225,7 +225,7 @@ app.get('/gettext',async c=>{
     c.res.body = fs.readFileSync('./gettext/index.html').toString('utf-8')
 })
 
-//接口
+//5.接口
 app.post('/gettexts',async c=>{
     let {searchtype,sevalue} = JSON.parse(c.body)
     
@@ -258,7 +258,7 @@ app.post('/gettexts',async c=>{
 
 // app.get
 
-//接口
+//6.接口
 
 app.post('/getmyfansandfollowusernumber',async c=>{
     let username = JSON.parse(c.body);
@@ -283,7 +283,7 @@ app.get('/getfans',async c=>{
     c.res.body = fs.readFileSync('./getfans/index.html').toString('utf-8');
 })
 
-//接口
+//7.接口
 app.post('/getmyfans', async c=>{
     let username = JSON.parse(c.body)
 
@@ -388,7 +388,7 @@ app.get('/getfollows',async c=>{
 })
 
 
-//接口
+//8.接口
 app.post('/getmyfollows', async c=>{
     let username = JSON.parse(c.body)
 
@@ -413,7 +413,7 @@ app.get('/getfollowstext', async c=>{
     c.res.body = fs.readFileSync('./getfollowstext/index.html').toString('utf-8');
 })
 
-//获取我的关注的人的文章 的接口
+//9.获取我的关注的人的文章 的接口
 app.post('/getmyfollowstext', async c=>{
 
     let username1 = JSON.parse(c.body)
@@ -435,8 +435,7 @@ app.post('/getmyfollowstext', async c=>{
         username.push(item.username)
     })
     console.log(username);
-    
-    
+
 
     let str = 'SELECT * FROM text where username =? ';
 
@@ -468,7 +467,7 @@ app.post('/getmyfollowstext', async c=>{
 //     c.res.body = index;
 // })
 
-//接口
+//10.接口
 
 app.post('/addmysave', async c => {
     let {username, textid} = JSON.parse(c.body)
@@ -544,7 +543,7 @@ app.get('/getsavetext', async c=>{
     c.res.body = fs.readFileSync('./getsavetext/index.html').toString('utf-8');
 })
 
-//获取我的收藏的文章 的接口
+//11.获取我的收藏的文章 的接口
 app.post('/getmysavetext', async c=>{
     let username = JSON.parse(c.body)
 
@@ -613,7 +612,7 @@ app.get('/q',async c=>{
     c.res.body = c.query;
 })
 
-//上传文件 文章图片
+//12.上传文件 文章图片
 
 app.use(async (c,next)=>{
     let upf = c.getFile('image')
@@ -656,7 +655,7 @@ app.post('/uploadtextimg',async c=>{
         c.res.body = err.message
     }
 
-    connection.query('UPDATE text SET titleimg = ? WHERE textid = ?',['/static'+c.path+'/'+fname,textid],function(error,results,fields){
+    connection.query('UPDATE text SET titleimg = ? WHERE textid = ?',['http://localhost:1234/static'+c.path+'/'+fname,textid],function(error,results,fields){
         if(error) throw error;
     })
 
@@ -667,7 +666,7 @@ app.get('/static/uploadtextimg/*',async c=>{
     c.res.body = fs.readFileSync('.'+c.path)
 })
 
-//上传用户头像
+//13.上传用户头像
 
 app.use(async (c,next)=>{
     let upf = c.getFile('image')
@@ -710,7 +709,7 @@ app.post('/uploaduserimg',async c=>{
         c.res.body = err.message
     }
 
-    connection.query('UPDATE login SET userimg = ? WHERE username = ?',[c.path+'/'+fname,username],function(error,results,fields){
+    connection.query('UPDATE login SET userimg = ? WHERE username = ?',['http://localhost:1234/static'+c.path+'/'+fname,username],function(error,results,fields){
         if(error) throw error;
     })
 
@@ -722,7 +721,7 @@ app.get('/uploaduserimg/*',async c=>{
 })
 
 
-//修改我的密码   //前端代码有了可以删除
+//14.修改我的密码   //前端代码有了可以删除
 
 app.get('/changepassword',async c=>{
     c.res.body = fs.readFileSync('./changepassword/index.html').toString('utf-8')
@@ -753,9 +752,9 @@ app.post('/changemypassword',async c=>{
     c.res.body = result;
 })
 
-//后台管理系统
+//15.后台管理系统
 
-//登录接口
+//1.登录接口
 
 app.post('/getdata',async c=>{
 
@@ -775,7 +774,7 @@ app.post('/getdata',async c=>{
     c.res.body = result;
 })
 
-//获取用户信息的接口
+//2.获取用户信息的接口
 
 app.get('/getusersdata',async c=>{
 
@@ -793,7 +792,27 @@ app.get('/getusersdata',async c=>{
     c.res.body = result;
 })
 
-//获取文章信息的接口
+//3.搜索用户信息的接口
+
+app.post('/searchusers',async c=>{
+    let{username} = JSON.parse(c.body);
+
+    var result = await new Promise((resolve) => {
+        //delete from save where username=? and textid=?
+        connection.query("SELECT * FROM login where username like '%" + username + "%'",function(error,results,fields){
+        
+            if(results.length == 0 ){
+                resolve({'status': 'failed','code':'400'})
+            }
+            else{
+                resolve({'status':'success','results':results}) 
+            }
+        })
+    }) 
+    c.res.body = result;
+})
+
+//4.获取文章信息的接口
 
 app.get('/gettextsdata',async c=>{
 
@@ -811,7 +830,30 @@ app.get('/gettextsdata',async c=>{
     c.res.body = result;
 })
 
-//删除用户信息的接口
+//5.搜索文章信息的接口
+
+app.post('/searchtexts',async c=>{
+    let{title} = JSON.parse(c.body);
+
+    console.log(title);
+
+    var result = await new Promise((resolve) => {
+        //delete from save where username=? and textid=?
+        //"SELECT * FROM text where title like '%"+ sevalue +"%'"
+        connection.query('SELECT * FROM text where title like "%' + title + '%"',function(error,results,fields){
+        
+            if(results.length == 0 ){
+                resolve({'status': 'failed','code':'400'})
+            }
+            else{
+                resolve({'status':'success','results':results}) 
+            }
+        })
+    }) 
+    c.res.body = result;
+})
+
+//6.删除用户信息的接口
 
 app.get('/deleteuserdata',async c=>{
     c.res.body = fs.readFileSync('./deleteuserdata/index.html').toString('utf-8')
@@ -837,7 +879,7 @@ app.post('/deleteuserdata',async c=>{
 })
 
 
-//删除文章信息的接口
+//7.删除文章信息的接口
 
 app.post('/deletetextdata',async c=>{
 

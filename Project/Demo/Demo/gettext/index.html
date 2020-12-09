@@ -23,8 +23,10 @@
     </footer>
 </body>
 <script>
+
     var data={searchtype:'title',sevalue:'第哈'}
-    fetch('/gettexts',{
+    data = {title:'第一'}
+    fetch('/searchtexts',{
         method: 'POST',
         headers:{
             'content-type':'text'

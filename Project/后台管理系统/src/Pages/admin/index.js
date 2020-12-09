@@ -115,13 +115,13 @@ const wzColumns = [
     dataIndex: 'createtime',
     width:180,
     },
-    // {
-    //   title: 'Action',
-    //   key: 'action',
-    //   render:()=>{
-    //       return <Button danger>删除</Button>
-    //   }
-    // },
+    {
+      title: 'Action',
+      key: 'action',
+      render:()=>{
+          return <Button danger>删除</Button>
+      }
+    },
   ];
 const wzData = [
     {
@@ -159,11 +159,20 @@ let [columns,setColumns] = useState(userColumns)
 let time = null;
 
 useEffect(()=>{
+  fetch('http://localhost:1234/getusersdata')
+      .then(res=>res.json())
+      .then(res=>console.log(res))
     if(window.location.pathname.includes("user")){
+      fetch('http://localhost:1234/getusersdata')
+      .then(res=>res.json())
+      .then(res=>console.log(res))
         setUrlIdx("user")
         setData(userData)
         setColumns(userColumns)
     }else if(window.location.pathname.includes("wz")){
+      fetch('http://localhost:1234/gettextsdata')
+      .then(res=>res.json())
+      .then(res=>console.log(res))
         setUrlIdx("wz")
         setData(wzData)
         setColumns(wzColumns)
