@@ -8,6 +8,7 @@ import edit from  "../MySelfImg/edit.png"
 import add from  "../MySelfImg/add.png"
 import shezhi from  "../MySelfImg/shezhi.png"
 import avatr_img from  "../MySelfImg/avatr.png"
+import img from '../ShoouChangImg/img.png'
 import { connect } from 'react-redux'
 import {myself} from '../action/myselfaction'
 
@@ -52,19 +53,21 @@ class MySelf extends Component{
                 <div className="myse_project">
                     <div className="myse_project_head">我的作品</div>
                     <div className="myse_project_content">
-
-                        <div  className="myse_project_list" >
-                            <img src={img1}/>
+                        <div class="mp-list" onClick={()=>this.props.history.push('/detail')}>
+                            <img src={img} className='mp_list_img'/>
+                                <div className="mp-list-text">
+                                    <div className="mp_list_title">title</div>
+                                    <div className="mp_list_foot">
+                                        <div className="mp_list_type">type</div>
+                                        <div className="mp_list_time">time</div>
+                                        <div className="mp_list_shoucang">收藏 <span>number</span></div>
+                                    </div>
+                                </div>
+                            
                         </div>
-                        <div  className="myse_project_list">
-                            <img src={img2}/>
-                        </div>
-                        <div  className="myse_project_list">
-                            <img src={img3}/>
-                        </div>
-                        <div  className="myse_project_list_add">
+                        {/* <div  className="myse_project_list_add">
                             <img src={add}/>
-                        </div>
+                        </div> */}
                         <div className="kongbai_bottom"></div>
                     </div>
                 </div>
