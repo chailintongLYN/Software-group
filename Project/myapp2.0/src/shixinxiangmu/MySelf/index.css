@@ -46,9 +46,9 @@
     align-items: center;
     justify-content: center;
     color: rgba(33, 33, 33, 100);
-font-size: 16px;
-text-align: left;
-font-family: PingFangSC-bold;
+    font-size: 16px;
+    text-align: left;
+    font-family: PingFangSC-bold;
 }
 .myse_gz_fs{
     margin-top: 10px;
@@ -124,9 +124,11 @@ font-family: PingFangSC-bold;
     top: 20px;
 }
 .mp-list{
-    /* margin-top: 5px; */
+    margin-top: 5px;
     height: 80px;
     width: 100%;
+    background-color: rgb(215, 215, 240);
+    
 }
 .mp-list>img,.mp-list-text{
     float: left;
@@ -136,6 +138,7 @@ font-family: PingFangSC-bold;
     height: 80px;
 }
 .mp-list-text{
+    margin-top:5 px;
     margin-left: 10px;
     position: relative;
     height: 100%;
@@ -145,6 +148,7 @@ font-family: PingFangSC-bold;
     color: rgba(2, 2, 2, 100);
     font-size: 20px;
     text-align: left;
+    margin-top: 5px;
 }
 .mp_list_foot{
     display: inline-block;
