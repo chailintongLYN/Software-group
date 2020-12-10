@@ -21,7 +21,6 @@ class JieQu extends Component {
         
        this.props.dispatch(guanzhu())
        console.log(this.props.content);
-        
     }
 
 render(props){
@@ -41,7 +40,7 @@ render(props){
             <div className="jq_center">
                 {this.props.content.map((item,index)=>{
                     return(
-                        <div className="jq_content" onClick={()=>this.props.history.push('/detail')}>
+                        <div className="jq_content" onClick={()=>this.props.history.push('/detail',{from:'guanzhu',id:this.props.content[index].textid})}>
                             <div className="jq_content_header">
                                 <img src={avatr}  className="jq_content_header_img"></img>
                                 <div className="jq_content_header_text">
