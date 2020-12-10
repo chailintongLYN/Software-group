@@ -280,12 +280,60 @@ app.post('/getmyfansandfollowusernumber',async c=>{
 })
 
 
+//查看是否已关注   //前端代码有了可以删除
+
+// app.get()
+
+//7.接口
+
+app.post('/iffollow',async c=>{
+    let {textusername,username} = JSON.parse(c.body);
+
+    var result = await new Promise((resolve)=>{
+        connection.query('SELECT * from fans where username = ? and followuser = ?',[textusername,username],function(error,results){
+            
+            if(results.length === 0){
+                resolve({'status':'false'})
+            }else{
+                resolve({'status':'true'})
+            }
+        })
+    })
+
+    c.res.body = result;
+})
+
+//查看是否已收藏  //前端代码有了可以删除
+
+//app.get()
+
+//接口
+
+app.post('/ifsave',async c=>{
+    let {textid,username} = JSON.parse(c.body);
+
+    var result = await new Promise((resolve)=>{
+        connection.query('SELECT * from save where username = ? and textid = ?',[username,textid],function(error,results){
+            
+            if(results.length === 0){
+                resolve({'status':'false'})
+            }else{
+                resolve({'status':'true'})
+            }
+        })
+    })
+
+    c.res.body = result;
+})
+
+
+
 //获取我的粉丝 //前端代码有了可以删除
 app.get('/getfans',async c=>{
     c.res.body = fs.readFileSync('./getfans/index.html').toString('utf-8');
 })
 
-//7.接口
+//8.接口
 app.post('/getmyfans', async c=>{
     let username = JSON.parse(c.body)
 
