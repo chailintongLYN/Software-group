@@ -18,7 +18,6 @@ const Search=(props)=>{
       onBlur={() => console.log('onBlur')}
       onCancel={() =>props.history.goBack()}
       showCancelButton
-      
       // onChange={this.onChange}
       // onCancel={()=>}
     />

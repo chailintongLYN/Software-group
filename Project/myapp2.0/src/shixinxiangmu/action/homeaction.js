@@ -12,7 +12,6 @@ const home = (username)=>{
                 newtext:res.newtext,
                 js:res.js,
                 react:res.react,
-                nodejs:res.nodejs,
                 html:res.html,
                 css:res.css
             })

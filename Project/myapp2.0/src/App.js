@@ -42,6 +42,9 @@ import Detail from './shixinxiangmu/Detail'
 import Liebiao from './shixinxiangmu/guanzhu&&fans/index'
 import store from './shixinxiangmu/store'
 import { Provider } from 'react-redux';
+import Followers from './shixinxiangmu/MySelf/Followers'
+import Fans from './shixinxiangmu/MySelf/Fans'
+import Commend from './shixinxiangmu/commend/Commend'
 
 import JieQu from "./shixinxiangmu/JieQu"
 import ShouChang from "./shixinxiangmu/ShouChang"
@@ -62,6 +65,9 @@ const App=()=>{
 					<Route path='/editor' component={Editor}/>
 					<Route path='/detail' component={Detail}/>
 					<Route path='/liebiao' component={Liebiao}/>
+					<Route path='/followers' component={Followers}/>
+					<Route path='/fans' component={Fans}/>
+					<Route path='/commend' component={Commend}/>
 				</Switch>
 		
 		</Router>

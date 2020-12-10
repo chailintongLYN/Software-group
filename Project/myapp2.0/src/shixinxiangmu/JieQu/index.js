@@ -54,7 +54,7 @@ render(props){
                             </div>  
                             <div className="jq_content_center">
                                 <div className="jq_content_center_text">
-                                    {this.props.content[index].text}
+                                    {this.props.content[index].title}
                                 </div> 
                                 <div className="jq_content_center_img">
                                     <img src={pinglun}></img>

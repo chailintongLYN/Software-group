@@ -45,12 +45,12 @@ class MySelf extends Component{
                 <div className="myse_gz_fs">
                     {this.props.fansandfllow.map((item,index)=>{
                         return(
-                            <div className="myse_gz">关注 <span style={{fontWeight:"bold"}}>{this.props.fansandfllow[index].fansnumber}</span></div>    
+                            <div className="myse_gz" onClick={()=>this.props.history.push('./followers')}>关注 <span style={{fontWeight:"bold"}}>{this.props.fansandfllow[index].followusernumber}</span></div>    
                         )
                     })}
                     {this.props.fansandfllow.map((item,index)=>{
                         return(
-                            <div className="myse_fs">粉丝 <span style={{fontWeight:"bold"}}>{this.props.fansandfllow[index].followusernumber}</span></div>    
+                            <div className="myse_fs" onClick={()=>this.props.history.push('./fans')}>粉丝 <span style={{fontWeight:"bold"}}>{this.props.fansandfllow[index].fansnumber}</span></div>    
                         )
                     })}
                 </div>

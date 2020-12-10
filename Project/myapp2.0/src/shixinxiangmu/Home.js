@@ -6,12 +6,6 @@ import tuijian1_btn from  "./HomeImg/tuijian1.png"
 import tuijian2_btn from  "./HomeImg/tuijian2.png"
 import tuijian3_btn from  "./HomeImg/tuijian3.png"
 import tuijian4_btn from  "./HomeImg/tuijian4.png"
-import remen1 from  "./HomeImg/remen1.png"
-import remen2 from  "./HomeImg/remen2.png"
-import remen3 from  "./HomeImg/remen3.png"
-import dashen from  "./HomeImg/dashen.png"
-import youzhi from  "./HomeImg/youzhi.png"
-import jingxuan from  "./HomeImg/jingxuan.png"
 import BttomBar from '../components/BttomBar'
 import Lunbotu from './Home-lunbotu'
 import { Component } from 'react';
@@ -27,7 +21,7 @@ class Home extends Component{
             <div className="home">
     
                 <div className="home_head">
-                    <div   className="home_headInput"  onClick={()=>this.props.history.push('/sreach')}>
+                    <div   className="home_headInput"  onClick={()=>this.props.history.push('/search')}>
                        <span className="home_headInput_search"></span> 专题搜索
                     </div>
                     <span className="head_btn">
@@ -36,11 +30,11 @@ class Home extends Component{
                 <Lunbotu/>
     
                 <div className="home_tuiJian">
-                    <div className="home_tuijian_btn_container">
+                    <div className="home_tuijian_btn_container" onClick={()=>this.props.history.push('/commend')}>
                         <div className="home_tuijian_btn">
                             <img src={tuijian1_btn}/>
                         </div>
-                        <div className="home_tuijian_text">
+                        <div className="home_tuijian_text" >
                             新锐推荐
                         </div>
                     </div>
@@ -73,30 +67,18 @@ class Home extends Component{
                 <div className="home_remen">
                     <h2 className="home_remen_title">最新专贴</h2>
                     <div className="home_remen_container">
-                        <div className="home_remen_container_div" onClick={()=>this.props.history.push('/detail')}>
-                            <div className="home_remen_container_div_img">
-                                <img src={remen1} />
-                            </div>
-                            <div className="home_remen_container_div_text">
-                            MAC更新险遭灾难
-                            </div>
-                        </div>
-                        <div className="home_remen_container_div" onClick={()=>this.props.history.push('/detail')}>
-                            <div className="home_remen_container_div_img">
-                            <img src={remen2} />
-                            </div>
-                            <div className="home_remen_container_div_text">
-                            Vokenization：一种比GPT-3更有常识的视觉语言模型
-                            </div>
-                        </div>
-                        <div className="home_remen_container_div" onClick={()=>this.props.history.push('/detail')}>
-                            <div className="home_remen_container_div_img">
-                            <img src={remen3} />
-                            </div>
-                            <div className="home_remen_container_div_text">
-                            变强——GitHub 热点速览 Vol.46
-                            </div>
-                        </div>
+                        {this.props.newtext.map((item,index)=>{
+                            return(
+                                <div className="home_remen_container_div" onClick={()=>this.props.history.push('/detail',{from:'home',id:this.props.newtext[index].textid,type:'newtext'},sessionStorage.setItem('textid:',this.props.newtext[index].textid))}>
+                                    <div className="home_remen_container_div_img">
+                                        <img src={this.props.newtext[index].titleimg} />
+                                    </div>
+                                    <div className="home_remen_container_div_text">
+                                    {this.props.newtext[index].title}
+                                    </div>
+                                </div>
+                            )
+                        })}
                       
                     </div>
                 </div>
@@ -104,39 +86,18 @@ class Home extends Component{
                 <div className="home_dashen home_remen">
                     <h2 className="home_remen_title">REACT</h2>
                     <div className="home_dashen_container">
-                        <div className="home_dashen_container_div" onClick={()=>this.props.history.push('/detail')}>
-                            <div className="home_dashen_container_div_img">
-                                <img src={dashen} />
-                            </div>
-                            <div className="home_dashen_container_div_text">
-                            xxx
-                            </div>
-                        </div>
-                        <div className="home_dashen_container_div" onClick={()=>this.props.history.push('/detail')}>
-                            <div className="home_dashen_container_div_img">
-                            <img src={dashen} />
-                            </div>
-                            <div className="home_dashen_container_div_text">
-                            Vxxx
-                            </div>
-                        </div>
-                        <div className="home_dashen_container_div" onClick={()=>this.props.history.push('/detail')}>
-                            <div className="home_dashen_container_div_img">
-                            <img src={dashen} />
-                            </div>
-                            <div className="home_dashen_container_div_text">
-                            xxx
-                            </div>
-                        </div>
-                        <div className="home_dashen_container_div" onClick={()=>this.props.history.push('/detail')}>
-                            <div className="home_dashen_container_div_img">
-                            <img src={dashen} />
-                            </div>
-                            <div className="home_dashen_container_div_text">
-                            xxx
-                            </div>
-                        </div>
-                      
+                        {this.props.react.map((item,index)=>{
+                            return(
+                                <div className="home_dashen_container_div"  onClick={()=>this.props.history.push('/detail',{from:'home',id:this.props.react[index].textid,type:'react'},sessionStorage.setItem('textid:',this.props.react[index].textid))}>
+                                    <div className="home_dashen_container_div_img">
+                                        <img src={this.props.react[index].titleimg} />
+                                    </div>
+                                    <div className="home_dashen_container_div_text">
+                                    {this.props.react[index].title}
+                                    </div>
+                                </div>
+                            )
+                        })}
                     </div>
                 </div>
     
@@ -144,63 +105,40 @@ class Home extends Component{
                 <div className="home_youzhi home_remen">
                     <h2 className="home_remen_title">JAVASCRIPT</h2>
                     <div className="home_remen_container">
-                        <div className="home_remen_container_div" onClick={()=>this.props.history.push('/detail')}>
-                            <div className="home_remen_container_div_img">
-                                <img src={youzhi} />
+                        {this.props.js.map((item,index)=>{
+                            
+                            return(
+                                <div className="home_remen_container_div" onClick={()=>this.props.history.push('/detail',{from:'home',id:this.props.js[index].textid,type:'js'},sessionStorage.setItem('textid:',this.props.js[index].textid))}>
+                                <div className="home_remen_container_div_img">
+                                    <img src={this.props.js[index].titleimg} />
+                                </div>
+                                <div className="home_remen_container_div_text">
+                                {this.props.js[index].title}
+                                </div>
                             </div>
-                            <div className="home_remen_container_div_text">
-                            携程技术
-                            </div>
-                        </div>
-                        <div className="home_remen_container_div" onClick={()=>this.props.history.push('/detail')}>
-                            <div className="home_remen_container_div_img">
-                            <img src={youzhi} />
-                            </div>
-                            <div className="home_remen_container_div_text">
-                            携程技术
-                            </div>
-                        </div>
-                        <div className="home_remen_container_div" onClick={()=>this.props.history.push('/detail')}>
-                            <div className="home_remen_container_div_img">
-                            <img src={youzhi} />
-                            </div>
-                            <div className="home_remen_container_div_text">
-                            携程技术
-                            </div>
-                        </div>
+                            )
+                        })}
+                        
                       
                     </div>
                 </div>
     
     
                 <div className="home_jingxuan home_remen">
-                    <h2 className="home_remen_title">NODEJS</h2>
+                    <h2 className="home_remen_title">CSS</h2>
                     <div className="home_remen_container">
-                        <div className="home_remen_container_div" onClick={()=>this.props.history.push('/detail')}>
-                            <div className="home_remen_container_div_img">
-                                <img src={jingxuan} />
+                       {this.props.css.map((item,index)=>{
+                           return(
+                            <div className="home_remen_container_div" onClick={()=>this.props.history.push('/detail',{from:'home',id:this.props.css[index].textid,type:'css'},sessionStorage.setItem('textid:',this.props.css[index].textid))}>
+                                <div className="home_remen_container_div_img">
+                                    <img src={this.props.css[index].titleimg} />
+                                </div>
+                                <div className="home_remen_container_div_text">
+                                {this.props.css[index].title}
+                                </div>
                             </div>
-                            <div className="home_remen_container_div_text">
-                            程序员是怎么炫富的
-                            </div>
-                        </div>
-                        <div className="home_remen_container_div" onClick={()=>this.props.history.push('/detail')}>
-                            <div className="home_remen_container_div_img">
-                            <img src={jingxuan} />
-                            </div>
-                            <div className="home_remen_container_div_text">
-                            程序员的凡尔赛文学
-                            </div>
-                        </div>
-                        <div className="home_remen_container_div" onClick={()=>this.props.history.push('/detail')}>
-                            <div className="home_remen_container_div_img">
-                            <img src={jingxuan} />
-                            </div>
-                            <div className="home_remen_container_div_text">
-                            2020程序大会
-                            </div>
-                        </div>
-                      
+                           )
+                       })}
                     </div>
                 </div>
                 <div className="kongbai_bottom"></div>
@@ -211,7 +149,11 @@ class Home extends Component{
     }
 }
 const mapStateToProps=(state)=>({
-    newtext:state.homereducer.newtext
+    newtext:state.homereducer.newtext,
+    js:state.homereducer.js,
+    react:state.homereducer.react,
+    html:state.homereducer.html,
+    css:state.homereducer.css
     
 })
 export default connect(mapStateToProps)(Home)

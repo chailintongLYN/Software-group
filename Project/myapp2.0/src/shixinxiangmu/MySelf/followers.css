@@ -1,0 +1,44 @@
+.header{
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    background-color: white;
+    font-size: 18px;
+    position: relative;
+    top: 0;
+    z-index: 2;
+    border-bottom: 5px solid #f5f5f9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.back{
+    position: absolute;
+    left: 5%;
+    font-size: 40px;
+}
+.center{
+    position: relative;
+    width: 90%;
+    margin: 0 auto;
+}
+.liebiao{
+    position: relative;
+    width: 100%;
+    height: 80px;
+    background-color:#fff;
+    margin-top: 10px;
+}
+.liebiao-touxiang{
+    position: absolute;
+    width: 74px;
+    margin-top: 3px;
+}
+.liebiao-username{
+    position: absolute;
+    left: 25%;
+    line-height: 80px;
+    text-align: center;
+    font-size: 25px;
+}

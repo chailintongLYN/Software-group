@@ -3,9 +3,13 @@ import guanzhureducer from './reducer/attentionReducer';
 import shoucangreducer from './reducer/shoucangReducer';
 import myselfreducer from './reducer/myslfeReducer'
 import homereducer from './reducer/homereducer'
+import followersreducer from './reducer/followersreducer'
+import fansreducer from'./reducer/fansreducer'
+import commendreducer from './reducer/commendreducer'
 import thunk from 'redux-thunk'
 const rootReducer=combineReducers({
-    shoucangreducer,guanzhureducer,myselfreducer,homereducer
+    shoucangreducer,guanzhureducer,myselfreducer,homereducer,followersreducer,
+    fansreducer,commendreducer
 })
 const store=createStore(
     rootReducer,applyMiddleware(thunk)
