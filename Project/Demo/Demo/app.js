@@ -12,6 +12,7 @@ const app = new titbit({
 })
 app.use( (new cors()).mid() )
 
+
 //启用静态文件组件
 let st = new resource({
     //设定静态资源所在目录
