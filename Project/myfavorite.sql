@@ -20,12 +20,14 @@ DROP TABLE IF EXISTS `fans`;
 
 CREATE TABLE `fans` (
   `username` varchar(100) NOT NULL COMMENT '被关注的人',
-  `followuser` varchar(100) NOT NULL COMMENT '粉丝'
+  `usernameimg` varchar(100) DEFAULT 'http://localhost:1234/static/uploaduserimg/timg.jpg' COMMENT '被关注的人的头像',
+  `followuser` varchar(100) NOT NULL COMMENT '粉丝',
+  `followuserimg` varchar(100) DEFAULT 'http://localhost:1234/static/uploaduserimg/timg.jpg' COMMENT '粉丝的头像'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `fans` */
 
-insert  into `fans`(`username`,`followuser`) values ('郝天恒','崔宫健'),('崔宫健','郝天恒'),('崔宫健1','郝天恒'),('崔宫健2','郝天恒');
+insert  into `fans`(`username`,`usernameimg`,`followuser`,`followuserimg`) values ('郝天恒','http://localhost:1234/static/uploaduserimg/timg.jpg','崔宫健','http://localhost:1234/static/uploaduserimg/timg.jpg'),('崔宫健','http://localhost:1234/static/uploaduserimg/timg.jpg','郝天恒','http://localhost:1234/static/uploaduserimg/timg.jpg'),('崔宫健1','http://localhost:1234/static/uploaduserimg/timg.jpg','郝天恒','http://localhost:1234/static/uploaduserimg/timg.jpg'),('崔宫健2','http://localhost:1234/static/uploaduserimg/timg.jpg','郝天恒','http://localhost:1234/static/uploaduserimg/timg.jpg');
 
 /*Table structure for table `login` */
 
