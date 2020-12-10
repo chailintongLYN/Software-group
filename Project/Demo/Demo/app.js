@@ -115,9 +115,10 @@ app.get('/home',async c=>{
 
 //3.首页接口 
 
-var homedata ={};
 
 app.get('/gethomedata',async c=>{
+    var homedata ={};
+
     var datalist = await Promise.all(
             [new Promise((resolve) => {  
                     connection.query("SELECT textid,title,titleimg from text  order by ctime desc limit 0,3",function (err, results){
@@ -438,26 +439,57 @@ app.post('/getmyfollowstext', async c=>{
 
 
     let str = 'SELECT * FROM text where username =? ';
+    let str1 = 'SELECT userimg FROM login where username = ? '
 
     username.forEach((item,index) => {
         if(index !==0){
             str = str + 'or username =? '
+            str1 = str1 + 'or username = ? '
         }
     })
 
-    var result = await new Promise((resolve) => {
-        connection.query(str,username,function(error,results,fields){
-            
-            if(results.length == 0 ){
-                resolve({'status': 'failed','code':'400'})
-            }
-            else{
-                resolve({'status':'success','results':results}) 
-            }
+    var followusertextlist ={}
+    var datalist = await Promise.all(
+        [new Promise((resolve) => {  
+            connection.query(str,username,function (err, results){
+                    if(err){
+                            throw err
+                    }else{
+                            followusertextlist.text = results;
+                            resolve({'result':followusertextlist.text})
+
+                    };
+            })
+        }),
+        new Promise((resolve) => {  
+            connection.query(str1,username,function (err, results){
+                            if(err){
+                                    throw err
+                            }else{
+                                    followusertextlist.userimg=results;
+                                    resolve({'result':followusertextlist.userimg})
+
+                            };
+                    })
         })
-    }) 
+    ]).then(function(result){
+        return followusertextlist;
+
+ })
+
+    // var result = await new Promise((resolve) => {
+    //     connection.query(str,username,function(error,results,fields){
+            
+    //         if(results.length == 0 ){
+    //             resolve({'status': 'failed','code':'400'})
+    //         }
+    //         else{
+    //             resolve({'status':'success','results':results}) 
+    //         }
+    //     })
+    // })
     
-    c.res.body = result;
+    c.res.body = datalist;
 })
 
 
