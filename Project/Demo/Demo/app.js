@@ -122,7 +122,7 @@ app.get('/gethomedata',async c=>{
 
     var datalist = await Promise.all(
             [new Promise((resolve) => {  
-                    connection.query("SELECT textid,title,titleimg from text  order by ctime desc limit 0,3",function (err, results){
+                    connection.query("SELECT * from text  order by ctime desc limit 0,3",function (err, results){
                             if(err){
                                     throw err
                             }else{
@@ -133,7 +133,7 @@ app.get('/gethomedata',async c=>{
                     })
                     }),
             new Promise((resolve) => {  
-                    connection.query("SELECT textid,title,titleimg from text where type='js' order by savenumber limit 0,3",function (err, results){
+                    connection.query("SELECT * from text where type='js' order by savenumber limit 0,3",function (err, results){
                                     if(err){
                                             throw err
                                     }else{
@@ -144,7 +144,7 @@ app.get('/gethomedata',async c=>{
                             })
                     }),
             new Promise((resolve) => {  
-                    connection.query("SELECT textid,title,titleimg from text where type='react' order by savenumber limit 0,3",function (err, results){
+                    connection.query("SELECT * from text where type='react' order by savenumber limit 0,3",function (err, results){
                                     if(err){
                                             throw err
                                     }else{
@@ -155,7 +155,7 @@ app.get('/gethomedata',async c=>{
                     })
                     }),
             new Promise((resolve) => {  
-                    connection.query("SELECT textid,title,titleimg from text where type='nodejs' order by savenumber limit 0,3",function (err, results){
+                    connection.query("SELECT * from text where type='nodejs' order by savenumber limit 0,3",function (err, results){
                             if(err){
                                     throw err
                             }else{
@@ -166,7 +166,7 @@ app.get('/gethomedata',async c=>{
                     })
                     }), 
             new Promise((resolve) => {  
-                    connection.query("SELECT textid,title,titleimg from text where type='html' order by savenumber limit 0,3",function (err, results){
+                    connection.query("SELECT * from text where type='html' order by savenumber limit 0,3",function (err, results){
                             if(err){
                                     throw err
                             }else{
@@ -177,7 +177,7 @@ app.get('/gethomedata',async c=>{
                     })
                     }),
             new Promise((resolve) => {  
-                    connection.query("SELECT textid,title,titleimg from text where type='css' order by savenumber limit 0,3",function (err, results){
+                    connection.query("SELECT * from text where type='css' order by savenumber limit 0,3",function (err, results){
                             if(err){
                                     throw err
                             }else{
