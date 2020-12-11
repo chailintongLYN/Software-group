@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./wangeditor.js"></script>
+</head>
+<body>
+    <form onsubmit="login(this);return false;" autocomplete="off" style="margin:auto;border:sloid #efefef 0.05rem;">
+        <input type="radio" name="vehicle" value="nodejs">nodejs<br>
+        <input type="radio" name="vehicle" value="react">react<br>
+        <input type="radio" name="vehicle" value="html">html<br>
+        <input type="radio" name="vehicle" value="css">css<br>
+        <input type="radio" name="vehicle" value="js">js<br>
+        <input type="text" name="username" oninput="cacheInput(this);" placeholder="用户名" required>
+        <input type="submit" value="提交">
+    </form>
+    <div id="my-editor" style="width:80%;margin:auto;border:sloid #efefef 0.05rem; min-height: 25rem;"></div>
+    <script>
+
+
+        let editor = new wangEditor('#my-editor')
+        editor.create()
+        editor.config.uploadImgShowBase64 = true;
+
+        let textdata = {
+            type:"",
+            title:"",
+            text:'',
+            username:'cuigongjian'
+        }
+
+        function cacheInput (t) {
+            textdata.title = t.value;
+        }
+        
+        function login(e){
+        textdata.text = editor.txt.html()
+        textdata.type =  function getRadioValue(vehicle){
+                var radioValue;    
+                radioValue=document.getElementsByName("vehicle");
+                if(radioValue!=null){
+                    var i;
+                    for(i=0;i<radioValue.length;i++){
+                        if(radioValue[i].checked){
+                            return radioValue[i].value;            
+                        }
+                    }
+                }
+                return null;
+            }();
+            console.log(textdata);
+            fetch('/editor', {
+            method : 'POST',
+            headers : {
+              'content-type' : 'text/plain'
+            },
+            body : JSON.stringify(textdata)
+          }).then(async res=>res.json()).catch(err => {
+            alert(err.message)
+          })
+        }
+    </script>
+</body>
+</html>
