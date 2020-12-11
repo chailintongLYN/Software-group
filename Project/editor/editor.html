@@ -28,7 +28,7 @@
             type:"",
             title:"",
             text:'',
-            username:'cuigongjian'
+            username:'崔宫健'
         }
 
         function cacheInput (t) {
@@ -51,7 +51,7 @@
                 return null;
             }();
             console.log(textdata);
-            fetch('/editor', {
+            fetch('/http://localhost:1234/editor', {
             method : 'POST',
             headers : {
               'content-type' : 'text/plain'
