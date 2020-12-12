@@ -6,10 +6,11 @@ import homereducer from './reducer/homereducer'
 import followersreducer from './reducer/followersreducer'
 import fansreducer from'./reducer/fansreducer'
 import commendreducer from './reducer/commendreducer'
+import searchreducer from './reducer/searchreducer'
 import thunk from 'redux-thunk'
 const rootReducer=combineReducers({
     shoucangreducer,guanzhureducer,myselfreducer,homereducer,followersreducer,
-    fansreducer,commendreducer
+    fansreducer,commendreducer,searchreducer
 })
 const store=createStore(
     rootReducer,applyMiddleware(thunk)
