@@ -129,7 +129,7 @@ class Detail extends Component{
                                 <div class="bottomdiv">
                                     <div class="time">{this.props.shoucang[index].ctime.substring(0,10)+" "+this.props.shoucang[index].ctime.substring(11,16)}</div>
                                     <div class="shoucang">
-                                        <img src={shoucang} class="shoucang-img" onClick={this.handleClick}/>
+                                        <img src={xing} class="shoucang-img" onClick={this.handleClick}/>
                                         <div class='shoucang-number'>{this.props.shoucang[index].savenumber}</div>
                                     </div>
                                 </div>
@@ -159,7 +159,7 @@ class Detail extends Component{
                                 <div class="bottomdiv">
                                     <div class="time">{this.props.getmytext[index].ctime.substring(0,10)+" "+this.props.getmytext[index].ctime.substring(11,16)}</div>
                                     <div class="shoucang">
-                                        <img src={shoucang} class="shoucang-img" onClick={this.handleClick}/>
+                                        <img src={xing} class="shoucang-img" onClick={this.handleClick}/>
                                         <div class='shoucang-number'>{this.props.getmytext[index].savenumber}</div>
                                     </div>
                                 </div>
@@ -191,7 +191,7 @@ class Detail extends Component{
                                             <div class="bottomdiv">
                                                 <div class="time">{this.props.newtext[index].ctime.substring(0,10)+" "+this.props.newtext[index].ctime.substring(11,16)}</div>
                                                 <div class="shoucang">
-                                                    <img src={shoucang} class="shoucang-img" onClick={this.handleClick}/>
+                                                    <img src={xing} class="shoucang-img" onClick={this.handleClick}/>
                                                     <div class='shoucang-number'>{this.props.newtext[index].savenumber}</div>
                                                 </div>
                                             </div>
@@ -221,7 +221,7 @@ class Detail extends Component{
                                             <div class="bottomdiv">
                                                 <div class="time">{this.props.react[index].ctime.substring(0,10)+" "+this.props.react[index].ctime.substring(11,16)}</div>
                                                 <div class="shoucang">
-                                                    <img src={shoucang} class="shoucang-img" onClick={this.handleClick}/>
+                                                    <img src={xing} class="shoucang-img" onClick={this.handleClick}/>
                                                     <div class='shoucang-number'>{this.props.react[index].savenumber}</div>
                                                 </div>
                                             </div>
@@ -251,7 +251,7 @@ class Detail extends Component{
                                             <div class="bottomdiv">
                                                 <div class="time">{this.props.js[index].ctime.substring(0,10)+" "+this.props.js[index].ctime.substring(11,16)}</div>
                                                 <div class="shoucang">
-                                                    <img src={shoucang} class="shoucang-img" onClick={this.handleClick}/>
+                                                    <img src={xing} class="shoucang-img" onClick={this.handleClick}/>
                                                     <div class='shoucang-number'>{this.props.js[index].savenumber}</div>
                                                 </div>
                                             </div>
@@ -281,7 +281,7 @@ class Detail extends Component{
                                             <div class="bottomdiv">
                                                 <div class="time">{this.props.css[index].ctime.substring(0,10)+" "+this.props.css[index].ctime.substring(11,16)}</div>
                                                 <div class="shoucang">
-                                                    <img src={shoucang} class="shoucang-img" onClick={this.handleClick}/>
+                                                    <img src={xing} class="shoucang-img" onClick={this.handleClick}/>
                                                     <div class='shoucang-number'>{this.props.css[index].savenumber}</div>
                                                 </div>
                                             </div>
@@ -312,7 +312,7 @@ class Detail extends Component{
                                 <div class="bottomdiv">
                                     <div class="time">{this.props.commend[index].ctime.substring(0,10)+" "+this.props.commend[index].ctime.substring(11,16)}</div>
                                     <div class="shoucang">
-                                        <img src={shoucang} class="shoucang-img" onClick={this.handleClick}/>
+                                        <img src={xing} class="shoucang-img" onClick={this.handleClick}/>
                                         <div class='shoucang-number'>{this.props.commend[index].savenumber}</div>
                                     </div>
                                 </div>

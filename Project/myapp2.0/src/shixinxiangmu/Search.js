@@ -43,22 +43,13 @@ class Search extends Component{
                 
             })
           }}
-          // onClear={value => console.log(value, 'onClear')}
-          // onFocus={() => console.log('onFocus')}
-          // onBlur={() => console.log('onBlur')}
-          // onCancel={() =>this.props.history.goBack()}
+          onClear={value => console.log(value, 'onClear')}
+          onFocus={() => console.log('onFocus')}
+          onBlur={() => console.log('onBlur')}
+          onCancel={() =>this.props.history.goBack()}
           showCancelButton
         />
         {this.renderninfo()}
-        {/* <div class="bangdan">
-          <p>热搜榜单</p>
-        </div>
-        <div class='list'>
-          <ol>
-            <li><a>阿里云新品发布会</a></li>
-            <span><img src='./xiaohuomiao.png'/></span>
-          </ol>
-        </div> */}
       </div>
     );
   }
