@@ -540,7 +540,7 @@ app.post('/addmysave', async c => {
                                 console.log('收藏+1');
                             })
                             
-                            resolve({'status':'success','results':results})
+                            resolve({'status':'success','results':'收藏成功'})
                             console.log('插入成功');
                         }
                     })
@@ -576,7 +576,7 @@ app.post('/deletemysave', async c => {
                         console.log('收藏-1');
                 })
                 
-                resolve({'status':'success','results':results})
+                resolve({'status':'success','results':'取消收藏成功'})
                 console.log('删除成功');
             }
         })

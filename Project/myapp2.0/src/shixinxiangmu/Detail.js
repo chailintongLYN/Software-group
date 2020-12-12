@@ -23,50 +23,90 @@ class Detail extends Component{
         }else if(this.props.location.state.from =='commend'){
             this.props.dispatch(commend())
         }
-        {this.props.content.map((item,index)=>{
-            if(this.props.content[index].textid==this.props.location.state.id){
-                var number=this.props.content[index].savenumber;
-                console.log(number);
-                this.state={
-                    count:number,
-                    sc:false
-                }
-            }
-        })}
+
+        let data = {
+            username:sessionStorage.getItem('username'),
+            textid:this.props.location.state.id
+        }
+        fetch('http://localhost:1234/ifsave',{
+                method:'POST',
+                headers:{
+                    'content-type' : 'application/json'
+                },
+                body:JSON.stringify(data)
+            }).then(res=>res.json())
+            .then(res=>{
+                var issc=res.status;
+                sessionStorage.setItem('issc',res.status);
+                console.log(res);
+            })
+        var number=this.props.location.state.scnumber;
+        console.log(number);
+        this.state={
+            count:number,
+            sc:sessionStorage.getItem('issc'),
+            gz:'已关注'
+        }
+        console.log('adasdsa:',sessionStorage.getItem('issc'));
+        // this.setState({
+        //     count:number
+        // })
+        // if(sessionStorage.getItem('issc')==){
+        //     this.state={
+        //         count:number,
+        //         sc:
+        //     }
+        // }else{
+        //     this.state={
+        //         count:number,
+                
+        //         gz:"已关注"
+        //     }
+        // }
         console.log(this.state)
         console.log(this.props.location.state);
     }
     handleClick(){
-        if(this.state.sc==false){
+        if(this.state.sc){
             var newCount=this.state.count+1;
             this.setState({
                 count:newCount,
-                isshoucang:true
+                sc:true,
+                gz:"已关注"
             })
-            var textid =1;
+            let data ={
+                username:sessionStorage.getItem('username'),
+                textid:this.props.location.state.id
+            }
+           console.log(data);
             fetch('http://localhost:1234/addmysave',{
                 method:'POST',
                 headers:{
                     'content-type' : 'application/json'
                 },
-                body:JSON.stringify(textid)
+                body:JSON.stringify(data)
             }).then(res=>res.json())
             .then(res=>{
+                
                 console.log(res);
             })
         }else{
-            var textid =1;
+            // var textid =1;
             var newCount=this.state.count-1;
             this.setState({
                 count:newCount,
                 sc:false
             })
+            let data = {
+                username:sessionStorage.getItem('username'),
+                textid:this.props.location.state.id
+            }
             fetch('http://localhost:1234/deletemysave',{
                 method:'POST',
                 headers:{
                     'content-type' : 'application/json'
                 },
-                body:JSON.stringify(textid)
+                body:JSON.stringify(data)
             }).then(res=>res.json())
             .then(res=>{
                 console.log(res);
@@ -100,7 +140,7 @@ class Detail extends Component{
                                     <div class="time">{this.props.content[index].ctime.substring(0,10)+" "+this.props.content[index].ctime.substring(11,16)}</div>
                                     <div class="shoucang">
                                         <img src={xing} class="shoucang-img" onClick={this.handleClick}/>
-                                        <div class='shoucang-number'>{this.props.content[index].savenumber}</div>
+                                        <div class='shoucang-number'>{this.state.count}</div>
                                     </div>
                                 </div>
                             </div>
