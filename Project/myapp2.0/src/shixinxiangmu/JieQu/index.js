@@ -21,7 +21,6 @@ class JieQu extends Component {
         
        this.props.dispatch(guanzhu())
        console.log(this.props.content);
-       
     }
 
 render(props){
