@@ -1,6 +1,6 @@
 /*
 SQLyog Ultimate v12.08 (64 bit)
-MySQL - 5.7.1-m11 : Database - myfavorite
+MySQL - 8.0.22 : Database - myfavorite
 *********************************************************************
 */
 
@@ -12,7 +12,7 @@ MySQL - 5.7.1-m11 : Database - myfavorite
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-CREATE DATABASE /*!32312 IF NOT EXISTS*/`myfavorite` /*!40100 DEFAULT CHARACTER SET utf8 */;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/`myfavorite` /*!40100 DEFAULT CHARACTER SET utf8 */ /*!80016 DEFAULT ENCRYPTION='N' */;
 
 /*Table structure for table `fans` */
 
@@ -27,27 +27,27 @@ CREATE TABLE `fans` (
 
 /*Data for the table `fans` */
 
-insert  into `fans`(`username`,`usernameimg`,`followuser`,`followuserimg`) values ('郝天恒','http://localhost:1234/static/uploaduserimg/timg.jpg','崔宫健','http://localhost:1234/static/uploaduserimg/timg.jpg'),('崔宫健','http://localhost:1234/static/uploaduserimg/timg.jpg','郝天恒','http://localhost:1234/static/uploaduserimg/timg.jpg'),('崔宫健1','http://localhost:1234/static/uploaduserimg/timg.jpg','郝天恒','http://localhost:1234/static/uploaduserimg/timg.jpg'),('崔宫健2','http://localhost:1234/static/uploaduserimg/timg.jpg','郝天恒','http://localhost:1234/static/uploaduserimg/timg.jpg');
+insert  into `fans`(`username`,`usernameimg`,`followuser`,`followuserimg`) values ('郝天恒','http://localhost:1234/static/uploaduserimg/timg.jpg','崔宫健','http://localhost:1234/static/uploaduserimg/timg.jpg'),('崔宫健','http://localhost:1234/static/uploaduserimg/timg.jpg','郝天恒','http://localhost:1234/static/uploaduserimg/timg.jpg'),('崔宫健1','http://localhost:1234/static/uploaduserimg/timg.jpg','郝天恒','http://localhost:1234/static/uploaduserimg/timg.jpg'),('崔宫健2','http://localhost:1234/static/uploaduserimg/timg.jpg','郝天恒','http://localhost:1234/static/uploaduserimg/timg.jpg'),('测试1','http://localhost:1234/static/uploaduserimg/timg.jpg','郝天恒','http://localhost:1234/static/uploaduserimg/timg.jpg'),('测试2 ','http://localhost:1234/static/uploaduserimg/timg.jpg','郝天恒','http://localhost:1234/static/uploaduserimg/timg.jpg'),('测试3','http://localhost:1234/static/uploaduserimg/timg.jpg','郝天恒','http://localhost:1234/static/uploaduserimg/timg.jpg'),('郝天恒','http://localhost:1234/static/uploaduserimg/timg.jpg','测试1','http://localhost:1234/static/uploaduserimg/timg.jpg'),('郝天恒','http://localhost:1234/static/uploaduserimg/timg.jpg','测试2','http://localhost:1234/static/uploaduserimg/timg.jpg'),('郝天恒','http://localhost:1234/static/uploaduserimg/timg.jpg','测试3','http://localhost:1234/static/uploaduserimg/timg.jpg');
 
 /*Table structure for table `login` */
 
 DROP TABLE IF EXISTS `login`;
 
 CREATE TABLE `login` (
-  `uid` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
-  `role` int(1) DEFAULT '0' COMMENT '管理者',
+  `uid` int NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `role` int DEFAULT '0' COMMENT '管理者',
   `userimg` varchar(100) DEFAULT 'http://localhost:1234/static/uploaduserimg/timg.jpg' COMMENT '用户头像',
   `username` varchar(100) NOT NULL COMMENT '用户名',
   `passwd` varchar(100) NOT NULL COMMENT '密码',
-  `fansnumber` int(11) DEFAULT '0' COMMENT '粉丝数量',
-  `followusernumber` int(11) DEFAULT '0' COMMENT '关注的人数',
+  `fansnumber` int DEFAULT '0' COMMENT '粉丝数量',
+  `followusernumber` int DEFAULT '0' COMMENT '关注的人数',
   `ctime` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`uid`,`username`,`passwd`)
 ) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=utf8;
 
 /*Data for the table `login` */
 
-insert  into `login`(`uid`,`role`,`userimg`,`username`,`passwd`,`fansnumber`,`followusernumber`,`ctime`) values (1,1,'http://localhost:1234/static/uploaduserimg/timg.jpg','admin','123',0,0,'2020-11-19 08:34:47'),(2,1,'http://localhost:1234/static/uploaduserimg/timg.jpg','admin123','123',0,0,'2020-11-19 08:43:26'),(3,1,'http://localhost:1234/static/uploaduserimg/timg.jpg','admin2','password123',0,0,'2020-11-19 08:43:52'),(26,0,'http://localhost:1234/static/uploaduserimg/timg.jpg','郝天恒','123',1,3,'2020-11-26 22:56:02'),(41,0,'http://localhost:1234/static/uploaduserimg/timg.jpg','崔宫健','123',1,1,'2020-12-02 21:13:36'),(42,0,'http://localhost:1234/static/uploaduserimg/timg.jpg','郝天恒1','123',0,0,'2020-12-04 14:19:54'),(43,0,'http://localhost:1234/static/uploaduserimg/timg.jpg','郝天恒2','123',0,0,'2020-12-04 14:20:04'),(44,0,'http://localhost:1234/static/uploaduserimg/timg.jpg','郝天恒3','123',0,0,'2020-12-04 14:20:15'),(45,0,'http://localhost:1234/static/uploaduserimg/timg.jpg','崔宫健1','123',1,0,'2020-12-04 14:20:23'),(46,0,'http://localhost:1234/static/uploaduserimg/timg.jpg','崔宫健2','123',1,0,'2020-12-04 14:20:31'),(47,0,'http://localhost:1234/static/uploaduserimg/timg.jpg','崔宫健3','123',0,0,'2020-12-04 14:20:41');
+insert  into `login`(`uid`,`role`,`userimg`,`username`,`passwd`,`fansnumber`,`followusernumber`,`ctime`) values (1,1,'http://localhost:1234/static/uploaduserimg/timg.jpg','admin','123',0,0,'2020-11-19 08:34:47'),(2,1,'http://localhost:1234/static/uploaduserimg/timg.jpg','admin123','123',0,0,'2020-11-19 08:43:26'),(3,1,'http://localhost:1234/static/uploaduserimg/timg.jpg','admin2','password123',0,0,'2020-11-19 08:43:52'),(26,0,'http://localhost:1234/static/uploaduserimg/timg.jpg','郝天恒','123',1,6,'2020-11-26 22:56:02'),(41,0,'http://localhost:1234/static/uploaduserimg/timg.jpg','崔宫健','123',1,1,'2020-12-02 21:13:36'),(42,0,'http://localhost:1234/static/uploaduserimg/timg.jpg','郝天恒1','123',0,0,'2020-12-04 14:19:54'),(43,0,'http://localhost:1234/static/uploaduserimg/timg.jpg','郝天恒2','123',0,0,'2020-12-04 14:20:04'),(44,0,'http://localhost:1234/static/uploaduserimg/timg.jpg','郝天恒3','123',0,0,'2020-12-04 14:20:15'),(45,0,'http://localhost:1234/static/uploaduserimg/timg.jpg','崔宫健1','123',1,0,'2020-12-04 14:20:23'),(46,0,'http://localhost:1234/static/uploaduserimg/timg.jpg','崔宫健2','123',1,0,'2020-12-04 14:20:31'),(47,0,'http://localhost:1234/static/uploaduserimg/timg.jpg','崔宫健3','123',0,0,'2020-12-04 14:20:41');
 
 /*Table structure for table `save` */
 
@@ -55,7 +55,7 @@ DROP TABLE IF EXISTS `save`;
 
 CREATE TABLE `save` (
   `username` varchar(100) NOT NULL,
-  `textid` int(11) NOT NULL
+  `textid` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `save` */
@@ -67,14 +67,14 @@ insert  into `save`(`username`,`textid`) values ('郝天恒',1),('郝天恒',2),
 DROP TABLE IF EXISTS `text`;
 
 CREATE TABLE `text` (
-  `textid` int(11) NOT NULL AUTO_INCREMENT,
+  `textid` int NOT NULL AUTO_INCREMENT,
   `titleimg` varchar(100) DEFAULT 'http://localhost:1234/static/uploadtextimg/timg.jpg' COMMENT '文章图片',
   `userimg` varchar(100) DEFAULT 'http://localhost:1234/static/uploadusertimg/timg.jpg' COMMENT '作者头像',
   `username` varchar(100) NOT NULL,
   `type` varchar(100) NOT NULL,
   `title` varchar(100) NOT NULL,
   `text` text NOT NULL,
-  `savenumber` int(11) NOT NULL DEFAULT '0',
+  `savenumber` int NOT NULL DEFAULT '0',
   `ctime` datetime DEFAULT CURRENT_TIMESTAMP,
   KEY `id` (`textid`)
 ) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;

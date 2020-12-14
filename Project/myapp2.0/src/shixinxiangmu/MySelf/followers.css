@@ -42,3 +42,8 @@
     text-align: center;
     font-size: 25px;
 }
+.delete{
+    position: absolute;
+    right: 0px;
+    margin-right: 15px;
+}
