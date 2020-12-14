@@ -369,12 +369,12 @@ app.post('/deletemyfansorfollows',async c=>{
             }
             else{
                 let fans
-                connection.query('UPDATE login SET fansnumber = fansnumber-1 where username = ?',[username],function(error,results){
+                connection.query('UPDATE login SET fansnumber = fansnumber - 1 where username = ?',[username],function(error,results){
                     if(error) throw error;
                     console.log('删除我的粉丝成功，',username,'的粉丝数量减1');
                 })
 
-                connection.query('UPDATE login SET followusernumber = followusernumber-1 where username = ? ',[followuser],function(error,results){
+                connection.query('UPDATE login SET followusernumber = followusernumber - 1 where username = ? ',[followuser],function(error,results){
                     if(error) throw error;
                     console.log('取消关注或被删除粉丝成功',followuser,'的关注数量减一');
                 })
