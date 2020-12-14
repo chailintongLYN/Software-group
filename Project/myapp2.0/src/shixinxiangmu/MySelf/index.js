@@ -55,7 +55,7 @@ class MySelf extends Component{
                 <div className="myse_bg" id="myse_bg"></div>
                 <div className="myse_kongbai">
                     <div className="myse_shezhi">
-                            <img src={shezhi} onClick={()=>alert("进入设置页面")}/>
+                            <img src={shezhi} onClick={()=>this.props.history.push('/set')}/>
                     </div>
                 </div>
                 {this.props.fansandfllow.map((item,index)=>{

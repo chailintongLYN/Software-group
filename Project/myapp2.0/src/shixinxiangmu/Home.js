@@ -54,7 +54,7 @@ class Home extends Component{
                         好物推荐
                         </div>
                     </div>
-                    <div className="home_tuijian_btn_container">
+                    <div className="home_tuijian_btn_container" onClick={()=>this.props.history.push("/guangfangwd")}>
                         <div className="home_tuijian_btn">
                             <img src={tuijian3_btn}/>
                         </div>

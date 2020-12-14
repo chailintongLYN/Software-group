@@ -1,0 +1,20 @@
+.Changepwd_list{
+  
+border-radius: 4px;
+background-color: rgba(255, 255, 255, 100);
+color: rgba(167, 167, 167, 100);
+font-size: 16px;
+text-align: left;
+font-family: Arial;
+margin: 5px 0;
+
+border-radius: 5px;
+overflow: hidden;
+width: 99.8%;
+}
+.Changepwd_list_0{
+    margin-top: 20px;
+}
+.Changepwd_btn{
+    margin-top: 100px;
+}
