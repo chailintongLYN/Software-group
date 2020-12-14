@@ -24,12 +24,14 @@ class Login extends Component {
                 username: e.target.value,
             });
             loginfo.username=e.target.value;
+            console.log(this.state);
         } else if (e.target.name === "passwd") {
             this.setState({
                 passwd: e.target.value,
             });
             loginfo.passwd=e.target.value;
             console.log(JSON.stringify(loginfo));
+            console.log(this.state);
         }
         
     }
