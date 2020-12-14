@@ -669,6 +669,7 @@ app.get('/q',async c=>{
 
 app.use(async (c,next)=>{
     let upf = c.getFile('image')
+    console.log('这里是app.use');
     if(!upf){
         c.res.body = 'file not found'
         return
@@ -691,6 +692,8 @@ app.get('/upload',async c=>{
 
 app.post('/uploadtextimg',async c=>{
 
+    console.log('这里是app.post');
+
     let f = c.getFile('image')
 
     let fname = `${c.helper.makeName()}${c.helper.extName(f.filename)}`
@@ -706,13 +709,14 @@ app.post('/uploadtextimg',async c=>{
         c.res.body = err.message
     }
 
-    connection.query('UPDATE text SET titleimg = ? WHERE textid = ?',['http://localhost:1234/static'+c.path+'/'+fname,textid],function(error,results,fields){
+    connection.query('UPDATE text SET titleimg = ? WHERE userame = ?',['http://localhost:1234/static'+c.path+'/'+fname,textid],function(error,results,fields){
         if(error) throw error;
     })
 
 },'uploadtextimg-image')
 
 app.get('/static/uploadtextimg/*',async c=>{
+    console.log('这里是app.get');
     console.log(c.path);
     c.res.body = fs.readFileSync('.'+c.path)
 })
