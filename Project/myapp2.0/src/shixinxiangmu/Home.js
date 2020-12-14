@@ -69,7 +69,7 @@ class Home extends Component{
                     <div className="home_remen_container">
                         {this.props.newtext.map((item,index)=>{
                             return(
-                                <div className="home_remen_container_div" onClick={()=>this.props.history.push('/detail',{from:'home',id:this.props.newtext[index].textid,type:'newtext'},sessionStorage.setItem('textid:',this.props.newtext[index].textid))}>
+                                <div className="home_remen_container_div" onClick={()=>this.props.history.push('/detail',{from:'home',id:this.props.newtext[index].textid,type:'newtext',scnumber:this.props.newtext[index].savenumber,textusername:this.props.newtext[index].username},sessionStorage.setItem('textid:',this.props.newtext[index].textid))}>
                                     <div className="home_remen_container_div_img">
                                         <img src={this.props.newtext[index].titleimg} />
                                     </div>
@@ -88,7 +88,7 @@ class Home extends Component{
                     <div className="home_dashen_container">
                         {this.props.react.map((item,index)=>{
                             return(
-                                <div className="home_dashen_container_div"  onClick={()=>this.props.history.push('/detail',{from:'home',id:this.props.react[index].textid,type:'react'},sessionStorage.setItem('textid:',this.props.react[index].textid))}>
+                                <div className="home_dashen_container_div"  onClick={()=>this.props.history.push('/detail',{from:'home',id:this.props.react[index].textid,type:'react',textusername:this.props.react[index].username,scnumber:this.props.react[index].savenumber},sessionStorage.setItem('textid:',this.props.react[index].textid))}>
                                     <div className="home_dashen_container_div_img">
                                         <img src={this.props.react[index].titleimg} />
                                     </div>
@@ -108,7 +108,7 @@ class Home extends Component{
                         {this.props.js.map((item,index)=>{
                             
                             return(
-                                <div className="home_remen_container_div" onClick={()=>this.props.history.push('/detail',{from:'home',id:this.props.js[index].textid,type:'js'},sessionStorage.setItem('textid:',this.props.js[index].textid))}>
+                                <div className="home_remen_container_div" onClick={()=>this.props.history.push('/detail',{from:'home',id:this.props.js[index].textid,type:'js',textusername:this.props.js[index].username,scnumber:this.props.js[index].savenumber},sessionStorage.setItem('textid:',this.props.js[index].textid))}>
                                 <div className="home_remen_container_div_img">
                                     <img src={this.props.js[index].titleimg} />
                                 </div>
@@ -129,7 +129,7 @@ class Home extends Component{
                     <div className="home_remen_container">
                        {this.props.css.map((item,index)=>{
                            return(
-                            <div className="home_remen_container_div" onClick={()=>this.props.history.push('/detail',{from:'home',id:this.props.css[index].textid,type:'css'},sessionStorage.setItem('textid:',this.props.css[index].textid))}>
+                            <div className="home_remen_container_div" onClick={()=>this.props.history.push('/detail',{from:'home',id:this.props.css[index].textid,type:'css',textusername:this.props.css[index].username,scnumber:this.props.js[index].savenumber},sessionStorage.setItem('textid:',this.props.css[index].textid))}>
                                 <div className="home_remen_container_div_img">
                                     <img src={this.props.css[index].titleimg} />
                                 </div>

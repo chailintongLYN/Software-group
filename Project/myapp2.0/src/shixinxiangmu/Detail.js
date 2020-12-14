@@ -9,6 +9,9 @@ import { connect } from 'react-redux'
 import { home } from './action/homeaction'
 import {commend} from './action/commendaction'
 import {goodthingsrecommend} from'./action/goodthingsrecaction'
+import { Modal, Button, WhiteSpace, WingBlank, Toast } from 'antd-mobile';
+
+const alert = Modal.alert;
 class Detail extends Component{
     constructor(props){
         super(props);
@@ -202,7 +205,7 @@ class Detail extends Component{
                                 <div class="tou">
                                     <img src={touxiang} class="touxiang"/>
                                     <span class="username">{this.props.content[index].username}</span>
-                                    <button class="attention" onClick={this.gzhandleClick}>已关注</button>
+                                    <button class="attention" onClick={this.gzhandleClick}>{this.state.gz}</button>
                                 </div>
                                 <div class="article">
                                     <p class="wz">{this.props.content[index].text}</p>
@@ -262,7 +265,7 @@ class Detail extends Component{
                                 <div class="tou">
                                     <img src={touxiang} class="touxiang"/>
                                     <span class="username">{this.props.getmytext[index].username}</span>
-                                    <button class="attention" onClick={this.gzhandleClick}>关注</button>
+                                    <button class="attention" onClick={()=>alert('不能对自己进行此项操作')}>关注</button>
                                 </div>
                                 <div class="article">
                                     <p class="wz">{this.props.getmytext[index].text}</p>
@@ -271,7 +274,7 @@ class Detail extends Component{
                                     <div class="time">{this.props.getmytext[index].ctime.substring(0,10)+" "+this.props.getmytext[index].ctime.substring(11,16)}</div>
                                     <div class="shoucang">
                                         <img src={xing} class="shoucang-img" onClick={this.schandleClick}/>
-                                        <div class='shoucang-number'>{this.props.getmytext[index].savenumber}</div>
+                                        <div class='shoucang-number'>{this.state.count}</div>
                                     </div>
                                 </div>
                             </div>
@@ -294,7 +297,7 @@ class Detail extends Component{
                                             <div class="tou">
                                                 <img src={touxiang} class="touxiang"/>
                                                 <span class="username">{this.props.newtext[index].username}</span>
-                                                <button class="attention" onClick={this.gzhandleClick}>关注</button>
+                                                <button class="attention" onClick={this.gzhandleClick}>{this.state.gz}</button>
                                             </div>
                                             <div class="article">
                                                 <p class="wz" dangerouslySetInnerHTML={{__html:this.props.newtext[index].text}}></p>
@@ -303,7 +306,7 @@ class Detail extends Component{
                                                 <div class="time">{this.props.newtext[index].ctime.substring(0,10)+" "+this.props.newtext[index].ctime.substring(11,16)}</div>
                                                 <div class="shoucang">
                                                     <img src={xing} class="shoucang-img" onClick={this.schandleClick}/>
-                                                    <div class='shoucang-number'>{this.props.newtext[index].savenumber}</div>
+                                                    <div class='shoucang-number'>{this.state.count}</div>
                                                 </div>
                                             </div>
                                         </div>
@@ -324,7 +327,7 @@ class Detail extends Component{
                                             <div class="tou">
                                                 <img src={touxiang} class="touxiang"/>
                                                 <span class="username">{this.props.react[index].username}</span>
-                                                <button class="attention" onClick={this.gzhandleClick}>关注</button>
+                                                <button class="attention" onClick={this.gzhandleClick}>{this.state.gz}</button>
                                             </div>
                                             <div class="article">
                                                 <p class="wz">{this.props.react[index].text}</p>
@@ -333,7 +336,7 @@ class Detail extends Component{
                                                 <div class="time">{this.props.react[index].ctime.substring(0,10)+" "+this.props.react[index].ctime.substring(11,16)}</div>
                                                 <div class="shoucang">
                                                     <img src={xing} class="shoucang-img" onClick={this.schandleClick}/>
-                                                    <div class='shoucang-number'>{this.props.react[index].savenumber}</div>
+                                                    <div class='shoucang-number'>{this.state.count}</div>
                                                 </div>
                                             </div>
                                         </div>
@@ -354,7 +357,7 @@ class Detail extends Component{
                                             <div class="tou">
                                                 <img src={touxiang} class="touxiang"/>
                                                 <span class="username">{this.props.js[index].username}</span>
-                                                <button class="attention" onClick={this.gzhandleClick}>关注</button>
+                                                <button class="attention" onClick={this.gzhandleClick}>{this.state.gz}</button>
                                             </div>
                                             <div class="article">
                                                 <p class="wz" dangerouslySetInnerHTML={{__html:this.props.js[index].text}}></p>
@@ -363,7 +366,7 @@ class Detail extends Component{
                                                 <div class="time">{this.props.js[index].ctime.substring(0,10)+" "+this.props.js[index].ctime.substring(11,16)}</div>
                                                 <div class="shoucang">
                                                     <img src={xing} class="shoucang-img" onClick={this.schandleClick}/>
-                                                    <div class='shoucang-number'>{this.props.js[index].savenumber}</div>
+                                                    <div class='shoucang-number'>{this.state.count}</div>
                                                 </div>
                                             </div>
                                         </div>
@@ -384,7 +387,7 @@ class Detail extends Component{
                                             <div class="tou">
                                                 <img src={touxiang} class="touxiang"/>
                                                 <span class="username">{this.props.css[index].username}</span>
-                                                <button class="attention" onClick={this.gzhandleClick}>关注</button>
+                                                <button class="attention" onClick={this.gzhandleClick}>{this.state.gz}</button>
                                             </div>
                                             <div class="article">
                                                 <p class="wz">{this.props.css[index].text}</p>
@@ -393,7 +396,7 @@ class Detail extends Component{
                                                 <div class="time">{this.props.css[index].ctime.substring(0,10)+" "+this.props.css[index].ctime.substring(11,16)}</div>
                                                 <div class="shoucang">
                                                     <img src={xing} class="shoucang-img" onClick={this.schandleClick}/>
-                                                    <div class='shoucang-number'>{this.props.css[index].savenumber}</div>
+                                                    <div class='shoucang-number'>{this.state.count}</div>
                                                 </div>
                                             </div>
                                         </div>
@@ -415,7 +418,7 @@ class Detail extends Component{
                                 <div class="tou">
                                     <img src={touxiang} class="touxiang"/>
                                     <span class="username">{this.props.commend[index].username}</span>
-                                    <button class="attention" onClick={this.gzhandleClick}>关注</button>
+                                    <button class="attention" onClick={this.gzhandleClick}>{this.state.gz}</button>
                                 </div>
                                 <div class="article">
                                     <p class="wz">{this.props.commend[index].text}</p>
@@ -424,7 +427,7 @@ class Detail extends Component{
                                     <div class="time">{this.props.commend[index].ctime.substring(0,10)+" "+this.props.commend[index].ctime.substring(11,16)}</div>
                                     <div class="shoucang">
                                         <img src={xing} class="shoucang-img" onClick={this.schandleClick}/>
-                                        <div class='shoucang-number'>{this.props.commend[index].savenumber}</div>
+                                        <div class='shoucang-number'>{this.state.count}</div>
                                     </div>
                                 </div>
                             </div>
@@ -445,7 +448,7 @@ class Detail extends Component{
                                 <div class="tou">
                                     <img src={touxiang} class="touxiang"/>
                                     <span class="username">{this.props.goodthingsrecommend[index].username}</span>
-                                    <button class="attention" onClick={this.gzhandleClick} >关注</button>
+                                    <button class="attention" onClick={this.gzhandleClick} >{this.state.gz}</button>
                                 </div>
                                 <div class="article">
                                     <p class="wz">{this.props.goodthingsrecommend[index].text}</p>
@@ -454,7 +457,7 @@ class Detail extends Component{
                                     <div class="time">{this.props.goodthingsrecommend[index].ctime.substring(0,10)+" "+this.props.goodthingsrecommend[index].ctime.substring(11,16)}</div>
                                     <div class="shoucang">
                                         <img src={xing} class="shoucang-img" onClick={this.schandleClick}/>
-                                        <div class='shoucang-number'>{this.props.goodthingsrecommend[index].savenumber}</div>
+                                        <div class='shoucang-number'>{this.state.count}</div>
                                     </div>
                                 </div>
                             </div>
