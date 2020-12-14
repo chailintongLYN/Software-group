@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>login</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        
+        .box {
+            width: 300px;
+            height: 400px;
+            padding: 0 20px;
+            border: 2px solid #1688ea;
+            margin: 50px auto;
+        }
+        
+        .tit {
+            margin-top: 5px;
+            margin-bottom: 30px;
+        }
+        
+        .brand {
+            color: #1688ea;
+            font-size: 18px;
+            margin-right: 20px;
+        }
+        
+        .inp {
+            width: 100%;
+            height: 40px;
+            margin-top: 30px;
+            text-indent: 8px;
+        }
+        
+        .notice {
+            height: 30px;
+            line-height: 30px;
+            font-size: 12px;
+        }
+        
+        .code {
+            width: 60%;
+        }
+        
+        .getCode {
+            width: 35%;
+            height: 44px;
+            float: right;
+            border: none;
+            background-color: #eee;
+        }
+        
+        .codeImg {
+            height: 40px;
+        }
+        
+        .btn {
+            background: #1688ea;
+            width: 100%;
+            height: 40px;
+            border: none;
+            margin-top: 8px;
+            color: #fff;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+
+<body>
+    <form onsubmit="login(this);return false;" autocomplete="off">
+        <div class="box">
+            <p class="tit">
+                <span class="brand">我为前端狂</span>
+                <span>用户登录</span>
+            </p>
+
+            <input class="inp" type="text" name="username" oninput="cacheInput(this);" placeholder="用户名" required>
+            <p class="notice"></p>
+            <input class="inp" type="password" name="passwd" oninput="cacheInput(this);" placeholder="密码" required>
+            <p class="notice"></p>
+            
+            <input type="submit" value="登陆" class="btn">
+        </div>
+    </form>
+
+    <script>
+        //用户名
+        var inputs = document.getElementsByTagName("input");
+        var ps = document.getElementsByClassName("notice");
+        inputs[0].setAttribute("onfocus", "names()");
+
+        function names() {
+            ps[0].innerHTML = "请输入用户名";
+        }
+        //密码
+        inputs[1].setAttribute("onfocus", "password()");
+
+        function password() {
+            ps[1].innerHTML = "请输入密码";
+        }
+                //消失
+        inputs[0].setAttribute("onblur", "dele0()");
+
+        function dele0() {
+            ps[0].innerHTML = "";
+        }
+        inputs[1].setAttribute("onblur", "dele1()");
+
+        function dele1() {
+            ps[1].innerHTML = "";
+        }
+        let loginfo = {
+          username : '',
+          passwd : ''
+        }
+    
+        function cacheInput (t) {
+          if (t.name === 'username') {
+            loginfo.username = t.value.trim()
+            console.log(loginfo.username)
+          } else if (t.name === 'passwd') {
+            loginfo.passwd = t.value
+            console.log(loginfo.passwd)
+            console.log(JSON.stringify(loginfo))
+          }
+        }
+
+        function login(t) {
+          if (loginfo.username === '') {
+            ps[0].innerHTML = "请输入正确的账号";
+            return
+          }
+          if(loginfo.passwd === ''){
+            ps[1].innerHTML = "请输入正确的密码";
+            return
+          }
+          fetch('/data', {
+            method : 'POST',
+            headers : {
+              'content-type' : 'text/plain'
+            },
+            body : JSON.stringify(loginfo)
+          }).then(async res=>res.json()).catch(err => {
+            alert(err.message)
+          }).then(res=>{
+            console.log(res);
+            if(res.status=='success'){
+              console.log(1);
+              localStorage.setItem("username",loginfo.username);
+              location.href = '/editor'
+            }else{
+              alert('密码或账户错误')
+            }
+            
+          })   
+        }
+
+
+
+
+    </script>
+</body>
+
+</html>
