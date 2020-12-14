@@ -25,7 +25,7 @@
     const files = event.target.files
     let formData = new FormData()
     formData.append('image', files[0])
-    formData.append('username', '郝天恒1')
+    formData.append('username', '郝天恒')
 
     let data ={
       textid : 1,
@@ -33,7 +33,6 @@
     }
 
     console.log(formData.get('image'));
-    console.log(formData.get('textid'));
 
     // fetch('/uploadtextimg', {
     //   method: 'POST',

@@ -137,8 +137,9 @@
         <div id="my-editor" style="width:80%;margin:auto;border:sloid #efefef 0.05rem; min-height: 22rem;"></div>
         
         <div>
-        <input class="sub" type="submit" value="发布" >
-        
+            <input class="sub" type="submit" value="发布" >
+            <input type="file" accept="image/*" id="fileUpload" value="上传标题图片" name="上传标题图片"/>
+            <img src="../static/uploadtextimg/timg.jpg">
         </div>
     </form>
     <button onclick="del()" class="del">取消</button>
@@ -150,6 +151,29 @@
     
     
     <script>
+
+document.querySelector('#fileUpload').addEventListener('change', event => {
+    handleImageUpload(event)
+  })
+  const handleImageUpload = event => {
+    // console.log(event);
+    const files = event.target.files
+    let formData = new FormData()
+    formData.append('image', files[0])
+    formData.append('username', '郝天恒1')
+
+    console.log(formData.get('image'));
+    fetch('http://localhost:1234/uploaduserimg', {
+      method: 'POST',
+      body: formData
+    })
+    .then(response => response.json())
+    .then(res => {
+      document.getElementsByTagName('img')[0].src=res
+      console.log(res)
+    })
+  }
+
         //富文本的创建
         let editor = new wangEditor('#my-editor')
         editor.create()
@@ -195,11 +219,7 @@
                 }
                 return null;
             }();
-<<<<<<< HEAD
             console.log(textdata);
-=======
-            // console.log(textdata);
->>>>>>> 0eb7114db11618423a0a5c89ddd5b8d5f5e3d2e4
             fetch('/editor', {
             method : 'POST',
             headers : {

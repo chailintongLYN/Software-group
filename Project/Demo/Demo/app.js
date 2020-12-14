@@ -691,9 +691,7 @@ app.get('/upload',async c=>{
 
 app.post('/uploadtextimg',async c=>{
 
-    // console.log(c.body.textid);
     let f = c.getFile('image')
-    let textid = c.body.textid
 
     let fname = `${c.helper.makeName()}${c.helper.extName(f.filename)}`
 
