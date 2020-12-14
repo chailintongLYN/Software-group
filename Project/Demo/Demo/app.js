@@ -368,7 +368,7 @@ app.post('/deletemyfansorfollows',async c=>{
                 resolve({'status': 'failed','code':'400'})
             }
             else{
-                let fans
+                
                 connection.query('UPDATE login SET fansnumber = fansnumber - 1 where username = ?',[username],function(error,results){
                     if(error) throw error;
                     console.log('删除我的粉丝成功，',username,'的粉丝数量减1');
