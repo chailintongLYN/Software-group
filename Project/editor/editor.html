@@ -5,38 +5,183 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="./wangeditor.js"></script>
+    <style> 
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        .topdiv{
+            height: 70px;
+            width: 100%;
+            background-color: #1688ea;
+        }
+        .bottomdiv{
+            height: 90px;
+            width: 100%;
+            position: absolute;
+            color: #fff;
+            bottom: 0px;
+            line-height: 90px;
+            /* margin: 0 auto; */
+            /* padding-top: 30px; */
+            text-align: center;
+            font-size: small;
+            background-color: #000;
+        }
+        .toptitle{
+            float: left;
+            margin-left: 50px;
+            height: 70px;
+            width: 40%;
+            word-wrap:5px;
+            line-height: 70px;
+            background-color: #1688ea;
+            color: #fff;
+            font-size: 25px;
+        }
+        .topname{
+            float: right;
+            margin-right: 50px;
+            height: 70px;
+            width: 30%;
+            line-height: 70px;
+            background-color: #1688ea;
+            color: #fff;
+            font-size: 20px;
+        }
+        #name{
+            float: left;
+            margin-right: 50px;
+            height: 70px;
+            width: 30%;
+            line-height: 70px;
+            background-color: #1688ea;
+            color: #fff;
+            font-size: 20px;
+        }
+        .na{
+            float: left;
+            margin-right: 10px;
+            height: 70px;
+            width: 15%;
+            line-height: 70px;
+            background-color: #1688ea;
+            color: #fff;
+            font-size: 20px;
+        }
+        .out{
+            float: right;
+            position: absolute;
+            right: 150px;
+            bottom: 670px;
+            width: 100px;
+            height: 35px;
+            background-color: rgba(255,0,0,0.9);
+            color: #fff;
+        }
+        .nei{
+            height: 30px;
+            width: 100px;
+            margin: 0 auto;
+            display: inline-block;
+        }
+        .bnei{
+            margin-top: 10px;
+            margin-bottom: 10px;
+            width: 100%;
+            height: 30px;
+        }
+        .sub{
+            float: right;
+            margin-right: 150px;
+            width: 130px;
+            height: 35px;
+            color: seashell;
+            background-color: #1688ea;
+            border-color: #1688ea;
+        }
+        .del{
+            float: right;
+            /* display: inline-block; */
+            width: 130px;
+            height: 35px;
+            margin-right: 1px;
+            /* background-color: #1688ea; */
+            border-color:#fff;
+        }
+    </style>
 </head>
+
 <body>
+
+    <div class = "topdiv">
+        <div class="toptitle">我为前端狂文章发表平台</div>
+        <div class="topname"><div class="na">欢迎：</div><div id="name"><span id="userna"></span></div></div>
+        <button onclick="out()" class="out">退出登陆</button>
+    </div>
     <form onsubmit="login(this);return false;" autocomplete="off" style="margin:auto;border:sloid #efefef 0.05rem;">
-        <input type="radio" name="vehicle" value="nodejs">nodejs<br>
-        <input type="radio" name="vehicle" value="react">react<br>
-        <input type="radio" name="vehicle" value="html">html<br>
-        <input type="radio" name="vehicle" value="css">css<br>
-        <input type="radio" name="vehicle" value="js">js<br>
-        <input type="text" name="username" oninput="cacheInput(this);" placeholder="用户名" required>
-        <input type="submit" value="提交">
+        <div style="width: 100%; height: 20px;"></div>
+        <div class="bnei" style="width:80%;margin:auto;border:sloid #efefef 0.05rem;">
+        <div class="nei"><input type="radio" name="vehicle" value="nodejs">nodejs</div>
+        <div class="nei"><input type="radio" name="vehicle" value="react">react</div>
+        <div class="nei"><input type="radio" name="vehicle" value="html">html</div>
+        <div class="nei"><input type="radio" name="vehicle" value="css">css</div>
+        <div class="nei"><input type="radio" name="vehicle" value="js">js</div>
+        <div class="nei"><input type="radio" name="vehicle" value="综合">综合</div>
+        <div class="nei"><input type="radio" name="vehicle" value="好物推荐">好物推荐<br></div>
+        </div>
+        <div style="width: 100%; height: 20px;"></div>
+        <div  style="width:80%;margin:auto;border:sloid #efefef 0.05rem;"><input type="text" name="username" oninput="cacheInput(this);" placeholder="文章题目" required style="width:100%;margin:auto;border:sloid #efefef 0.05rem; min-height: 2rem;"></div>
+        <div style="width: 100%; height: 20px;"></div>
+        
+        <div id="my-editor" style="width:80%;margin:auto;border:sloid #efefef 0.05rem; min-height: 22rem;"></div>
+        
+        <div>
+        <input class="sub" type="submit" value="发布" >
+        
+        </div>
     </form>
-    <div id="my-editor" style="width:80%;margin:auto;border:sloid #efefef 0.05rem; min-height: 25rem;"></div>
+    <button onclick="del()" class="del">取消</button>
+    <div class = "bottomdiv">
+        我为前端狂项目小组河北师范大学软件学院
+    </div>
+    
+    
+    
+    
     <script>
-
-
+        //富文本的创建
         let editor = new wangEditor('#my-editor')
         editor.create()
         editor.config.uploadImgShowBase64 = true;
-
+        //数据存储
         let textdata = {
             type:"",
             title:"",
             text:'',
-            username:'崔宫健'
+            username:''
         }
-
+        //获取题目
         function cacheInput (t) {
             textdata.title = t.value;
         }
-        
+        //显示用户姓名
+        var userna = document.getElementById('userna')
+        console.log(localStorage.getItem('username'))
+        userna.innerHTML = localStorage.getItem('username')
+        //返回首页
+        function out(){
+            location.href = '/pcload';
+        }
+        //取消发布(页面清空)
+        function del(){
+            location.href = '/editor';
+        }
+
+        // 登陆函数
         function login(e){
         textdata.text = editor.txt.html()
+        textdata.username = localStorage.getItem('username')
         textdata.type =  function getRadioValue(vehicle){
                 var radioValue;    
                 radioValue=document.getElementsByName("vehicle");
@@ -50,15 +195,29 @@
                 }
                 return null;
             }();
+<<<<<<< HEAD
             console.log(textdata);
+=======
+            // console.log(textdata);
+>>>>>>> 0eb7114db11618423a0a5c89ddd5b8d5f5e3d2e4
             fetch('/editor', {
             method : 'POST',
             headers : {
               'content-type' : 'text/plain'
             },
             body : JSON.stringify(textdata)
-          }).then(async res=>res.json()).catch(err => {
+          }).then(async res=>res.json())
+          
+          .catch(err => {
             alert(err.message)
+          }).then(res=>{
+            console.log(res);
+            if(res.status=='success'){
+                alert('发布成功')
+              location.href = '/editor'
+            }else{
+              alert('密码或账户错误')
+            }
           })
         }
     </script>
