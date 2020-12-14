@@ -18,6 +18,10 @@ import JieQu from "./shixinxiangmu/JieQu"
 import ShouChang from "./shixinxiangmu/ShouChang"
 import MySelf from "./shixinxiangmu/MySelf"
 import GoodThingsRecommend from './shixinxiangmu/goodthingsrecommend/Goodthrecommend'
+import Guangfangwd from "./shixinxiangmu/Guangfangwd"
+import Set from "./shixinxiangmu/Set"
+import Changepwd from "./shixinxiangmu/Changepwd"
+import Avatarchange from './shixinxiangmu/Set/Avatarchange'
 const App=()=>{
 	return(
 		<Provider store={store}>
@@ -38,6 +42,10 @@ const App=()=>{
 					<Route path='/fans' component={Fans}/>
 					<Route path='/commend' component={Commend}/>
 					<Route path='/goodthingsrecommend' component={GoodThingsRecommend}/>
+					<Route path='/guangfangwd' component={Guangfangwd}/>
+					<Route path='/set' component={Set}/>
+					<Route path='/changepwd' component={Changepwd}/>
+					<Route path='/avatarchange' component={Avatarchange}/>
 				</Switch>
 		
 		</Router>
