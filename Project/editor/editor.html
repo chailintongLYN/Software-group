@@ -137,11 +137,13 @@
         <div id="my-editor" style="width:80%;margin:auto;border:sloid #efefef 0.05rem; min-height: 22rem;"></div>
         
         <div>
-        <input class="sub" type="submit" value="发布" >
+        <input class="sub" type="submit" value="发布"/>
+        <input type="file" value="上传文章图片" accept="image/*" id="fileUpload"/>
+        <img src=""/>
         
         </div>
     </form>
-    <button onclick="del()" class="del">取消</button>
+    <button onclick="del()" class="del">重新编辑</button>
     <div class = "bottomdiv">
         我为前端狂项目小组河北师范大学软件学院
     </div>
@@ -150,20 +152,27 @@
     
     
     <script>
+        //数据存储
+        let formData = new FormData()
+        
+        document.querySelector('#fileUpload').addEventListener('change', event => {
+            handleImageUpload(event)
+        })
+
+        const handleImageUpload = event => {
+            const files = event.target.files
+            formData.append('image', files[0])
+
+            console.log(formData.get('image'));
+        }
         //富文本的创建
         let editor = new wangEditor('#my-editor')
         editor.create()
         editor.config.uploadImgShowBase64 = true;
-        //数据存储
-        let textdata = {
-            type:"",
-            title:"",
-            text:'',
-            username:''
-        }
+        
         //获取题目
         function cacheInput (t) {
-            textdata.title = t.value;
+            formData.append('title',t.value)
         }
         //显示用户姓名
         var userna = document.getElementById('userna')
@@ -180,9 +189,9 @@
 
         // 登陆函数
         function login(e){
-        textdata.text = editor.txt.html()
-        textdata.username = localStorage.getItem('username')
-        textdata.type =  function getRadioValue(vehicle){
+            formData.append('text',editor.txt.html())
+            formData.append('username',localStorage.getItem('username'))
+            formData.append('type',function getRadioValue(vehicle){
                 var radioValue;    
                 radioValue=document.getElementsByName("vehicle");
                 if(radioValue!=null){
@@ -194,30 +203,20 @@
                     }
                 }
                 return null;
-            }();
-<<<<<<< HEAD
-            console.log(textdata);
-=======
-            // console.log(textdata);
->>>>>>> 0eb7114db11618423a0a5c89ddd5b8d5f5e3d2e4
-            fetch('/editor', {
+            }())
+
+            fetch('/uploadtextimg', {
             method : 'POST',
-            headers : {
-              'content-type' : 'text/plain'
-            },
-            body : JSON.stringify(textdata)
+            body:formData
           }).then(async res=>res.json())
           
           .catch(err => {
             alert(err.message)
           }).then(res=>{
             console.log(res);
-            if(res.status=='success'){
+            document.getElementsByTagName('img')[0].src=res.imagepath
                 alert('发布成功')
-              location.href = '/editor'
-            }else{
-              alert('密码或账户错误')
-            }
+            //   location.href = '/editor'
           })
         }
     </script>

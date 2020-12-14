@@ -7,7 +7,8 @@
 
 <body>
   <input type="file" accept="image/*" id="fileUpload" />
-  <img src="../static/uploadtextimg/timg.jpg">
+  <img src=""/>
+  <!-- <img src="../static/uploadtextimg/timg.jpg"/> -->
   <!-- <form>
     <div>
       <label>Select file to upload</label>
@@ -25,7 +26,7 @@
     const files = event.target.files
     let formData = new FormData()
     formData.append('image', files[0])
-    formData.append('username', '郝天恒1')
+    formData.append('username', '郝天恒')
 
     let data ={
       textid : 1,
@@ -33,9 +34,19 @@
     }
 
     console.log(formData.get('image'));
-    console.log(formData.get('textid'));
 
-    // fetch('/uploadtextimg', {
+    fetch('/uploadtextimg', {
+      method: 'POST',
+      body: formData
+    })
+    .then(response => response.json())
+    .then(res => {
+      console.log(1123);
+      document.getElementsByTagName('img')[0].src=res
+      console.log(res)
+    })
+
+    // fetch('/uploaduserimg', {
     //   method: 'POST',
     //   body: formData
     // })
@@ -44,16 +55,6 @@
     //   document.getElementsByTagName('img')[0].src=res
     //   console.log(res)
     // })
-
-    fetch('/uploaduserimg', {
-      method: 'POST',
-      body: formData
-    })
-    .then(response => response.json())
-    .then(res => {
-      document.getElementsByTagName('img')[0].src=res
-      console.log(res)
-    })
   }
           
 </script>
