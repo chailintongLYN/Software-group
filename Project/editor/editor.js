@@ -109,7 +109,7 @@ app.post('/uploadtextimg',async c=>{
     });
     try{
         await c.moveFile(f,'./public/uploadtextimg/'+fname)
-        c.res.body =  {'results':results,'imagepath':'../uploadtextimg/'+fname}
+        c.res.body =  {'results':results,'imagepath':'http://localhost:12345/static/uploadtextimg/'+fname}
     }catch(err){
         c.res.body = {'results':results,'imageerror':err.message}
     }

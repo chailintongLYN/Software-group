@@ -143,7 +143,7 @@
         
         </div>
     </form>
-    <button onclick="del()" class="del">取消</button>
+    <button onclick="del()" class="del">重新编辑</button>
     <div class = "bottomdiv">
         我为前端狂项目小组河北师范大学软件学院
     </div>
@@ -204,9 +204,6 @@
                 }
                 return null;
             }())
-            // console.log('formData.username:',formData.get('username'));
-            // console.log('formData.text:',formData.get('text'));
-            // console.log('formData.type:',formData.get('type'));
 
             fetch('/uploadtextimg', {
             method : 'POST',
@@ -217,12 +214,9 @@
             alert(err.message)
           }).then(res=>{
             console.log(res);
-            // if(res.status=='success'){
-            //     alert('发布成功')
+            document.getElementsByTagName('img')[0].src=res.imagepath
+                alert('发布成功')
             //   location.href = '/editor'
-            // }else{
-            //   alert('密码或账户错误')
-            // }
           })
         }
     </script>
