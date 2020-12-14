@@ -368,7 +368,7 @@ app.post('/deletemyfansorfollows',async c=>{
                 resolve({'status': 'failed','code':'400'})
             }
             else{
-                let fans
+
                 connection.query('UPDATE login SET fansnumber = fansnumber - 1 where username = ?',[username],function(error,results){
                     if(error) throw error;
                     console.log('删除我的粉丝成功，',username,'的粉丝数量减1');
@@ -785,7 +785,7 @@ app.post('/changemypassword',async c=>{
     console.log(username,passwd,newpasswd);
     var result = await new Promise((resolve) => {
         connection.query('SELECT * FROM login where username = ? and passwd = ? ',[username,passwd],function(error,results,fields){
-            if(results.length === 0 ){
+            if(results.length !== 0 ){
                 resolve({'status': 'passwdfailed','code':'400'})
             }
             else{

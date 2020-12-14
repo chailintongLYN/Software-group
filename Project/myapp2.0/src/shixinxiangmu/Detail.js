@@ -208,7 +208,7 @@ class Detail extends Component{
                                     <button class="attention" onClick={this.gzhandleClick}>{this.state.gz}</button>
                                 </div>
                                 <div class="article">
-                                    <p class="wz">{this.props.content[index].text}</p>
+                                    <p class="wz" dangerouslySetInnerHTML={{__html:this.props.newtext[index].text}}></p>
                                 </div>
                                 <div class="bottomdiv">
                                     <div class="time">{this.props.content[index].ctime.substring(0,10)+" "+this.props.content[index].ctime.substring(11,16)}</div>
@@ -238,7 +238,7 @@ class Detail extends Component{
                                     <button class="attention" onClick={this.gzhandleClick}>{this.state.gz}</button>
                                 </div>
                                 <div class="article">
-                                    <p class="wz">{this.props.shoucang[index].text}</p>
+                                    <p class="wz" dangerouslySetInnerHTML={{__html:this.props.newtext[index].text}}></p>
                                 </div>
                                 <div class="bottomdiv">
                                     <div class="time">{this.props.shoucang[index].ctime.substring(0,10)+" "+this.props.shoucang[index].ctime.substring(11,16)}</div>
@@ -268,7 +268,7 @@ class Detail extends Component{
                                     <button class="attention" onClick={()=>alert('不能对自己进行此项操作')}>关注</button>
                                 </div>
                                 <div class="article">
-                                    <p class="wz">{this.props.getmytext[index].text}</p>
+                                    <p class="wz" dangerouslySetInnerHTML={{__html:this.props.newtext[index].text}}></p>
                                 </div>
                                 <div class="bottomdiv">
                                     <div class="time">{this.props.getmytext[index].ctime.substring(0,10)+" "+this.props.getmytext[index].ctime.substring(11,16)}</div>
@@ -330,7 +330,7 @@ class Detail extends Component{
                                                 <button class="attention" onClick={this.gzhandleClick}>{this.state.gz}</button>
                                             </div>
                                             <div class="article">
-                                                <p class="wz">{this.props.react[index].text}</p>
+                                                <p class="wz" dangerouslySetInnerHTML={{__html:this.props.newtext[index].text}}></p>
                                             </div>
                                             <div class="bottomdiv">
                                                 <div class="time">{this.props.react[index].ctime.substring(0,10)+" "+this.props.react[index].ctime.substring(11,16)}</div>
@@ -390,7 +390,7 @@ class Detail extends Component{
                                                 <button class="attention" onClick={this.gzhandleClick}>{this.state.gz}</button>
                                             </div>
                                             <div class="article">
-                                                <p class="wz">{this.props.css[index].text}</p>
+                                                <p class="wz" dangerouslySetInnerHTML={{__html:this.props.newtext[index].text}}></p>
                                             </div>
                                             <div class="bottomdiv">
                                                 <div class="time">{this.props.css[index].ctime.substring(0,10)+" "+this.props.css[index].ctime.substring(11,16)}</div>
@@ -421,7 +421,7 @@ class Detail extends Component{
                                     <button class="attention" onClick={this.gzhandleClick}>{this.state.gz}</button>
                                 </div>
                                 <div class="article">
-                                    <p class="wz">{this.props.commend[index].text}</p>
+                                    <p class="wz" dangerouslySetInnerHTML={{__html:this.props.commend[index].text}}></p>
                                 </div>
                                 <div class="bottomdiv">
                                     <div class="time">{this.props.commend[index].ctime.substring(0,10)+" "+this.props.commend[index].ctime.substring(11,16)}</div>
@@ -451,7 +451,7 @@ class Detail extends Component{
                                     <button class="attention" onClick={this.gzhandleClick} >{this.state.gz}</button>
                                 </div>
                                 <div class="article">
-                                    <p class="wz">{this.props.goodthingsrecommend[index].text}</p>
+                                    <p class="wz"  dangerouslySetInnerHTML={{__html:this.props.goodthingsrecommend[index].text}}></p>
                                 </div>
                                 <div class="bottomdiv">
                                     <div class="time">{this.props.goodthingsrecommend[index].ctime.substring(0,10)+" "+this.props.goodthingsrecommend[index].ctime.substring(11,16)}</div>
