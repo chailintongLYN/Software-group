@@ -169,4 +169,7 @@
     float: right;
 
 }
+.mp_list_delete{
+    z-index: 100;
+}
 

@@ -936,7 +936,9 @@ app.post('/deleteuserdata',async c=>{
 
 app.post('/deletetextdata',async c=>{
 
-    let{textid} = JSON.parse(c.body);
+    let textid = JSON.parse(c.body);
+    console.log('textid:',textid);
+    
 
     var result = await  new Promise((resolve) => {
         //delete from save where username=? and textid=?

@@ -15,12 +15,51 @@ import {myself} from '../action/myselfaction'
 class MySelf extends Component{
     constructor(props){
         super(props);
+        this.delete=this.delete.bind(this);
         this.props.dispatch(myself());
         console.log(this.props.fansandfllow);
         console.log(this.props.getmytext);
+        this.state={
+            textid:''
+        }
     }
-    
+    // function name(params) {
+        
+    // }
+ delete(textid){
+        console.log('textid:',textid);
+        fetch('http://localhost:1234/deletetextdata',{
+                method:'POST',
+                headers:{
+                    'content-type' : 'application/json'
+                },
+                body:JSON.stringify(textid)
+            }).then(res=>res.json())
+            .then(res=>{
+                console.log('删除:',res);
+                this.setState({
+                    textid:textid
+                })
+                console.log(res);
+            })
+            window.location.href=window.location.href;
+    }
     render(){
+        // function deletetext(textid) {
+        //     console.log('textid:',textid);
+        // fetch('http://localhost:1234/deletetextdata',{
+        //         method:'POST',
+        //         headers:{
+        //             'content-type' : 'application/json'
+        //         },
+        //         body:JSON.stringify(textid)
+        //     }).then(res=>res.json())
+        //     .then(res=>{
+        //         console.log('删除:',res);
+                
+        //         console.log(res);
+        //     })
+        // }
         console.log(this.props.fansandfllow);
         console.log(this.props.getmytext);
         return (
@@ -59,7 +98,7 @@ class MySelf extends Component{
                     <div className="myse_project_content">
                         {this.props.getmytext.map((item,index)=>{
                             return(
-                                <div class="mp-list" onClick={()=>this.props.history.push('/detail',{from:'myself',id:this.props.getmytext[index].textid})}>
+                                <div class="mp-list" onClick={(e)=>{e.stopPropagation();this.props.history.push('/detail',{from:'myself',id:this.props.getmytext[index].textid})}}>
                                     <img src={this.props.getmytext[index].titleimg} className='mp_list_img'/>
                                         <div className="mp-list-text">
                                             <div className="mp_list_title">{this.props.getmytext[index].title}</div>
@@ -67,6 +106,9 @@ class MySelf extends Component{
                                                 <div className="mp_list_type">{this.props.getmytext[index].type}</div>
                                                 <div className="mp_list_time">{this.props.getmytext[index].ctime.substring(0,10)+""+this.props.getmytext[index].ctime.substring(11,16)}</div>
                                                 <div className="mp_list_shoucang">收藏 <span>{this.props.getmytext[index].savenumber}</span></div>
+                                                
+                                                <input type='reset' className='mp_list_delete' onClick={(e)=>{e.stopPropagation(); this.delete(this.props.getmytext[index].textid)}} value='删除'/>
+                                                
                                             </div>
                                         </div>         
                                 </div>
