@@ -6,7 +6,7 @@ import img from './Img/img.png'
 import search from './Img/md-search.svg'
 
 
-const Set=()=>{  
+const Set=(props)=>{  
     return(
         <div className="set">
                <div className="set_header">
@@ -19,8 +19,8 @@ const Set=()=>{
                     <img src={rightArrow}></img>
                   </div>
                </div>
-               <div className="set_content"  onClick={()=>alert("xx")}>
-                  <div className="set_list ">
+               <div className="set_content"  onClick={()=>props.history.push('/avatarchange')}>
+                  <div className="set_list " >
                       <div className="set_list_text">修改头像</div>
                     <img src={rightArrow}></img>
                   </div>

@@ -71,7 +71,7 @@ class Home extends Component{
                             return(
                                 <div className="home_remen_container_div" onClick={()=>this.props.history.push('/detail',{from:'home',id:this.props.newtext[index].textid,type:'newtext',scnumber:this.props.newtext[index].savenumber,textusername:this.props.newtext[index].username},sessionStorage.setItem('textid:',this.props.newtext[index].textid))}>
                                     <div className="home_remen_container_div_img">
-                                        <img src={this.props.newtext[index].titleimg} />
+                                        <img src={this.props.newtext[index].titleimg} className='biao_img'/>
                                     </div>
                                     <div className="home_remen_container_div_text">
                                     {this.props.newtext[index].title}
@@ -90,7 +90,7 @@ class Home extends Component{
                             return(
                                 <div className="home_dashen_container_div"  onClick={()=>this.props.history.push('/detail',{from:'home',id:this.props.react[index].textid,type:'react',textusername:this.props.react[index].username,scnumber:this.props.react[index].savenumber},sessionStorage.setItem('textid:',this.props.react[index].textid))}>
                                     <div className="home_dashen_container_div_img">
-                                        <img src={this.props.react[index].titleimg} />
+                                        <img src={this.props.react[index].titleimg} className='biao_img'/>
                                     </div>
                                     <div className="home_dashen_container_div_text">
                                     {this.props.react[index].title}
@@ -110,7 +110,7 @@ class Home extends Component{
                             return(
                                 <div className="home_remen_container_div" onClick={()=>this.props.history.push('/detail',{from:'home',id:this.props.js[index].textid,type:'js',textusername:this.props.js[index].username,scnumber:this.props.js[index].savenumber},sessionStorage.setItem('textid:',this.props.js[index].textid))}>
                                 <div className="home_remen_container_div_img">
-                                    <img src={this.props.js[index].titleimg} />
+                                    <img src={this.props.js[index].titleimg} className='biao_img'/>
                                 </div>
                                 <div className="home_remen_container_div_text">
                                 {this.props.js[index].title}
@@ -131,7 +131,7 @@ class Home extends Component{
                            return(
                             <div className="home_remen_container_div" onClick={()=>this.props.history.push('/detail',{from:'home',id:this.props.css[index].textid,type:'css',textusername:this.props.css[index].username,scnumber:this.props.js[index].savenumber},sessionStorage.setItem('textid:',this.props.css[index].textid))}>
                                 <div className="home_remen_container_div_img">
-                                    <img src={this.props.css[index].titleimg} />
+                                    <img src={this.props.css[index].titleimg} className='biao_img'/>
                                 </div>
                                 <div className="home_remen_container_div_text">
                                 {this.props.css[index].title}

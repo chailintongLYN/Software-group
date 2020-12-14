@@ -4,6 +4,12 @@
     display: flex;
     align-items: center;
     justify-items: center;
+    text-align: center;
+}
+.wd_header_text{
+    position: absolute;
+    left: 38%;
+    font-size: 20px;
 }
 .wd_header>img{
     margin-left: 20px;
@@ -67,11 +73,17 @@ margin-left: 39px;
 }
 .wd_list_2{
     margin-right: 10px;
+    width: 75px;
+    height: 69px;
+}
+.wd_list_2 img{
+    width: 100%;
 }
 .wd_list_3{
     height: 69px;
     text-align: left;
     margin-left: 5px;
+    font-size: 16px;
 }
 .wd_list_3_0{
     color: rgba(96, 98, 102, 100);
@@ -79,7 +91,7 @@ margin-left: 39px;
     text-align: left;
     font-family: Helvetica-regular;
     width: 209px;
-    height: 16px;
+    height: 18px;
     overflow: hidden;
 }
 .wd_list_3_1{
