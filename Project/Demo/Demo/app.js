@@ -368,18 +368,18 @@ app.post('/deletemyfansorfollows',async c=>{
                 resolve({'status': 'failed','code':'400'})
             }
             else{
-
-                connection.query('UPDATE login SET fansnumber = fansnumber - 1 where username = ?',username,function(error,results){
+                let fans
+                connection.query('UPDATE login SET fansnumber = fansnumber-1 where username = ?',[username],function(error,results){
                     if(error) throw error;
                     console.log('删除我的粉丝成功，',username,'的粉丝数量减1');
                 })
 
-                connection.query('UPDATE login SET followusernumber = followusernumber - 1 where username = ? ',followuser,function(error,results){
+                connection.query('UPDATE login SET followusernumber = followusernumber-1 where username = ? ',[followuser],function(error,results){
                     if(error) throw error;
                     console.log('取消关注或被删除粉丝成功',followuser,'的关注数量减一');
                 })
 
-                resolve({'status':'success'})   
+                resolve({'status':'success','results':'取消关注成功或删除粉丝成功'})   
             }
         })
     }) 
@@ -395,6 +395,8 @@ app.post('/deletemyfansorfollows',async c=>{
 
 app.post('/addmyfollows',async c=>{
     let {username,followuser} = JSON.parse(c.body)
+    console.log('follows:123123:',followuser);
+    
 
     var result = await  new Promise((resolve) => {
         connection.query('SELECT * FROM fans where username=? and followuser=? ',[username,followuser],function(error,results,fields){
@@ -404,16 +406,17 @@ app.post('/addmyfollows',async c=>{
             }
             else{
 
-                connection.query('UPDATE login SET followusernumber = followusernumber + 1 where username = ? ',followuser,function(error,results){
+                connection.query('UPDATE login SET followusernumber = followusernumber+1 where username = ? ',[followuser],function(error,results){
                     if(error) throw error;
                     console.log('关注成功，',followuser,'的关注数量加1');
                 })
 
-                connection.query('UPDATE login SET fansnumber = fansnumber + 1 where username = ? ',username,function(error,results){
+                connection.query('UPDATE login SET fansnumber = fansnumber+1 where username = ? ',[username],function(error,results){
                     if(error) throw error;
                     console.log('关注成功，',username,'的粉丝数量加1');
                 })
 
+                //(username,followuser) value(?,?)
                 connection.query('INSERT INTO fans SET ?',{username,followuser},function(error,results,fields){
                     console.log(results);
 
@@ -421,7 +424,7 @@ app.post('/addmyfollows',async c=>{
                         resolve({'status': 'failed','code':'400'})
                     }
                     else{
-                        resolve({'status':'success'})   
+                        resolve({'status':'success','results':'关注成功'})   
                     }
                 })
             }
@@ -540,7 +543,7 @@ app.post('/addmysave', async c => {
                                 console.log('收藏+1');
                             })
                             
-                            resolve({'status':'success','results':results})
+                            resolve({'status':'success','results':'收藏成功'})
                             console.log('插入成功');
                         }
                     })
@@ -576,7 +579,7 @@ app.post('/deletemysave', async c => {
                         console.log('收藏-1');
                 })
                 
-                resolve({'status':'success','results':results})
+                resolve({'status':'success','results':'取消收藏成功'})
                 console.log('删除成功');
             }
         })
@@ -933,7 +936,9 @@ app.post('/deleteuserdata',async c=>{
 
 app.post('/deletetextdata',async c=>{
 
-    let{textid} = JSON.parse(c.body);
+    let textid = JSON.parse(c.body);
+    console.log('textid:',textid);
+    
 
     var result = await  new Promise((resolve) => {
         //delete from save where username=? and textid=?
