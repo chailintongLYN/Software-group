@@ -24,7 +24,7 @@ class GoodThingsRecommend extends Component{
             {this.props.goodthingsrecommend.map((item,index)=>{
                 return(
                     <div className="sc_container">
-                    <div className="sc_list" onClick={()=>this.props.history.push('/detail',{from:'goodthingsrecommend',id:this.props.goodthingsrecommend[index].textid})}>
+                    <div className="sc_list" onClick={()=>this.props.history.push('/detail',{from:'goodthingsrecommend',id:this.props.goodthingsrecommend[index].textid,textusername:this.props.goodthingsrecommend[index].username,scnumber:this.props.goodthingsrecommend[index].savenumber})}>
                         <img src={img} />
                         <div className="sc_list_text" >
                             <div className="sc_list_head">{this.props.goodthingsrecommend[index].title}</div>

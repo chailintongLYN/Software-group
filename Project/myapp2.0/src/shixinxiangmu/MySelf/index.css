@@ -6,6 +6,9 @@
     border: 1px solid white;
     margin: 0px auto;
 }
+.myse_avatr>img{
+    height: 100%;
+}
 .myse_kongbai{
     height: 40px;
 }
@@ -170,6 +173,9 @@
 
 }
 .mp_list_delete{
-    z-index: 100;
+    float: right;
+    background-color: rgb(244, 244, 247);
+    border: 1px;
+    border-radius: 2px;
 }
 

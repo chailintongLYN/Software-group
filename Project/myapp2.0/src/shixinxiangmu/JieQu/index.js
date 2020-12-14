@@ -40,7 +40,7 @@ render(props){
             <div className="jq_center">
                 {this.props.content.map((item,index)=>{
                     return(
-                        <div className="jq_content" onClick={()=>this.props.history.push('/detail',{from:'guanzhu',id:this.props.content[index].textid,scnumber:this.props.content[index].savenumber})}>
+                        <div className="jq_content" onClick={()=>this.props.history.push('/detail',{from:'guanzhu',id:this.props.content[index].textid,scnumber:this.props.content[index].savenumber,textusername:this.props.content[index].username})}>
                             <div className="jq_content_header">
                                 <img src={avatr}  className="jq_content_header_img"></img>
                                 <div className="jq_content_header_text">

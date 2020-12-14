@@ -11,6 +11,9 @@ import avatr_img from  "../MySelfImg/avatr.png"
 import img from '../ShoouChangImg/img.png'
 import { connect } from 'react-redux'
 import {myself} from '../action/myselfaction'
+import { Modal, Button, WhiteSpace, WingBlank, Toast } from 'antd-mobile';
+
+const alert = Modal.alert;
 
 class MySelf extends Component{
     constructor(props){
@@ -45,21 +48,6 @@ class MySelf extends Component{
             window.location.href=window.location.href;
     }
     render(){
-        // function deletetext(textid) {
-        //     console.log('textid:',textid);
-        // fetch('http://localhost:1234/deletetextdata',{
-        //         method:'POST',
-        //         headers:{
-        //             'content-type' : 'application/json'
-        //         },
-        //         body:JSON.stringify(textid)
-        //     }).then(res=>res.json())
-        //     .then(res=>{
-        //         console.log('删除:',res);
-                
-        //         console.log(res);
-        //     })
-        // }
         console.log(this.props.fansandfllow);
         console.log(this.props.getmytext);
         return (
@@ -67,7 +55,7 @@ class MySelf extends Component{
                 <div className="myse_bg" id="myse_bg"></div>
                 <div className="myse_kongbai">
                     <div className="myse_shezhi">
-                            <img src={shezhi} onClick={()=>alert("进入设置页面")}/>
+                            <img src={shezhi} onClick={()=>this.props.history.push('/set')}/>
                     </div>
                 </div>
                 {this.props.fansandfllow.map((item,index)=>{
@@ -79,7 +67,6 @@ class MySelf extends Component{
                 })}
                 <div className="myse_name">
                 {sessionStorage.getItem('username')}  
-                {/* <img src={edit} onClick={()=>alert("进入编辑页面")} /> */}
                 </div>
                 <div className="myse_gz_fs">
                     {this.props.fansandfllow.map((item,index)=>{
@@ -98,16 +85,18 @@ class MySelf extends Component{
                     <div className="myse_project_content">
                         {this.props.getmytext.map((item,index)=>{
                             return(
-                                <div class="mp-list" onClick={(e)=>{e.stopPropagation();this.props.history.push('/detail',{from:'myself',id:this.props.getmytext[index].textid})}}>
+                                <div class="mp-list" onClick={(e)=>{e.stopPropagation();this.props.history.push('/detail',{from:'myself',id:this.props.getmytext[index].textid,scnumber:this.props.getmytext[index].savenumber})}}>
                                     <img src={this.props.getmytext[index].titleimg} className='mp_list_img'/>
                                         <div className="mp-list-text">
                                             <div className="mp_list_title">{this.props.getmytext[index].title}</div>
                                             <div className="mp_list_foot">
                                                 <div className="mp_list_type">{this.props.getmytext[index].type}</div>
-                                                <div className="mp_list_time">{this.props.getmytext[index].ctime.substring(0,10)+""+this.props.getmytext[index].ctime.substring(11,16)}</div>
+                                                <div className="mp_list_time">{this.props.getmytext[index].ctime.substring(0,10)}</div>
                                                 <div className="mp_list_shoucang">收藏 <span>{this.props.getmytext[index].savenumber}</span></div>
                                                 
-                                                <input type='reset' className='mp_list_delete' onClick={(e)=>{e.stopPropagation(); this.delete(this.props.getmytext[index].textid)}} value='删除'/>
+                                                <button className='mp_list_delete' 
+                                                onClick={(e)=>{e.stopPropagation();alert('删除','是否确认删除？',[{text:'取消',onPress:()=>console.log('cancel')},{text:'确定',onPress:()=>this.delete(this.props.getmytext[index].textid)}]) }} >
+                                                    删除</button>
                                                 
                                             </div>
                                         </div>         
