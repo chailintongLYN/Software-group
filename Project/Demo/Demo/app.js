@@ -722,7 +722,7 @@ app.post('/uploadtextimg',async c=>{
         c.res.body = err.message
     }
 
-    connection.query('UPDATE text SET titleimg = ? WHERE userame = ?',['http://localhost:1234/static'+c.path+'/'+fname,textid],function(error,results,fields){
+    connection.query('UPDATE text SET titleimg = ? WHERE username = ?',['http://localhost:1234/static'+c.path+'/'+fname,textid],function(error,results,fields){
         if(error) throw error;
     })
 
@@ -737,6 +737,8 @@ app.get('/static/uploadtextimg/*',async c=>{
 //13.上传用户头像
 
 app.use(async (c,next)=>{
+    console.log('这里是app.use');
+    
     let upf = c.getFile('image')
     if(!upf){
         c.res.body = 'file not found'
@@ -759,6 +761,7 @@ app.use(async (c,next)=>{
 
 
 app.post('/uploaduserimg',async c=>{
+    console.log('这里是app.post');
 
     // console.log(c.body.textid);
     let f = c.getFile('image')
@@ -772,7 +775,7 @@ app.post('/uploaduserimg',async c=>{
     
     try{
         await c.moveFile(f,'./uploaduserimg/'+fname)
-        c.res.body =  JSON.stringify('../uploaduserimg/'+fname)
+        c.res.body =  JSON.stringify('http://localhost:1234/static/uploaduserimg/'+fname)
     }catch(err){
         c.res.body = err.message
     }
@@ -784,6 +787,7 @@ app.post('/uploaduserimg',async c=>{
 },'uploaduserimg-image')
 
 app.get('/uploaduserimg/*',async c=>{
+    console.log('这里是app.get');
     console.log(c.path);
     c.res.body = fs.readFileSync('.'+c.path)
 })

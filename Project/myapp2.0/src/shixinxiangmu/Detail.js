@@ -268,7 +268,7 @@ class Detail extends Component{
                                     <button class="attention" onClick={()=>alert('不能对自己进行此项操作')}>关注</button>
                                 </div>
                                 <div class="article">
-                                    <p class="wz" dangerouslySetInnerHTML={{__html:this.props.newtext[index].text}}></p>
+                                    <p class="wz" dangerouslySetInnerHTML={{__html:this.props.getmytext[index].text}}></p>
                                 </div>
                                 <div class="bottomdiv">
                                     <div class="time">{this.props.getmytext[index].ctime.substring(0,10)+" "+this.props.getmytext[index].ctime.substring(11,16)}</div>
@@ -330,7 +330,7 @@ class Detail extends Component{
                                                 <button class="attention" onClick={this.gzhandleClick}>{this.state.gz}</button>
                                             </div>
                                             <div class="article">
-                                                <p class="wz" dangerouslySetInnerHTML={{__html:this.props.newtext[index].text}}></p>
+                                                <p class="wz" dangerouslySetInnerHTML={{__html:this.props.react[index].text}}></p>
                                             </div>
                                             <div class="bottomdiv">
                                                 <div class="time">{this.props.react[index].ctime.substring(0,10)+" "+this.props.react[index].ctime.substring(11,16)}</div>
@@ -390,7 +390,7 @@ class Detail extends Component{
                                                 <button class="attention" onClick={this.gzhandleClick}>{this.state.gz}</button>
                                             </div>
                                             <div class="article">
-                                                <p class="wz" dangerouslySetInnerHTML={{__html:this.props.newtext[index].text}}></p>
+                                                <p class="wz" dangerouslySetInnerHTML={{__html:this.props.css[index].text}}></p>
                                             </div>
                                             <div class="bottomdiv">
                                                 <div class="time">{this.props.css[index].ctime.substring(0,10)+" "+this.props.css[index].ctime.substring(11,16)}</div>
