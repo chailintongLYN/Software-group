@@ -239,7 +239,20 @@ app.post('/gettexts',async c=>{
             str = 'SELECT * FROM text where ' + searchtype + '=? '
     
         }else{
-            str = "SELECT * FROM text where title like '%"+ sevalue +"%'"
+            console.log(sevalue.substring(0,8));
+            if (sevalue.substring(0,6) == '仅搜索标题：') {
+                let newsevalue = sevalue.Remove(0,6)
+                console.log('仅搜索标题');
+                str = "SELECT * FROM text where title like '%"+ newsevalue +"%'"
+            }
+            else if (sevalue.substring(0,8) == '仅搜索文本内容：') {
+                let newsevalue = sevalue.Remove(0,8)
+                console.log('仅搜索文本内容');
+                str = "SELECT * FROM text where text like '%"+ newsevalue +"%'"
+            }else{
+                console.log('搜索全部内容');
+                str = "SELECT * FROM text where text or title like '%"+ sevalue +"%'"
+            }
         }
 
         connection.query(str,[sevalue],function(error,results,fields){
