@@ -40,6 +40,9 @@ margin-left: 39px;
     display: flex;
     flex-wrap: wrap;
 }
+.wd_a{
+    width: 99.8%;
+}
 .wd_list{
     height: 99px;
     width: 99.8%;
