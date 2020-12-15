@@ -72,15 +72,28 @@ app.use(async (c,next)=>{
     console.log('image:',c.getFile('image'));
     console.log('这里是app.use');
     if(!upf){
-        c.res.body = 'file not found'
+        console.log('file not found:',c.body);
+        let{title,text,username,type} = c.body
+        var results = await  new Promise((resolve) => {
+            connection.query('INSERT INTO text (username,type,title,text) VALUES (?,?,?,?)',[username,type,title,text],function (error, results, fields){
+                if(error){
+                    resolve({'status': 'faild'}) 
+                    throw error;
+                }else{
+                    console.log("ok")
+                    resolve({'status':'success'}) 
+                }
+            }) 
+        });
+        c.res.body = results
         return
     }
-
     //100k
     else if(upf.length > 100000){
         c.res.body = 'max file size : 100k'
         return
     }
+    console.log('123');
     await next()
 },{method : 'POST',name : 'uploadtextimg-image'});
 
@@ -129,7 +142,7 @@ app.post('/uploadtextimg',async c=>{
 
     let textid = results[0].textid
 
-    connection.query('UPDATE text SET titleimg = ? WHERE textid = ?',['http://localhost:1234/static'+c.path+'/'+fname,textid],function(error,results,fields){
+    connection.query('UPDATE text SET titleimg = ? WHERE textid = ?',['http://localhost:12345/static'+c.path+'/'+fname,textid],function(error,results,fields){
         if(error) throw error;
     })
 

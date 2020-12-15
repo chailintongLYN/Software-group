@@ -139,7 +139,7 @@
         <div>
         <input class="sub" type="submit" value="发布"/>
         <input type="file" value="上传文章图片" accept="image/*" id="fileUpload"/>
-        <img src=""/>
+        <img src="http://localhost:12345/static/uploadtextimg/timg.jpg"/>
         
         </div>
     </form>
@@ -150,7 +150,7 @@
     
     
     
-    
+    <script src= "https://cdn.staticfile.org/jquery/3.1.1/jquery.min.js"></script>
     <script>
         //数据存储
         let formData = new FormData()
@@ -162,6 +162,20 @@
         const handleImageUpload = event => {
             const files = event.target.files
             formData.append('image', files[0])
+            console.log(files[0]);
+            //添加图片路径到img src中进行预览
+            jQuery('img').attr('src',getObjectURL(files[0]));
+            function getObjectURL(file) {
+                var url = null;
+                if (window.createObjectURL != undefined) { // basic
+                    url = window.createObjectURL(file);
+                } else if (window.URL != undefined) { // mozilla(firefox)
+                    url = window.URL.createObjectURL(file);
+                } else if (window.webkitURL != undefined) { // webkit or chrome
+                    url = window.webkitURL.createObjectURL(file);
+                }
+                return url;
+            }
 
             console.log(formData.get('image'));
         }
@@ -214,9 +228,7 @@
             alert(err.message)
           }).then(res=>{
             console.log(res);
-            document.getElementsByTagName('img')[0].src=res.imagepath
                 alert('发布成功')
-            //   location.href = '/editor'
           })
         }
     </script>
