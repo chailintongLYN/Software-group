@@ -42,7 +42,7 @@ render(props){
                     return(
                         <div className="jq_content" onClick={()=>this.props.history.push('/detail',{from:'guanzhu',id:this.props.content[index].textid,scnumber:this.props.content[index].savenumber,textusername:this.props.content[index].username})}>
                             <div className="jq_content_header">
-                                <img src={avatr}  className="jq_content_header_img"></img>
+                                <img src={this.props.content[index].userimg}  className="jq_content_header_img"></img>
                                 <div className="jq_content_header_text">
                                         <div className="jq_content_header_text_name">
                                             {this.props.content[index].username}
@@ -57,9 +57,9 @@ render(props){
                                     {this.props.content[index].title}
                                 </div> 
                                 <div className="jq_content_center_img">
-                                    <img src={pinglun}></img>
-                                    <img src={pinglun}></img>
-                                    <img src={pinglun}></img>
+                                    <img src={this.props.content[index].titleimg}></img>
+                                    {/* <img src={pinglun}></img>
+                                    <img src={pinglun}></img> */}
                                 </div> 
                             </div> 
                             <div className="jq_content_foot">

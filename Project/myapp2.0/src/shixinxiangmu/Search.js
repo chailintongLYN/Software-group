@@ -8,90 +8,37 @@ import img from './ShoouChangImg/img.png'
 class Search extends Component{
   constructor(props){
     super(props);
-    // this.loacl_search=this.loacl_search.bind(this);
     this.state={
       zhuangtai:''
     }
-  }
-//  invalue=sessionStorage.getItem('value');
- 
-//  loacl_search(invalue){
-//   if(invalue!==null){
-//     console.log(invalue);
-//     // console.log('存储检索内容');
-//     // {this.props.search.map((item,index)=>{
-//     //   sessionStorage.setItem('title',this.props.search[index].title);
-//     //   sessionStorage.setItem('titleimg',this.props.search[index].titleimg);
-//     //   sessionStorage.setItem('type',this.props.search[index].type);
-//     //   sessionStorage.setItem('ctime',this.props.search[index].ctime.substring(0,10)+" "+this.props.search[index].ctime.substring(11,16));
-//     //   sessionStorage.setItem('savenumber',this.props.search[index].savenumber);
-//     // })}
-//     // // sessionStorage.setItem('search',this.props.search);
-//     // console.log(this.props.search);
-//     let data ={
-//       searchtype:'title',
-//       sevalue:invalue
-//     }
-//     fetch('http://localhost:1234/gettexts',{
-//         method:'POST',
-//         headers:{
-//             'content-type' : 'application/json'
-//         },
-//         body:JSON.stringify(data)
-//     }).then(res => res.json())
-//     .then(res=>{
-//         this.state.zhuangtai = res.status
-//         console.log(this, res.status)
-//         this.props.dispatch({
-//             type:'SEARCH',
-//             search:res.results
-            
-//         })
-        
-//     })
-//   }
-//   }
-  render(){
-    // console.log(sessionStorage.getItem('search'));
-    var invalue=sessionStorage.getItem('value');
-    console.log(sessionStorage.getItem('value'));
- 
-function loacl_search(invalue){
-  if(invalue!==null){
-    console.log(invalue);
-    // console.log('存储检索内容');
-    // {this.props.search.map((item,index)=>{
-    //   sessionStorage.setItem('title',this.props.search[index].title);
-    //   sessionStorage.setItem('titleimg',this.props.search[index].titleimg);
-    //   sessionStorage.setItem('type',this.props.search[index].type);
-    //   sessionStorage.setItem('ctime',this.props.search[index].ctime.substring(0,10)+" "+this.props.search[index].ctime.substring(11,16));
-    //   sessionStorage.setItem('savenumber',this.props.search[index].savenumber);
-    // })}
-    // // sessionStorage.setItem('search',this.props.search);
-    // console.log(this.props.search);
-    let data ={
-      searchtype:'title',
-      sevalue:invalue
+    if(sessionStorage.getItem('value')!==null){
+      let data ={
+        searchtype:'title',
+        sevalue:sessionStorage.getItem('value')
+      }
+      fetch('http://localhost:1234/gettexts',{
+          method:'POST',
+          headers:{
+              'content-type' : 'application/json'
+          },
+          body:JSON.stringify(data)
+      }).then(res => res.json())
+      .then(res=>{
+          this.state.zhuangtai = res.status
+          console.log(this, res.status)
+          this.props.dispatch({
+              type:'SEARCH',
+              search:res.results
+              
+          })
+          
+      })
     }
-    fetch('http://localhost:1234/gettexts',{
-        method:'POST',
-        headers:{
-            'content-type' : 'application/json'
-        },
-        body:JSON.stringify(data)
-    }).then(res => res.json())
-    .then(res=>{
-        this.state.zhuangtai = res.status
-        console.log(this, res.status)
-        this.props.dispatch({
-            type:'SEARCH',
-            search:res.results
-            
-        })
-        
-    })
+
   }
-  }
+ 
+ 
+  render(){
     return (
       <div>
         <SearchBar  
@@ -99,9 +46,11 @@ function loacl_search(invalue){
           onSubmit={ (value) => {
             console.log(value)
             sessionStorage.setItem('value',value);
+            var invalue=sessionStorage.getItem('value');
+            console.log(invalue);
             let data ={
               searchtype:'title',
-              sevalue:value
+              sevalue:invalue
             }
             fetch('http://localhost:1234/gettexts',{
                 method:'POST',
@@ -127,7 +76,12 @@ function loacl_search(invalue){
           onClear={value => console.log(value, 'onClear')}
           onFocus={() => console.log('onFocus')}
           onBlur={() => console.log('onBlur')}
-          onCancel={() =>this.props.history.goBack()}
+          onCancel={() =>{
+            this.props.history.goBack()
+            sessionStorage.removeItem('value')
+
+          }
+          }
           showCancelButton
         />
         {this.renderninfo()}
@@ -146,13 +100,13 @@ function loacl_search(invalue){
         </div>
       )
     }else if(this.state.zhuangtai=='success'){
-      loacl_search(invalue);
+      // loacl_search(invalue);
       return(
         <div className='sc'>
           {this.props.search.map((item,index)=>{
               return(
                   <div className="sc_container">
-                    <div className="sc_list" onClick={()=>this.props.history.push('/detail',{from:'search',search:this.props.search[index],scnumber:this.props.search[index].savenumber})}>
+                    <div className="sc_list" onClick={()=>this.props.history.push('/detail',{from:'search',id:this.props.search[index].textid,search:this.props.search[index],scnumber:this.props.search[index].savenumber})}>
                         <img src={this.props.search[index].titleimg} id='titleimg'/>
                         <div className="sc_list_text" >
                             <div className="sc_list_head" id='title'>{this.props.search[index].title}</div>
@@ -194,4 +148,4 @@ const mapStateToProps = (state)=>{
   }
 }
 
-export default connect(mapStateToProps)(Search);
+export default connect(mapStateToProps)(Search)
