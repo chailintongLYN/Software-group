@@ -483,6 +483,8 @@ app.get('/getfollowstext', async c=>{
 app.post('/getmyfollowstext', async c=>{
 
     let username1 = JSON.parse(c.body)
+    console.log(c.body);
+    
     var result1 = await new Promise((resolve) => {
         connection.query('SELECT * FROM fans where followuser = ? ',username1,function(error,results,fields){
             
@@ -537,6 +539,8 @@ app.post('/getmyfollowstext', async c=>{
 
 app.post('/addmysave', async c => {
     let {username, textid} = JSON.parse(c.body)
+    console.log(username,textid);
+    
     var result = await new Promise((resolve) => {
 
         connection.query('SELECT * FROM save where username =? and textid =? ',[username,textid],function(error,results,fields){
