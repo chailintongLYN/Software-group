@@ -20,7 +20,7 @@ class Lunbotu extends Component{
     componentDidUpdate(){
       setTimeout(() => {
         this.setState({
-          data:['http://localhost:1234/static/turningimg/lunbo.jpg','http://localhost:1234/static/turningimg/jQuery.jpg', 'http://localhost:1234/static/turningimg/react.png', 'http://localhost:1234/static/turningimg/webqianduankaifajichuzhishi.jpg'],
+          data:['http://localhost:1234/static/turningimg/lunbo.jpg','http://localhost:1234/static/turningimg/jQuery.jpg', 'http://localhost:1234/static/turningimg/react.jpg', 'http://localhost:1234/static/turningimg/webqianduankaifajichuzhishi.jpg'],
         })
       }, 100);
     }
