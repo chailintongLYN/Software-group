@@ -1,21 +1,21 @@
-const follow = (username)=>{
+const lunbotu = (username)=>{
     return(dispatch)=>{
-        fetch('http://localhost:1234/getmyfollows',{
+        let textid = 117
+        fetch('http://localhost:1234/gettexts',{
                 method:'POST',
                 headers:{
                     'content-type' : 'application/json'
                 },
-                body:JSON.stringify(sessionStorage.getItem('username'))
+                body:JSON.stringify(textid)
             }).then(res => res.json())
             .then(res=>{
                 console.log(res);
                 dispatch({
-                    type:'FOLLOW',
+                    type:'LUNBOTU',
                     follow:res.results
                 })
             })
-    }
+        }
 }
 
-
-export {follow}
+export {lunbotu}

@@ -185,7 +185,17 @@ app.get('/gethomedata',async c=>{
                                     resolve({'result':homedata.css})
                             };
                     })
-            })           
+            }),
+            new Promise((resolve) => {  
+                    connection.query("SELECT * from text where textid = 117 or textid =12 or textid = 10",function (err, results){
+                            if(err){
+                                    throw err
+                            }else{
+                                    homedata.lunbotu=results;
+                                    resolve({'result':homedata.lunbotu})
+                            };
+                    })
+            })                    
     ]).then(function(result){
             return homedata;
 
