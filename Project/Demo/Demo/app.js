@@ -774,7 +774,7 @@ app.post('/uploaduserimg',async c=>{
 
     
     try{
-        await c.moveFile(f,'./uploaduserimg/'+fname)
+        await c.moveFile(f,'./public/uploaduserimg/'+fname)
         c.res.body =  JSON.stringify('http://localhost:1234/static/uploaduserimg/'+fname)
     }catch(err){
         c.res.body = err.message
