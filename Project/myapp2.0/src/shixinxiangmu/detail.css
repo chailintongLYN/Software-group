@@ -20,18 +20,27 @@
     height: 100%;
     
 }
-.tou{
+.wz-tou{
     position: relative;
     width: 100%;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
+    margin-top: 15px;
 }
 .attention{
     position: absolute;
     right: 0px;
+    width: 60px;
+    height: 30px;
+    margin-top: 2px;
+    background-color: rgb(183, 196, 223);
+    border:1px;
+    border-radius: 3px;
 }
-.username{
-    position: relative;
-    font-size: 12px;
+.wz-username{
+    position: absolute;
+    left: 15%;
+    margin-top:8px;
+    font-size: 16px;
 }
 .wx-title{
     position: relative;
@@ -50,7 +59,7 @@
     font-size: 14px;
     line-height: 2em;
 }
-.bottondiv{
+.bottomdiv{
     position: relative;
     width: 100%;
 }
@@ -58,17 +67,18 @@
   display: inline-block;
   position: absolute;
   right: 15%;
-  margin-top: 10px;
+  bottom: 0px;
   background-color: #fff;
   
 }
-.shoucang-img{
+.shoucang-img {
     width: 30px;height: 30px;
+    margin-top: 10px;
    
 }
 .shoucang-number{
     position: absolute;
-    top: 7px;
+    top: 0px;
     left: 30px;
 }
 .time{

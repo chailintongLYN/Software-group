@@ -45,5 +45,11 @@
 .delete{
     position: absolute;
     right: 0px;
+    top:30% ;
     margin-right: 15px;
+    width: 100px;
+    height: 30px;
+    background-color: rgb(192, 217, 236);
+    border: 1px;
+    border-radius: 3px;
 }

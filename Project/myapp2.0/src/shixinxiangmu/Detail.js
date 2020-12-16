@@ -17,6 +17,7 @@ class Detail extends Component{
         super(props);
         this.schandleClick=this.schandleClick.bind(this);
         this.gzhandleClick=this.gzhandleClick.bind(this);
+        this.bgcChange=this.bgcChange.bind(this);
         if(this.props.location.state.from=='guanzhu'){
             this.props.dispatch(guanzhu());
         }else if(this.props.location.state.from=='shoucang'){
@@ -86,7 +87,7 @@ class Detail extends Component{
         this.state.count=number;
         console.log(this.props.location.state);
     }
-     schandleClick(){
+     schandleClick(event){
         if(this.state.sc=='false'){
             console.log('zhixing')
             var newCount=this.state.count+1;
@@ -142,6 +143,23 @@ class Detail extends Component{
             })
         }
     }
+    bgcChange=()=>{
+        if(sessionStorage.getItem('issc')==='true'){
+            console.log('xing');
+            
+            return(
+                <i className='iconfont icon-taobao1' onClick={this.schandleClick,this.bgcChange} id='shoucang-img'></i>
+            )
+        }else{
+
+            console.log('taobao');
+            
+            return(
+                <i className='iconfont icon-shoucang2' onClick={this.schandleClick,this.bgcChange} id='shoucang-img'></i>
+            )
+        }
+    }
+    
     gzhandleClick(){
         if(this.state.gz=='关注'){
             console.log('123123123123123')
@@ -204,9 +222,9 @@ class Detail extends Component{
                             return(
                                 <div class="de-detail">
                                 <div class="wx-title">{this.props.content[index].title}</div>
-                                <div class="tou">
-                                    <img src={touxiang} class="touxiang"/>
-                                    <span class="username">{this.props.content[index].username}</span>
+                                <div class="wz-tou">
+                                    <img src={this.props.content[index].userimg} class="touxiang"/>
+                                    <span class="wz-username">{this.props.content[index].username}</span>
                                     <button class="attention" onClick={this.gzhandleClick}>{this.state.gz}</button>
                                 </div>
                                 <div class="article">
@@ -215,7 +233,9 @@ class Detail extends Component{
                                 <div class="bottomdiv">
                                     <div class="time">{this.props.content[index].ctime.substring(0,10)+" "+this.props.content[index].ctime.substring(11,16)}</div>
                                     <div class="shoucang">
-                                        <img src={xing} class="shoucang-img" onClick={this.schandleClick}/>
+                                        {/* <img src={xing} className="shoucang-img" onClick={this.schandleClick} id='shoucang-img'/> */}
+                                        {/* <i className='iconfont icon-taobaodianpu' id='shoucang-img' onClick={this.schandleClick}></i> */}
+                                        {this.bgcChange()}
                                         <div class='shoucang-number'>{this.state.count}</div>
                                     </div>
                                 </div>
@@ -234,9 +254,9 @@ class Detail extends Component{
                             return(
                                 <div class="de-detail">
                                 <div class="wx-title">{this.props.shoucang[index].title}</div>
-                                <div class="tou">
-                                    <img src={touxiang} class="touxiang"/>
-                                    <span class="username">{this.props.shoucang[index].username}</span>
+                                <div class="wz-tou">
+                                    <img src={this.props.shoucang[index].userimg} class="touxiang"/>
+                                    <span class="wz-username">{this.props.shoucang[index].username}</span>
                                     <button class="attention" onClick={this.gzhandleClick}>{this.state.gz}</button>
                                 </div>
                                 <div class="article">
@@ -264,9 +284,9 @@ class Detail extends Component{
                             return(
                                 <div class="de-detail">
                                 <div class="wx-title">{this.props.getmytext[index].title}</div>
-                                <div class="tou">
-                                    <img src={touxiang} class="touxiang"/>
-                                    <span class="username">{this.props.getmytext[index].username}</span>
+                                <div class="wz-tou">
+                                    <img src={this.props.getmytext[index].userimg} class="touxiang"/>
+                                    <span class="wz-username">{this.props.getmytext[index].username}</span>
                                     <button class="attention" onClick={()=>alert('不能对自己进行此项操作')}>关注</button>
                                 </div>
                                 <div class="article">
@@ -296,9 +316,9 @@ class Detail extends Component{
                                         return(
                                             <div class="de-detail">
                                             <div class="wx-title">{this.props.newtext[index].title}</div>
-                                            <div class="tou">
-                                                <img src={touxiang} class="touxiang"/>
-                                                <span class="username">{this.props.newtext[index].username}</span>
+                                            <div class="wz-tou">
+                                                <img src={this.props.newtext[index].userimg} class="touxiang"/>
+                                                <span class="wz-username">{this.props.newtext[index].username}</span>
                                                 <button class="attention" onClick={this.gzhandleClick}>{this.state.gz}</button>
                                             </div>
                                             <div class="article">
@@ -326,9 +346,9 @@ class Detail extends Component{
                                         return(
                                             <div class="de-detail">
                                             <div class="wx-title">{this.props.react[index].title}</div>
-                                            <div class="tou">
-                                                <img src={touxiang} class="touxiang"/>
-                                                <span class="username">{this.props.react[index].username}</span>
+                                            <div class="wz-tou">
+                                                <img src={this.props.react[index].userimg} class="touxiang"/>
+                                                <span class="wz-username">{this.props.react[index].username}</span>
                                                 <button class="attention" onClick={this.gzhandleClick}>{this.state.gz}</button>
                                             </div>
                                             <div class="article">
@@ -356,9 +376,9 @@ class Detail extends Component{
                                         return(
                                             <div class="de-detail">
                                             <div class="wx-title">{this.props.js[index].title}</div>
-                                            <div class="tou">
-                                                <img src={touxiang} class="touxiang"/>
-                                                <span class="username">{this.props.js[index].username}</span>
+                                            <div class="wz-tou">
+                                                <img src={this.props.js[index].userimg} class="touxiang"/>
+                                                <span class="wz-username">{this.props.js[index].username}</span>
                                                 <button class="attention" onClick={this.gzhandleClick}>{this.state.gz}</button>
                                             </div>
                                             <div class="article">
@@ -386,9 +406,9 @@ class Detail extends Component{
                                         return(
                                             <div class="de-detail">
                                             <div class="wx-title">{this.props.css[index].title}</div>
-                                            <div class="tou">
-                                                <img src={touxiang} class="touxiang"/>
-                                                <span class="username">{this.props.css[index].username}</span>
+                                            <div class="wz-tou">
+                                                <img src={this.props.css[index].userimg} class="touxiang"/>
+                                                <span class="wz-username">{this.props.css[index].username}</span>
                                                 <button class="attention" onClick={this.gzhandleClick}>{this.state.gz}</button>
                                             </div>
                                             <div class="article">
@@ -417,9 +437,9 @@ class Detail extends Component{
                             return(
                                 <div class="de-detail">
                                 <div class="wx-title">{this.props.commend[index].title}</div>
-                                <div class="tou">
-                                    <img src={touxiang} class="touxiang"/>
-                                    <span class="username">{this.props.commend[index].username}</span>
+                                <div class="wz-tou">
+                                    <img src={this.props.commend[index].userimg} class="touxiang"/>
+                                    <span class="wz-username">{this.props.commend[index].username}</span>
                                     <button class="attention" onClick={this.gzhandleClick}>{this.state.gz}</button>
                                 </div>
                                 <div class="article">
@@ -447,9 +467,9 @@ class Detail extends Component{
                             return(
                                 <div class="de-detail">
                                 <div class="wx-title">{this.props.goodthingsrecommend[index].title}</div>
-                                <div class="tou">
-                                    <img src={touxiang} class="touxiang"/>
-                                    <span class="username">{this.props.goodthingsrecommend[index].username}</span>
+                                <div class="wz-tou">
+                                    <img src={this.props.goodthingsrecommend[index].userimg} class="touxiang"/>
+                                    <span class="wz-username">{this.props.goodthingsrecommend[index].username}</span>
                                     <button class="attention" onClick={this.gzhandleClick} >{this.state.gz}</button>
                                 </div>
                                 <div class="article">
@@ -475,9 +495,9 @@ class Detail extends Component{
                             
                         <div class="de-detail">
                         <div class="wx-title">{this.props.location.state.search.title}</div>
-                        <div class="tou">
-                            <img src={touxiang} class="touxiang"/>
-                            <span class="username">{this.props.location.state.search.username}</span>
+                        <div class="wz-tou">
+                            <img src={this.props.location.state.search.userimg} class="touxiang"/>
+                            <span class="wz-username">{this.props.location.state.search.username}</span>
                             <button class="attention" onClick={this.gzhandleClick} >{this.state.gz}</button>
                         </div>
                         <div class="article">
