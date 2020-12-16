@@ -83,4 +83,6 @@
 
 .wz pre,.wz code{
     width: 100%;
+    white-space: pre-wrap;
+    overflow: hidden;
 }
