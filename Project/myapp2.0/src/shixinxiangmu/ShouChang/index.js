@@ -28,7 +28,7 @@ class ShouChang extends Component{
                 return(
                     <div className="sc_container">
                     <div className="sc_list" onClick={()=>this.props.history.push('/detail',{from:'shoucang',id:this.props.shoucang[index].textid,scnumber:this.props.shoucang[index].savenumber,textusername:this.props.shoucang[index].username})}>
-                        <img src={img} />
+                        <img src={this.props.shoucang[index].titleimg} />
                         <div className="sc_list_text" >
                             <div className="sc_list_head">{this.props.shoucang[index].title}</div>
                             <div className="sc_list_foot">

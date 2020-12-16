@@ -83,6 +83,7 @@ class Detail extends Component{
         var number=this.props.location.state.scnumber;
         console.log(number);
         this.state.count=number;
+        console.log(this.props.location.state);
     }
      schandleClick(){
         if(this.state.sc=='false'){
@@ -208,7 +209,7 @@ class Detail extends Component{
                                     <button class="attention" onClick={this.gzhandleClick}>{this.state.gz}</button>
                                 </div>
                                 <div class="article">
-                                    <p class="wz" dangerouslySetInnerHTML={{__html:this.props.newtext[index].text}}></p>
+                                    <p class="wz" dangerouslySetInnerHTML={{__html:this.props.content[index].text}}></p>
                                 </div>
                                 <div class="bottomdiv">
                                     <div class="time">{this.props.content[index].ctime.substring(0,10)+" "+this.props.content[index].ctime.substring(11,16)}</div>
@@ -238,7 +239,7 @@ class Detail extends Component{
                                     <button class="attention" onClick={this.gzhandleClick}>{this.state.gz}</button>
                                 </div>
                                 <div class="article">
-                                    <p class="wz" dangerouslySetInnerHTML={{__html:this.props.newtext[index].text}}></p>
+                                    <p class="wz" dangerouslySetInnerHTML={{__html:this.props.shoucang[index].text}}></p>
                                 </div>
                                 <div class="bottomdiv">
                                     <div class="time">{this.props.shoucang[index].ctime.substring(0,10)+" "+this.props.shoucang[index].ctime.substring(11,16)}</div>
@@ -464,6 +465,33 @@ class Detail extends Component{
                             )
                         }
                     })}
+                </div>
+            )
+            case'search':
+            return(
+                <div class="de-container">
+                    <span class='biao' onClick={()=>this.props.history.goBack()}>﹤</span>
+                            
+                        <div class="de-detail">
+                        <div class="wx-title">{this.props.location.state.search.title}</div>
+                        <div class="tou">
+                            <img src={touxiang} class="touxiang"/>
+                            <span class="username">{this.props.location.state.search.username}</span>
+                            <button class="attention" onClick={this.gzhandleClick} >{this.state.gz}</button>
+                        </div>
+                        <div class="article">
+                            <p class="wz"  dangerouslySetInnerHTML={{__html:this.props.location.state.search.text}}></p>
+                        </div>
+                        <div class="bottomdiv">
+                            <div class="time">{this.props.location.state.search.ctime.substring(0,10)+" "+this.props.location.state.search.ctime.substring(11,16)}</div>
+                            <div class="shoucang">
+                                <img src={xing} class="shoucang-img" onClick={this.schandleClick}/>
+                                <div class='shoucang-number'>{this.state.count}</div>
+                            </div>
+                        </div>
+                            
+                        
+                    </div>
                 </div>
             )
 
