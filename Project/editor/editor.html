@@ -109,6 +109,25 @@
             /* background-color: #1688ea; */
             border-color:#fff;
         }
+        .photo{
+            width: 80px;
+            height: 80px;
+            display: inline-block;
+        }
+        .photo>img{
+            width: 80px;
+            height: 80px;
+        }
+        .tu{
+            margin-left:170px;
+            height: 80px;
+            width: 600px;
+            display: inline-block;
+        }
+        .fileUpload>button{
+            background-color: #1688ea;
+            border-color: #1688ea;
+        }
     </style>
 </head>
 
@@ -136,14 +155,19 @@
         
         <div id="my-editor" style="width:80%;margin:auto;border:sloid #efefef 0.05rem; min-height: 22rem;"></div>
         
-        <div>
         <input class="sub" type="submit" value="发布"/>
-        <input type="file" value="上传文章图片" accept="image/*" id="fileUpload"/>
-        <img src="http://localhost:12345/static/uploadtextimg/timg.jpg"/>
         
-        </div>
+
+        
     </form>
     <button onclick="del()" class="del">重新编辑</button>
+    <div class="tu" >
+    选择封面图片：
+    <input type="file" value="上传文章图片" accept="image/*" id="fileUpload" class="fileUpload" style="display: inline-block;"/>
+    <div  style="display: inline-block;">图片效果预览：</div>
+    <div class="photo"><img src="http://localhost:12345/static/uploadtextimg/timg.jpg"/></div>
+    </div>
+        
     <div class = "bottomdiv">
         我为前端狂项目小组河北师范大学软件学院
     </div>
