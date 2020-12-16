@@ -206,7 +206,7 @@ app.get('/gethomedata',async c=>{
 
 //首页获取新锐推荐的文章 //前端代码有了可以删除
 
-app.get('/1getrecommendtext',async c=>{
+app.get('/getrecommendtext',async c=>{
     c.res.body = fs.readFileSync('./getrecommendtexts/index.html').toString('utf-8')
 })
 
