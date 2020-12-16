@@ -141,6 +141,10 @@ class Home extends Component{
                        })}
                     </div>
                 </div>
+                {/* 轮播图 */}
+                {/* {this.props.lunbotu.map((item,index)=>{
+                    
+                })} */}
                 <div className="kongbai_bottom"></div>
                 <BttomBar />
             </div>
@@ -153,7 +157,8 @@ const mapStateToProps=(state)=>({
     js:state.homereducer.js,
     react:state.homereducer.react,
     html:state.homereducer.html,
-    css:state.homereducer.css
+    css:state.homereducer.css,
+    lunbotu:state.homereducer.lunbotu
     
 })
 export default connect(mapStateToProps)(Home)

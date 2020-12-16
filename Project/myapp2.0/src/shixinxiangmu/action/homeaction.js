@@ -13,7 +13,8 @@ const home = (username)=>{
                 js:res.js,
                 react:res.react,
                 html:res.html,
-                css:res.css
+                css:res.css,
+                lunbotu:res.lunbotu
             })
         })
     }

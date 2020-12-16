@@ -2,17 +2,72 @@
 *{
     margin: 0px;
 }
-body,html{
-	margin:0px;
-	height:100%;
-}.pccontainer{
+body{
+    height: 75%;
+}
+.pccontainer{
     width: 100%;
     height: 100%;
-    position: absolute;
+    /* position: absolute; */
     top: 0px;bottom: 0px;
 }
-form{
+.pc-from{
+    position: relative;
+    width: 30%;
+    margin: 0 auto;
+    margin-top: 150px;
+}
+.biaoti{
+    position: relative;
+    width: 45%;
+    float: left;
+    height: 45px;
+    border: 2px solid rgb(126, 110, 110);
+    border-radius: 10px ;
+    text-align: center;
+    
+}
+.biaoti-text{
+   position: absolute;
+   top: 25%;
+   left: 33%;
+}
+.dl-type{
+    position: relative;
+    width: 45%;
+    float: right;
+    height: 45px;
+    border: 2px solid rgb(126, 110, 110);
+    border-radius: 10px ;
+    text-align: center;
+}
+.dl-type-text{
     position: absolute;
-    top: 100px;
-    left: 300px;
+    top: 25%;
+    left: 33%;
+}
+.pc-username{
+    position: relative;
+    width: 100%;
+    height: 50px;
+    margin-top: 30px;
+    border: 2px solid rgb(126, 110, 110);
+    border-radius: 10px ;
+}
+.pc-password{
+    position: relative;
+    width: 100%;
+    height: 50px;
+    margin-top: 30px;
+    border: 2px solid rgb(150, 133, 133);
+    border-radius: 10px ;
+}
+.pc-denglu{
+    position: relative;
+    width: 100%;
+    height: 50px;
+    margin-top: 50px;
+    border: 2px solid rgb(228, 57, 57);
+    border-radius: 10px ;
+    background-color: rgb(235, 119, 119);
 }

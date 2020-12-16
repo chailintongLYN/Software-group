@@ -71,18 +71,19 @@ async handleSumit(e) {
 }
 render(props) {
     return (
-        <body>
             <div class="pccontainer">
                 {/* <div class="ll"></div> */}
-                <form onSubmit={this.handleSumit}>
+                <form onSubmit={this.handleSumit} className='pc-from'>
                     <div>
+                    <div className='biaoti'><span className='biaoti-text'>我为前端狂</span></div>
+                    <div className='dl-type'><span className='dl-type-text'>管理员登录</span></div>
                             <input
                                 type="text"
                                 name="username"
                                 placeholder="请输入用户名"
                                 value={this.state.username}
                                 onChange={this.handleChange}
-                                class="pcusername"
+                                class="pc-username"
                             />
                     </div>
                     <div>
@@ -93,16 +94,17 @@ render(props) {
                                 placeholder="请输入密码"
                                 value={this.state.password}
                                 onChange={this.handleChange}
-                                class="pcpassword"
+                                class="pc-password"
                             />
                     </div>
-                    <span class='tishi'>若您没有账号，请先注册</span>
-                    <button type="submit" value="登录"><a href='./editor.html'>登录</a></button>
+                    {/* <span class='tishi'>若您没有账号，请先注册</span> */}
+                    <button type="submit" value="登录" className='pc-denglu'>登录</button>
+                    {/* <input type='botton' value="注册" class="pc-zhuce" onClick={()=>this.props.history.push('/logon')}/> */}
                     {/* <input type="submit" value="登录" class="denglu" /> */}
                     {/* <input type='botton' value="注册" class="zhuce" onClick={()=>this.props.history.push('/logon')}/> */}
                 </form>
             </div>
-        </body>
+
     );
   }
 }

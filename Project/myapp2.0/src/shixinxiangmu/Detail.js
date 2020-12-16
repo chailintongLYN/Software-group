@@ -427,6 +427,36 @@ class Detail extends Component{
                                 })}
                             </div>
                         )
+                    case'lunbotu':
+                        return(
+                            <div class="de-container">
+                                <span class='biao' onClick={()=>this.props.history.goBack()}>﹤</span>
+                                {this.props.css.map((item,index)=>{
+                                    if(this.props.lunbotu[index].textid==this.props.location.state.id){
+                                        return(
+                                            <div class="de-detail">
+                                            <div class="wx-title">{this.props.lunbotu[index].title}</div>
+                                            <div class="wz-tou">
+                                                <img src={this.props.lunbotu[index].userimg} class="touxiang"/>
+                                                <span class="wz-username">{this.props.lunbotu[index].username}</span>
+                                                <button class="attention" onClick={this.gzhandleClick}>{this.state.gz}</button>
+                                            </div>
+                                            <div class="article">
+                                                <p class="wz" dangerouslySetInnerHTML={{__html:this.props.lunbotu[index].text}}></p>
+                                            </div>
+                                            <div class="bottomdiv">
+                                                <div class="time">{this.props.lunbotu[index].ctime.substring(0,10)+" "+this.props.lunbotu[index].ctime.substring(11,16)}</div>
+                                                <div class="shoucang">
+                                                    <img src={xing} class="shoucang-img" onClick={this.schandleClick}/>
+                                                    <div class='shoucang-number'>{this.state.count}</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        )
+                                    }
+                                })}
+                            </div>
+                        )
                }
             case'commend':
             return(
@@ -531,7 +561,8 @@ const mapStateToProps=(state)=>({
     html:state.homereducer.html,
     css:state.homereducer.css,
     commend:state.commendreducer.commend,
-    goodthingsrecommend:state.goodthingsrecommendreducer.goodthingsrecommend
+    goodthingsrecommend:state.goodthingsrecommendreducer.goodthingsrecommend,
+    lunbotu:state.homereducer.lunbotu
     
 })
 
