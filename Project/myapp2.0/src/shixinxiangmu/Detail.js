@@ -78,7 +78,8 @@ class Detail extends Component{
                 this.setState({
                     sc:sessionStorage.getItem('issc'),
                 })
-                console.log('123123:',res,'123123:',sessionStorage.getItem('issc'),);
+                console.log(this.props.location.state);
+                console.log('123123:',res,'是否收藏:',sessionStorage.getItem('issc'),);
             })
         var number=this.props.location.state.scnumber;
         console.log(number);
