@@ -788,6 +788,14 @@ app.post('/uploaduserimg',async c=>{
         if(error) throw error;
     })
 
+    connection.query('UPDATE fans SET userimg = ? WHERE username = ? or followuser = ?',['http://localhost:1234/static'+c.path+'/'+fname,username],function(error,results,fields){
+        if(error) throw error;
+    })
+
+    connection.query('UPDATE text SET userimg = ? WHERE username = ?',['http://localhost:1234/static'+c.path+'/'+fname,username],function(error,results,fields){
+        if(error) throw error;
+    })
+
 },'uploaduserimg-image')
 
 app.get('/uploaduserimg/*',async c=>{
