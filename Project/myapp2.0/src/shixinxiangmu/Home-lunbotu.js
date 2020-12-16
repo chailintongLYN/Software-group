@@ -6,7 +6,7 @@ const Lunbotu=(props)=>{
     let [imgHeight,setImgHeight] = useState(176)
     useEffect(()=>{
         setTimeout(() => {
-            setData((pre)=>['AiyWuByWklrrUDlFignR', 'TekJlZRVCjLFexlOCuWn', 'IJOtIlfsYdTyaDTRVrLI', 'IJOtIlfsYdTyaDTRVrLI2']);
+            setData((pre)=>['http://localhost:1234/static/turningimg/lunbo.jpg','http://localhost:1234/static/turningimg/jQuery.jpg', 'http://localhost:1234/static/turningimg/react.png', 'http://localhost:1234/static/turningimg/webqianduankaifajichuzhishi.jpg']);
           }, 100);
     },[])
     return(
@@ -21,14 +21,14 @@ const Lunbotu=(props)=>{
           {data.map(val => (
             <a
               key={val}
-            //   href="http://www.alipay.com"
+              href="http://www.alipay.com"
               style={{ display: 'inline-block', width: '100%', height: imgHeight }}
             >
               <img
                 // src={`https://zos.alipayobjects.com/rmsportal/${val}.png`}
-                src={lunBoImg}
+                src={`${val}`}
                 alt=""
-                style={{ width: '100%', verticalAlign: 'top' }}
+                style={{ width: '100%', verticalAlign: 'top'}}
                 onLoad={() => {
                   // fire window resize event to change height
                   window.dispatchEvent(new Event('resize'));

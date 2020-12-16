@@ -106,7 +106,7 @@ class Search extends Component{
           {this.props.search.map((item,index)=>{
               return(
                   <div className="sc_container">
-                    <div className="sc_list" onClick={()=>this.props.history.push('/detail',{from:'search',id:this.props.search[index].textid,search:this.props.search[index],scnumber:this.props.search[index].savenumber})}>
+                    <div className="sc_list" onClick={()=>this.props.history.push('/detail',{from:'search',id:this.props.search[index].textid,search:this.props.search[index],scnumber:this.props.search[index].savenumber,textusername:this.props.search[index].username})}>
                         <img src={this.props.search[index].titleimg} id='titleimg'/>
                         <div className="sc_list_text" >
                             <div className="sc_list_head" id='title'>{this.props.search[index].title}</div>

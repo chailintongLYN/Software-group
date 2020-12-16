@@ -43,7 +43,7 @@ const Set=(props)=>{
                     <img src={rightArrow}></img>
                   </div>
                </div>
-               <div className="set_content_tc"  onClick={()=>alert("xx")}>
+               <div className="set_content_tc"  onClick={()=>props.history.push('/')}>
                  退出登录
                </div>
         </div>
