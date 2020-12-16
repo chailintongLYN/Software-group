@@ -82,8 +82,13 @@
     width: 100%;
 }
 
-.wz pre,.wz code{
+.wz pre,.wz code .wz a{
     width: 100%;
     white-space: pre-wrap;
     overflow: hidden;
+    word-break: break-all;
+}
+
+a{
+    word-break: break-all;
 }
