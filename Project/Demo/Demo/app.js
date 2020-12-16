@@ -206,7 +206,7 @@ app.get('/gethomedata',async c=>{
 
 //首页获取新锐推荐的文章 //前端代码有了可以删除
 
-app.get('/1getrecommendtext',async c=>{
+app.get('/getrecommendtext',async c=>{
     c.res.body = fs.readFileSync('./getrecommendtexts/index.html').toString('utf-8')
 })
 
@@ -249,18 +249,23 @@ app.post('/gettexts',async c=>{
             str = 'SELECT * FROM text where ' + searchtype + '=? '
     
         }else{
-            console.log(sevalue.substring(0,8));
-            if (sevalue.substring(0,6) == '仅搜索标题：') {
-                let newsevalue = sevalue.Remove(0,6)
-                console.log('仅搜索标题');
+            console.log(sevalue);
+            if (sevalue.substring(0,6) == '仅检索标题：') {
+                let newsevalue = slice(6)
+                console.log('仅检索标题',newsevalue);
                 str = "SELECT * FROM text where title like '%"+ newsevalue +"%'"
             }
-            else if (sevalue.substring(0,8) == '仅搜索文本内容：') {
-                let newsevalue = sevalue.Remove(0,8)
-                console.log('仅搜索文本内容');
+            else if (sevalue.substring(0,8) == '仅检索文本内容：') {
+                let newsevalue = sevalue.slice(8)
+                console.log('仅检索文本内容');
                 str = "SELECT * FROM text where text like '%"+ newsevalue +"%'"
-            }else{
-                console.log('搜索全部内容');
+            }else if(sevalue.substring(0,6) == '仅检索类型：'){
+                let newsevalue = sevalue.slice(6)
+                console.log('仅检索类型',newsevalue);
+                str = "SELECT * FROM text where type like '%"+ newsevalue +"%'"
+            }
+            else{
+                console.log('检索全部内容');
                 str = "SELECT * FROM text where  text like '%"+ sevalue + "%' or title like '%"+ sevalue + "%' or type like '%"+ sevalue + "%'";
             }
         }
