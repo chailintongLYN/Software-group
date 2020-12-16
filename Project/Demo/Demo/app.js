@@ -251,7 +251,7 @@ app.post('/gettexts',async c=>{
                 str = "SELECT * FROM text where text like '%"+ newsevalue +"%'"
             }else{
                 console.log('搜索全部内容');
-                str = "SELECT * FROM text where text or title or type like '%"+ sevalue +"%'"
+                str = "SELECT * FROM text where  text like '%"+ sevalue + "%' or title like '%"+ sevalue + "%' or type like '%"+ sevalue + "%'";
             }
         }
 
