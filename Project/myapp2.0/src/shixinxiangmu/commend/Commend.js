@@ -29,7 +29,7 @@ class Commend extends Component{
                 return(
                     <div className="sc_container">
                     <div className="sc_list" onClick={()=>this.props.history.push('/detail',{from:'commend',id:this.props.commend[index].textid,textusername:this.props.commend[index].username,scnumber:this.props.commend[index].savenumber})}>
-                        <img src={img} />
+                        <img src={this.props.commend[index].titleimg} />
                         <div className="sc_list_text" >
                             <div className="sc_list_head">{this.props.commend[index].title}</div>
                             <div className="sc_list_foot">
