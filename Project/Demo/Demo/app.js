@@ -187,7 +187,7 @@ app.get('/gethomedata',async c=>{
                     })
             }),
             new Promise((resolve) => {  
-                    connection.query("SELECT * from text where textid = 117 or textid =12 or textid = 10",function (err, results){
+                    connection.query("SELECT * from text where textid = 117 or textid =12 or textid = 16 or textid = 1",function (err, results){
                             if(err){
                                     throw err
                             }else{
@@ -251,7 +251,7 @@ app.post('/gettexts',async c=>{
         }else{
             console.log(sevalue);
             if (sevalue.substring(0,6) == '仅检索标题：') {
-                let newsevalue = slice(6)
+                let newsevalue = sevalue.slice(6)
                 console.log('仅检索标题',newsevalue);
                 str = "SELECT * FROM text where title like '%"+ newsevalue +"%'"
             }

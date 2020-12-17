@@ -17,7 +17,6 @@ class Detail extends Component{
         super(props);
         this.schandleClick=this.schandleClick.bind(this);
         this.gzhandleClick=this.gzhandleClick.bind(this);
-        this.bgcChange=this.bgcChange.bind(this);
         if(this.props.location.state.from=='guanzhu'){
             this.props.dispatch(guanzhu());
         }else if(this.props.location.state.from=='shoucang'){
@@ -28,8 +27,10 @@ class Detail extends Component{
             this.props.dispatch(home());
         }else if(this.props.location.state.from =='commend'){
             this.props.dispatch(commend())
-        }else if(this.props.location.state.from =='goodthingsrecommend'){
-            this.props.dispatch(goodthingsrecommend())
+        }
+        else if(this.props.location.state.from =='lunbotu'){
+            this.props.dispatch(home());
+            
         }
         this.state={
             count:'',
@@ -79,17 +80,17 @@ class Detail extends Component{
                 this.setState({
                     sc:sessionStorage.getItem('issc'),
                 })
-                console.log(this.props.location.state);
+                // console.log(this.props.location.state.from);
                 console.log('123123:',res,'是否收藏:',sessionStorage.getItem('issc'),);
             })
         var number=this.props.location.state.scnumber;
-        console.log(number);
+        // console.log(number);
         this.state.count=number;
         console.log(this.props.location.state);
     }
      schandleClick(event){
         if(this.state.sc=='false'){
-            console.log('zhixing')
+            // console.log('zhixing')
             var newCount=this.state.count+1;
             this.setState({
                 count:newCount,
@@ -98,7 +99,7 @@ class Detail extends Component{
                 username:sessionStorage.getItem('username'),
                 textid:this.props.location.state.id
             }
-           console.log(data);
+        //    console.log(data);
             fetch('http://localhost:1234/addmysave',{
                 method:'POST',
                 headers:{
@@ -107,10 +108,13 @@ class Detail extends Component{
                 body:JSON.stringify(data)
             }).then(res=>res.json())
             .then(res=>{
-                this.state.sc='true';
-                console.log(this.state.sc);
+                // this.state.sc='true';
+                this.setState({
+                    sc: 'true'
+                })
+                // console.log(this.state.sc);
                 sessionStorage.setItem('issc',this.state.sc);
-                console.log(res);
+                // console.log(res);
             })
         }else{
             let data = {
@@ -136,29 +140,14 @@ class Detail extends Component{
                         count:newCount,
                     })
                 }
-                this.state.sc='false'
+                // this.state.sc='false'
+                this.setState({sc:'false'});
                 console.log(this.state.sc);
                 sessionStorage.setItem('issc',this.state.sc);
                 console.log(res);
             })
         }
-    }
-    bgcChange=()=>{
-        if(sessionStorage.getItem('issc')==='true'){
-            console.log('xing');
-            
-            return(
-                <i className='iconfont icon-taobao1' onClick={this.schandleClick,this.bgcChange} id='shoucang-img'></i>
-            )
-        }else{
-
-            console.log('taobao');
-            
-            return(
-                <i className='iconfont icon-shoucang2' onClick={this.schandleClick,this.bgcChange} id='shoucang-img'></i>
-            )
-        }
-    }
+     }
     
     gzhandleClick(){
         if(this.state.gz=='关注'){
@@ -212,6 +201,7 @@ class Detail extends Component{
         console.log(this.props.location.state.from);
         var from =this.props.location.state.from;
         var type=this.props.location.state.type;
+        console.log(from);
         switch(from){
             case'guanzhu':
             return(
@@ -233,9 +223,7 @@ class Detail extends Component{
                                 <div class="bottomdiv">
                                     <div class="time">{this.props.content[index].ctime.substring(0,10)+" "+this.props.content[index].ctime.substring(11,16)}</div>
                                     <div class="shoucang">
-                                        {/* <img src={xing} className="shoucang-img" onClick={this.schandleClick} id='shoucang-img'/> */}
-                                        {/* <i className='iconfont icon-taobaodianpu' id='shoucang-img' onClick={this.schandleClick}></i> */}
-                                        {this.bgcChange()}
+                                        <i className={this.state.sc==='true'?'iconfont icon-shoucang1':'iconfont icon-shoucang'} onClick={this.schandleClick} id='shoucang-img'></i>
                                         <div class='shoucang-number'>{this.state.count}</div>
                                     </div>
                                 </div>
@@ -265,7 +253,7 @@ class Detail extends Component{
                                 <div class="bottomdiv">
                                     <div class="time">{this.props.shoucang[index].ctime.substring(0,10)+" "+this.props.shoucang[index].ctime.substring(11,16)}</div>
                                     <div class="shoucang">
-                                        <img src={xing} class="shoucang-img" onClick={this.schandleClick}/>
+                                    <i className={this.state.sc==='true'?'iconfont icon-shoucang1':'iconfont icon-shoucang'} onClick={this.schandleClick} id='shoucang-img'></i>
                                         <div class='shoucang-number'>{this.state.count}</div>
                                     </div>
                                 </div>
@@ -295,7 +283,7 @@ class Detail extends Component{
                                 <div class="bottomdiv">
                                     <div class="time">{this.props.getmytext[index].ctime.substring(0,10)+" "+this.props.getmytext[index].ctime.substring(11,16)}</div>
                                     <div class="shoucang">
-                                        <img src={xing} class="shoucang-img" onClick={this.schandleClick}/>
+                                    <i className={this.state.sc==='true'?'iconfont icon-shoucang1':'iconfont icon-shoucang'} onClick={this.schandleClick} id='shoucang-img'></i>
                                         <div class='shoucang-number'>{this.state.count}</div>
                                     </div>
                                 </div>
@@ -327,7 +315,7 @@ class Detail extends Component{
                                             <div class="bottomdiv">
                                                 <div class="time">{this.props.newtext[index].ctime.substring(0,10)+" "+this.props.newtext[index].ctime.substring(11,16)}</div>
                                                 <div class="shoucang">
-                                                    <img src={xing} class="shoucang-img" onClick={this.schandleClick}/>
+                                                    <i className={this.state.sc==='true'?'iconfont icon-shoucang1':'iconfont icon-shoucang'} onClick={this.schandleClick} id='shoucang-img'></i>
                                                     <div class='shoucang-number'>{this.state.count}</div>
                                                 </div>
                                             </div>
@@ -357,7 +345,7 @@ class Detail extends Component{
                                             <div class="bottomdiv">
                                                 <div class="time">{this.props.react[index].ctime.substring(0,10)+" "+this.props.react[index].ctime.substring(11,16)}</div>
                                                 <div class="shoucang">
-                                                    <img src={xing} class="shoucang-img" onClick={this.schandleClick}/>
+                                                    <i className={this.state.sc==='true'?'iconfont icon-shoucang1':'iconfont icon-shoucang'} onClick={this.schandleClick} id='shoucang-img'></i>
                                                     <div class='shoucang-number'>{this.state.count}</div>
                                                 </div>
                                             </div>
@@ -387,7 +375,7 @@ class Detail extends Component{
                                             <div class="bottomdiv">
                                                 <div class="time">{this.props.js[index].ctime.substring(0,10)+" "+this.props.js[index].ctime.substring(11,16)}</div>
                                                 <div class="shoucang">
-                                                    <img src={xing} class="shoucang-img" onClick={this.schandleClick}/>
+                                                    <i className={this.state.sc==='true'?'iconfont icon-shoucang1':'iconfont icon-shoucang'} onClick={this.schandleClick} id='shoucang-img'></i>
                                                     <div class='shoucang-number'>{this.state.count}</div>
                                                 </div>
                                             </div>
@@ -417,37 +405,7 @@ class Detail extends Component{
                                             <div class="bottomdiv">
                                                 <div class="time">{this.props.css[index].ctime.substring(0,10)+" "+this.props.css[index].ctime.substring(11,16)}</div>
                                                 <div class="shoucang">
-                                                    <img src={xing} class="shoucang-img" onClick={this.schandleClick}/>
-                                                    <div class='shoucang-number'>{this.state.count}</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        )
-                                    }
-                                })}
-                            </div>
-                        )
-                    case'lunbotu':
-                        return(
-                            <div class="de-container">
-                                <span class='biao' onClick={()=>this.props.history.goBack()}>﹤</span>
-                                {this.props.css.map((item,index)=>{
-                                    if(this.props.lunbotu[index].textid==this.props.location.state.id){
-                                        return(
-                                            <div class="de-detail">
-                                            <div class="wx-title">{this.props.lunbotu[index].title}</div>
-                                            <div class="wz-tou">
-                                                <img src={this.props.lunbotu[index].userimg} class="touxiang"/>
-                                                <span class="wz-username">{this.props.lunbotu[index].username}</span>
-                                                <button class="attention" onClick={this.gzhandleClick}>{this.state.gz}</button>
-                                            </div>
-                                            <div class="article">
-                                                <p class="wz" dangerouslySetInnerHTML={{__html:this.props.lunbotu[index].text}}></p>
-                                            </div>
-                                            <div class="bottomdiv">
-                                                <div class="time">{this.props.lunbotu[index].ctime.substring(0,10)+" "+this.props.lunbotu[index].ctime.substring(11,16)}</div>
-                                                <div class="shoucang">
-                                                    <img src={xing} class="shoucang-img" onClick={this.schandleClick}/>
+                                                    <i className={this.state.sc==='true'?'iconfont icon-shoucang1':'iconfont icon-shoucang'} onClick={this.schandleClick} id='shoucang-img'></i>
                                                     <div class='shoucang-number'>{this.state.count}</div>
                                                 </div>
                                             </div>
@@ -463,6 +421,7 @@ class Detail extends Component{
                 <div class="de-container">
                     <span class='biao' onClick={()=>this.props.history.goBack()}>﹤</span>
                     {this.props.commend.map((item,index)=>{
+                        
                         if(this.props.commend[index].textid==this.props.location.state.id){
                             return(
                                 <div class="de-detail">
@@ -478,7 +437,7 @@ class Detail extends Component{
                                 <div class="bottomdiv">
                                     <div class="time">{this.props.commend[index].ctime.substring(0,10)+" "+this.props.commend[index].ctime.substring(11,16)}</div>
                                     <div class="shoucang">
-                                        <img src={xing} class="shoucang-img" onClick={this.schandleClick}/>
+                                        <i className={this.state.sc==='true'?'iconfont icon-shoucang1':'iconfont icon-shoucang'} onClick={this.schandleClick} id='shoucang-img'></i>
                                         <div class='shoucang-number'>{this.state.count}</div>
                                     </div>
                                 </div>
@@ -508,7 +467,7 @@ class Detail extends Component{
                                 <div class="bottomdiv">
                                     <div class="time">{this.props.goodthingsrecommend[index].ctime.substring(0,10)+" "+this.props.goodthingsrecommend[index].ctime.substring(11,16)}</div>
                                     <div class="shoucang">
-                                        <img src={xing} class="shoucang-img" onClick={this.schandleClick}/>
+                                        <i className={this.state.sc==='true'?'iconfont icon-shoucang1':'iconfont icon-shoucang'} onClick={this.schandleClick} id='shoucang-img'></i>
                                         <div class='shoucang-number'>{this.state.count}</div>
                                     </div>
                                 </div>
@@ -536,7 +495,7 @@ class Detail extends Component{
                         <div class="bottomdiv">
                             <div class="time">{this.props.location.state.search.ctime.substring(0,10)+" "+this.props.location.state.search.ctime.substring(11,16)}</div>
                             <div class="shoucang">
-                                <img src={xing} class="shoucang-img" onClick={this.schandleClick}/>
+                                <i className={this.state.sc==='true'?'iconfont icon-shoucang1':'iconfont icon-shoucang'} onClick={this.schandleClick} id='shoucang-img'></i>
                                 <div class='shoucang-number'>{this.state.count}</div>
                             </div>
                         </div>

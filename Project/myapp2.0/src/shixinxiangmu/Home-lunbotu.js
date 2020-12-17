@@ -1,6 +1,7 @@
 import React,{useState,useEffect,Component} from 'react'
 import { Carousel, WingBlank } from 'antd-mobile';
-import lunBoImg from  "./HomeImg/lunbo.jpg"
+import lunBoImg from  "./HomeImg/lunbo.jpg";
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux'
 import {home} from './action/homeaction'
 class Lunbotu extends Component{
@@ -23,7 +24,7 @@ class Lunbotu extends Component{
     componentDidUpdate(){
       setTimeout(() => {
         this.setState({
-          data:['http://localhost:1234/static/turningimg/lunbo.jpg','http://localhost:1234/static/turningimg/jQuery.jpg', 'http://localhost:1234/static/turningimg/react.jpg', 'http://localhost:1234/static/turningimg/webqianduankaifajichuzhishi.jpg'],
+          data:['http://localhost:1234/static/turningimg/lunbo.jpg', 'http://localhost:1234/static/turningimg/react.jpg', 'http://localhost:1234/static/turningimg/webqianduankaifajichuzhishi.jpg','http://localhost:1234/static/turningimg/jQuery.jpg'],
         })
       }, 100);
     }
@@ -50,6 +51,7 @@ class Lunbotu extends Component{
               <a
               key={val}
               // href="http://www.alipay.com"
+              // onClick={()=>this.props.history.push('/detail')}
               style={{ display: 'inline-block', width: '100%', height: this.state.imgHeight }}
             >
               <img
@@ -58,6 +60,8 @@ class Lunbotu extends Component{
                 alt=""
                 style={{ width: '100%', verticalAlign: 'top'}}
                 // onClick={(val)=>this.props.history.push('/detail')}
+                // onClick={()=>console.log(this.props.lunbotu[index].textid)}
+                onClick={()=>this.props.history.push('/detail',{from:'home',id:this.props.lunbotu[index].textid,type:this.props.lunbotu[index].type,textusername:this.props.lunbotu[index].username,scnumber:this.props.lunbotu[index].savenumber})}
                 onLoad={() => {
                   // fire window resize event to change height
                   window.dispatchEvent(new Event('resize'));
@@ -80,4 +84,4 @@ class Lunbotu extends Component{
 const mapStateToProps=(state)=>({
   lunbotu:state.homereducer.lunbotu
 })
-export default connect(mapStateToProps)(Lunbotu)
+export default connect(mapStateToProps)(withRouter(Lunbotu))
