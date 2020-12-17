@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import './login.css'
+import './logon.css'
 let newinfo={
     username:"",
     passwd:""
@@ -41,7 +41,7 @@ class Logon extends Component{
             alert("用户名或密码不能为空！");
             return;
         }
-        fetch('http://localhost:1234/newdata', {
+        fetch('http://localhost:1234/logon', {
             method : 'POST',
             headers : {
               'content-type' : 'application/json'
@@ -65,7 +65,7 @@ class Logon extends Component{
                   : "/login";
               // 登陆成功之后的跳转
               this.props.history.push(RedirectUrl);
-            }else if(response.status === 'usernamefailed'){
+            }else if(response.status === 'usernamefaild'){
                 alert('用户名已存在')
             }
             else{
@@ -78,7 +78,7 @@ class Logon extends Component{
             <body>
                 <div class="container">
                     {/* <div class="ll"></div> */}
-                    <form onSubmit={this.handleSumit}>
+                    <form onSubmit={this.handleSumit} class='biaodan1'>
                         <div>
                                 <input
                                     type="text"
@@ -86,7 +86,7 @@ class Logon extends Component{
                                     placeholder="请输入用户名"
                                     value={this.state.username}
                                     onChange={this.handleChange}
-                                    class="username"
+                                    class="logon-username"
                                 />
                         </div>
                         <div>

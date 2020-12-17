@@ -34,7 +34,7 @@ body,html{
     background-color:rgb(255, 255, 255);
     font-size: 12px;
 } */
-.username{
+.login-username{
     position: absolute;
     top: 0px;
     width: 275px;

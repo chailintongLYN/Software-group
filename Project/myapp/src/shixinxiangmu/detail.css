@@ -1,5 +1,4 @@
 .de-container{
-    position: fixed;
     top: 0px;
     bottom: 0px;
     width: 100%;
@@ -12,6 +11,7 @@
     font-size: 40px;
     width: 40px;
     height: 40px;
+    z-index: 2;
 }
 .de-detail{
     padding-top: 50px;
@@ -20,18 +20,27 @@
     height: 100%;
     
 }
-.tou{
+.wz-tou{
     position: relative;
     width: 100%;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
+    margin-top: 15px;
 }
 .attention{
     position: absolute;
     right: 0px;
+    width: 60px;
+    height: 30px;
+    margin-top: 2px;
+    background-color: rgb(183, 196, 223);
+    border:1px;
+    border-radius: 3px;
 }
-.username{
-    position: relative;
-    font-size: 12px;
+.wz-username{
+    position: absolute;
+    left: 15%;
+    margin-top:8px;
+    font-size: 16px;
 }
 .wx-title{
     position: relative;
@@ -41,6 +50,7 @@
 .touxiang{
     position: relative;
     width: 32px;height: 32px;
+    border-radius: 50%;
 }
 
 
@@ -49,4 +59,47 @@
     width: 100%;
     font-size: 14px;
     line-height: 2em;
+}
+.bottomdiv{
+    position: relative;
+    width: 100%;
+}
+.shoucang{
+  display: inline-block;
+  position: absolute;
+  right: 15%;
+  bottom: 0px;
+  background-color: #fff;
+  
+}
+.shoucang-img {
+    width: 30px;height: 30px;
+    margin-top: 10px;
+   
+}
+.shoucang-number{
+    position: absolute;
+    top: 0px;
+    left: 30px;
+}
+.time{
+    margin-top: 20px;
+    display: inline-block;
+    width: 50%;
+    margin-right: 0px;
+}
+
+.wz img{
+    width: 100%;
+}
+
+.wz pre,.wz code .wz a{
+    width: 100%;
+    white-space: pre-wrap;
+    overflow: hidden;
+    word-break: break-all;
+}
+
+a{
+    word-break: break-all;
 }

@@ -99,6 +99,11 @@ margin: 11px 0 11px 21px;
 .home_remen_container_div_img{
     width: 108px;
     height: 108px;
+    /* border:1px; */
+    border-radius: 5px;
+}
+.biao_img{
+    border-radius: 5px;
 }
 .home_dashen_container_div_text, .home_remen_container_div_text{
     width: 100%;

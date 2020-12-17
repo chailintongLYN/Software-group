@@ -24,12 +24,14 @@ class Login extends Component {
                 username: e.target.value,
             });
             loginfo.username=e.target.value;
+            console.log(this.state);
         } else if (e.target.name === "passwd") {
             this.setState({
                 passwd: e.target.value,
             });
             loginfo.passwd=e.target.value;
             console.log(JSON.stringify(loginfo));
+            console.log(this.state);
         }
         
     }
@@ -57,7 +59,7 @@ class Login extends Component {
             //   location.href = '/login';
               console.log(response)
               // 保存信息到sessionStorage
-              var username=sessionStorage.setItem("username", username);
+              sessionStorage.setItem("username", username);
               // 登录成功后，设置redirectToReferrer为true;
               // this.setState({
               //     rediectToReferrer: true,
@@ -85,7 +87,7 @@ class Login extends Component {
                                     placeholder="请输入用户名"
                                     value={this.state.username}
                                     onChange={this.handleChange}
-                                    class="username"
+                                    class="login-username"
                                 />
                         </div>
                         <div>
