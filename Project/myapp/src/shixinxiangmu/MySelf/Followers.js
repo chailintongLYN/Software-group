@@ -12,6 +12,25 @@ class Followers extends Component{
         this.deletefollower=this.deletefollower.bind(this);
         this.props.dispatch(follow())
     }
+    isfollowerkong=()=>{
+        if(this.props.follow==undefined){
+            return(
+                        <div class='liebiao'></div>
+            )
+        }else{
+            return(
+                this.props.follow.map((item,index)=>{
+                    return(
+                        <div class='liebiao'>
+                            <img src={this.props.follow[index].usernameimg} class='liebiao-touxiang'/>
+                            <div class='liebiao-username'>{this.props.follow[index].username}</div>
+                            <button className='delete' onClick={()=>alert('取消关注','是否取消关注',[{text:'取消',onPress:()=>console.log('cancel')},{text:'确定',onPress:()=>this.deletefollower(this.props.follow[index].username)}])}>取消关注</button>
+                        </div>
+                    )
+                })
+            )
+        }
+    }
     deletefollower(username){
         let data = {
             username:username,
@@ -39,15 +58,7 @@ class Followers extends Component{
                     <div>我的关注</div>
                 </div>
                 <div class='center'>
-                    {this.props.follow.map((item,index)=>{
-                        return(
-                            <div class='liebiao'>
-                                <img src={this.props.follow[index].usernameimg} class='liebiao-touxiang'/>
-                                <div class='liebiao-username'>{this.props.follow[index].username}</div>
-                                <button className='delete' onClick={()=>alert('取消关注','是否取消关注',[{text:'取消',onPress:()=>console.log('cancel')},{text:'确定',onPress:()=>this.deletefollower(this.props.follow[index].username)}])}>取消关注</button>
-                            </div>
-                        )
-                    })}
+                    {this.isfollowerkong()}
                 </div>
             </div>
         )

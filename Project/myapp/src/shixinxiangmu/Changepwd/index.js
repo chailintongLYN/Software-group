@@ -29,9 +29,9 @@ class Changepwd extends Component{
     constructor(props){
         super(props);
         this.state={
-            oldPwd:'',
-            newPwd1:'',
-            newPwd2:'',
+            // oldPwd:'',
+            // newPwd1:'',
+            // newPwd2:'',
             type:'number'
         }
         this.oldPwd_handleChange=this.oldPwd_handleChange.bind(this);
@@ -45,23 +45,25 @@ class Changepwd extends Component{
         changeinfo.oldPwd=oldPwd
         // console.log(this.state);
         console.log(changeinfo)
-        this.setState({
-            oldPwd:changeinfo.oldPwd
-        })
-        console.log(this.state)
+        // this.setState({
+        //     oldPwd:changeinfo.oldPwd
+        // })
+        // console.log(this.state)
     }
     newPwd1_handleChange(newPwd1){
         
-        changeinfo.newPwd1=newPwd1
-        this.setState({
-            newPwd1:changeinfo.newPwd1
-        })
+        changeinfo.newPwd1=newPwd1;
+        console.log(changeinfo);
+        // this.setState({
+        //     newPwd1:changeinfo.newPwd1
+        // })
     }
     newPwd2_handleChange(newPwd2){
-        changeinfo.newPwd2=newPwd2
-        this.setState({
-            newPwd2:changeinfo.newPwd2
-        })
+        changeinfo.newPwd2=newPwd2;
+        console.log(changeinfo);
+        // this.setState({
+        //     newPwd2:changeinfo.newPwd2
+        // })
     }
     //提交修改
     async handleSubmit(){
@@ -72,6 +74,7 @@ class Changepwd extends Component{
                 newpasswd:changeinfo.newPwd1
             }
             console.log(changeinfo);
+            console.log(data);
             fetch('http://localhost:1234/changemypassword',{
                 method:'POST',
                 headers:{

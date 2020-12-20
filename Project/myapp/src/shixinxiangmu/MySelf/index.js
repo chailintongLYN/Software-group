@@ -19,6 +19,7 @@ class MySelf extends Component{
     constructor(props){
         super(props);
         this.delete=this.delete.bind(this);
+        this.ismytextkong=this.ismytextkong.bind(this);
         this.props.dispatch(myself());
         console.log(this.props.fansandfllow);
         console.log(this.props.getmytext);
@@ -29,6 +30,36 @@ class MySelf extends Component{
     // function name(params) {
         
     // }
+    ismytextkong=()=>{
+        if(this.props.getmytext==undefined){
+            return(
+                <div></div>
+            )
+        }else{
+            return(
+                this.props.getmytext.map((item,index)=>{
+                    return(
+                        <div class="mp-list" onClick={(e)=>{e.stopPropagation();this.props.history.push('/detail',{from:'myself',id:this.props.getmytext[index].textid,scnumber:this.props.getmytext[index].savenumber})}}>
+                            <img src={this.props.getmytext[index].titleimg} className='mp_list_img'/>
+                                <div className="mp-list-text">
+                                    <div className="mp_list_title">{this.props.getmytext[index].title}</div>
+                                    <div className="mp_list_foot">
+                                        <div className="mp_list_type">{this.props.getmytext[index].type}</div>
+                                        <div className="mp_list_time">{this.props.getmytext[index].ctime.substring(0,10)}</div>
+                                        <div className="mp_list_shoucang">收藏 <span>{this.props.getmytext[index].savenumber}</span></div>
+                                        
+                                        <button className='mp_list_delete' 
+                                        onClick={(e)=>{e.stopPropagation();alert('删除','是否确认删除？',[{text:'取消',onPress:()=>console.log('cancel')},{text:'确定',onPress:()=>this.delete(this.props.getmytext[index].textid)}]) }} >
+                                            删除</button>
+                                        
+                                    </div>
+                                </div>         
+                        </div>
+                    )
+                })
+            )
+        }
+    }
  delete(textid){
         console.log('textid:',textid);
         fetch('http://localhost:1234/deletetextdata',{
@@ -83,29 +114,12 @@ class MySelf extends Component{
                 <div className="myse_project">
                     <div className="myse_project_head">我的作品</div>
                     <div className="myse_project_content">
-                        {this.props.getmytext.map((item,index)=>{
-                            return(
-                                <div class="mp-list" onClick={(e)=>{e.stopPropagation();this.props.history.push('/detail',{from:'myself',id:this.props.getmytext[index].textid,scnumber:this.props.getmytext[index].savenumber})}}>
-                                    <img src={this.props.getmytext[index].titleimg} className='mp_list_img'/>
-                                        <div className="mp-list-text">
-                                            <div className="mp_list_title">{this.props.getmytext[index].title}</div>
-                                            <div className="mp_list_foot">
-                                                <div className="mp_list_type">{this.props.getmytext[index].type}</div>
-                                                <div className="mp_list_time">{this.props.getmytext[index].ctime.substring(0,10)}</div>
-                                                <div className="mp_list_shoucang">收藏 <span>{this.props.getmytext[index].savenumber}</span></div>
-                                                
-                                                <button className='mp_list_delete' 
-                                                onClick={(e)=>{e.stopPropagation();alert('删除','是否确认删除？',[{text:'取消',onPress:()=>console.log('cancel')},{text:'确定',onPress:()=>this.delete(this.props.getmytext[index].textid)}]) }} >
-                                                    删除</button>
-                                                
-                                            </div>
-                                        </div>         
-                                </div>
-                            )
-                        })}
+                        {/* {this.props.getmytext=='undefined'?{}:
+                        } */}
                         {/* <div  className="myse_project_list_add">
                             <img src={add}/>
                         </div> */}
+                        {this.ismytextkong()}
                         <div className="kongbai_bottom"></div>
                     </div>
                 </div>

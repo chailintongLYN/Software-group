@@ -12,6 +12,25 @@ class Fans extends Component{
         this.deleteFans=this.deleteFans.bind(this);
         this.props.dispatch(fans())
     }
+    isfanskong=()=>{
+        if(this.props.fans==undefined){
+            return(
+                <div className='liebiao'></div>
+            )
+        }else{
+            return(
+                this.props.fans.map((item,index)=>{
+                    return(
+                        <div class='liebiao'>
+                            <img src={this.props.fans[index].followuserimg} class='liebiao-touxiang'/>
+                            <div class='liebiao-username'>{this.props.fans[index].followuser}</div>
+                            <button className='delete' onClick={()=>alert('删除粉丝','是否此删除粉丝',[{text:'取消',onPress:()=>console.log('cancel')},{text:'确定',onPress:()=>this.deleteFans(this.props.fans[index].followuser)}])}>删除粉丝</button>
+                        </div>
+                    )
+                })
+            )
+        }
+    }
     deleteFans(username){
         let data = {
             username:sessionStorage.getItem('username'),
@@ -38,15 +57,7 @@ class Fans extends Component{
                     <div>我的粉丝</div>
                 </div>
                 <div class='center'>
-                    {this.props.fans.map((item,index)=>{
-                        return(
-                            <div class='liebiao'>
-                                <img src={this.props.fans[index].followuserimg} class='liebiao-touxiang'/>
-                                <div class='liebiao-username'>{this.props.fans[index].followuser}</div>
-                                <button className='delete' onClick={()=>alert('删除粉丝','是否此删除粉丝',[{text:'取消',onPress:()=>console.log('cancel')},{text:'确定',onPress:()=>this.deleteFans(this.props.fans[index].followuser)}])}>删除粉丝</button>
-                            </div>
-                        )
-                    })}
+                    {this.isfanskong()}
                 </div>
             </div>
         )

@@ -16,7 +16,34 @@ class ShouChang extends Component{
         super(props);
         this.props.dispatch(shoucang())
     }
-    
+    isshoucangkong=()=>{
+        if(this.props.shoucang==undefined){
+            return(
+                <div className='sc_container'></div>
+            )
+        }else{
+            console.log(1)
+            return(
+                this.props.shoucang.map((item,index)=>{
+                    return(
+                        <div className="sc_container">
+                        <div className="sc_list" onClick={()=>this.props.history.push('/detail',{from:'shoucang',id:this.props.shoucang[index].textid,scnumber:this.props.shoucang[index].savenumber,textusername:this.props.shoucang[index].username})}>
+                            <img src={this.props.shoucang[index].titleimg} />
+                            <div className="sc_list_text" >
+                                <div className="sc_list_head">{this.props.shoucang[index].title}</div>
+                                <div className="sc_list_foot">
+                                    <div className="sc_list_foot1">{this.props.shoucang[index].type}</div>
+                                    <div className="sc_list_foot2">{this.props.shoucang[index].ctime.substring(0,10)+" "+this.props.shoucang[index].ctime.substring(11,16)}</div>
+                                    <div className="sc_list_foot3">收藏 <span>{this.props.shoucang[index].savenumber}</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    )
+                })
+            )
+        }
+    }
     render(props){
         console.log('shoucang:',this.props.shoucang);
         return (
@@ -24,23 +51,7 @@ class ShouChang extends Component{
             <div className="sc_header">
                 <img src={heart}/> 我的收藏
             </div>
-            {this.props.shoucang.map((item,index)=>{
-                return(
-                    <div className="sc_container">
-                    <div className="sc_list" onClick={()=>this.props.history.push('/detail',{from:'shoucang',id:this.props.shoucang[index].textid,scnumber:this.props.shoucang[index].savenumber,textusername:this.props.shoucang[index].username})}>
-                        <img src={this.props.shoucang[index].titleimg} />
-                        <div className="sc_list_text" >
-                            <div className="sc_list_head">{this.props.shoucang[index].title}</div>
-                            <div className="sc_list_foot">
-                                <div className="sc_list_foot1">{this.props.shoucang[index].type}</div>
-                                <div className="sc_list_foot2">{this.props.shoucang[index].ctime.substring(0,10)+" "+this.props.shoucang[index].ctime.substring(11,16)}</div>
-                                <div className="sc_list_foot3">收藏 <span>{this.props.shoucang[index].savenumber}</span></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                )
-            })}
+            {this.isshoucangkong()}
         <div className="kongbai_bottom"></div>
         <BttomBar />
         </div>

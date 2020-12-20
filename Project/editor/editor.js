@@ -109,6 +109,7 @@ app.post('/uploadtextimg',async c=>{
     console.log(fname);
 
     let{title,text,username,type} = c.body
+    console.log(c.body);
     var results = await  new Promise((resolve) => {
         connection.query('INSERT INTO text (username,type,title,text) VALUES (?,?,?,?)',[username,type,title,text],function (error, results, fields){
             if(error){

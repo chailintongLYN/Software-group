@@ -433,11 +433,26 @@ app.post('/addmyfollows',async c=>{
                 resolve({'status':'Already exists','code':'400'})
             }
             else{
+                let usernameimg = '',
+                    followuserimg = '';
+
+                connection.query('SELECT userimg from login where username = ?',[username],function(error,results){
+                    if (error) throw error;
+                    // console.log();
+                    usernameimg = results[0].userimg
+                })
+
+                connection.query('SELECT userimg from login where username = ?',[followuser],function(error,results){
+                    if (error) throw error;
+                    // console.log();
+                    followuserimg = results[0].userimg
+                })
 
                 connection.query('UPDATE login SET followusernumber = followusernumber+1 where username = ? ',[followuser],function(error,results){
                     if(error) throw error;
                     console.log('关注成功，',followuser,'的关注数量加1');
                 })
+
 
                 connection.query('UPDATE login SET fansnumber = fansnumber+1 where username = ? ',[username],function(error,results){
                     if(error) throw error;
@@ -512,11 +527,15 @@ app.post('/getmyfollowstext', async c=>{
         })
     }) 
 
-    let username = []
+    let username = [];
+    if (result1.results == undefined) {
+        return
+    }else{
+        result1.results.forEach((item,index)=>{
+            username.push(item.username)
+        })
+    }
 
-    result1.results.forEach((item,index)=>{
-        username.push(item.username)
-    })
     console.log(username);
 
 
@@ -653,10 +672,15 @@ app.post('/getmysavetext', async c=>{
     }
 
     let textidarr  =  []
+
+    if (result.results == undefined) {
+        return
+    }else{
+        result.results.forEach((item,)=>{
+            textidarr.push(item.textid)
+        })
+    }
     
-    result.results.forEach((item,)=>{
-        textidarr.push(item.textid)
-    })
     
     let strr = 'SELECT * FROM text where textid =? ';
     
@@ -835,7 +859,7 @@ app.post('/changemypassword',async c=>{
     console.log(username,passwd,newpasswd);
     var result = await new Promise((resolve) => {
         connection.query('SELECT * FROM login where username = ? and passwd = ? ',[username,passwd],function(error,results,fields){
-            if(results.length !== 0 ){
+            if(results.length == 0 ){
                 resolve({'status': 'passwdfailed','code':'400'})
             }
             else{

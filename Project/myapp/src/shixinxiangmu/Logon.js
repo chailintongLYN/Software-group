@@ -33,6 +33,7 @@ class Logon extends Component{
     }
     // 提交登录表单
     async handleSumit(e) {
+        console.log('zhuce');
         e.preventDefault();
         console.log(e.target)
         const username = this.state.username;
@@ -62,10 +63,11 @@ class Logon extends Component{
               // });
               let RedirectUrl = this.props.location.state
                   ? this.props.location.state.from.pathname
-                  : "/login";
+                  : "/home";
               // 登陆成功之后的跳转
               this.props.history.push(RedirectUrl);
-            }else if(response.status === 'usernamefaild'){
+            }else if(response.status == 'usernamefailed'){
+                // console.log(response.status)
                 alert('用户名已存在')
             }
             else{
@@ -100,7 +102,7 @@ class Logon extends Component{
                                     class="password"
                                 />
                         </div>
-                        <input type="submit" value="完成注册" class="zhuce" onClick={()=>this.props.history.push('/home')}/>
+                        <input type="submit" value="完成注册" class="zhuce"/>
                         <input type="button" value="返回登录" class="denglu" onClick={()=>this.props.history.push('/')}/>
                     </form>
                 </div>
