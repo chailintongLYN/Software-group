@@ -155,38 +155,6 @@ app.get('/static/uploadtextimg/*',async c=>{
     c.res.body = fs.readFileSync('.'+c.path)
 })
 
-// app.post('/editor',async c=>{
-//     let{title,text,username,type} = c.body
-//     var results = await  new Promise((resolve) => {
-//         connection.query('INSERT INTO text (username,type,title,text) VALUES (?,?,?,?)',[username,type,title,text],function (error, results, fields){
-//             if(error){
-//                 resolve({'status': 'faild'}) 
-//                 throw error;
-//             }else{
-//                 console.log("ok")
-//                 resolve({'status':'success'}) 
-//             }
-//         }) 
-//     });
-    
-//     c.res.body = {'results':results};
-// })
-// router.post('/editor', async c => {
-//     let {type,title,text,username} = JSON.parse(c.body);
-//     console.log(type,title,text,username);
-//     var results = await  new Promise((resolve) => {
-//     connection.query('INSERT INTO text (username,type,title,text) VALUES (?,?,?,?)',[username,type,title,text],function (error, results, fields){
-//             if(error){
-//                 resolve({'status': 'faild'}) 
-//                 throw error;
-//             }else{
-//                 console.log("ok")
-//                 resolve({'status':'success'}) 
-//             }
-//         }) 
-//     });
-//     c.res.body = results; 
-// });
 app.get('/pcload',async c=>{
     c.res.body=pcload
 })

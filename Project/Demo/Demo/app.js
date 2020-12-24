@@ -217,7 +217,7 @@ app.get('/getrecommendtext',async c=>{
 
     var result = await new Promise((resolve)=>{
         //SELECT textid,title from text  order by ctime desc limit 0,3
-        connection.query('SELECT * from text order by savenumber desc limit 0,4',function(error,results){
+        connection.query('SELECT * from text order by savenumber desc limit 0,5',function(error,results){
             console.log('results:',results);
             if(results.length === 0){
                 resolve({'status':'failed','code':'400'})
