@@ -433,13 +433,14 @@ app.post('/addmyfollows',async c=>{
                 resolve({'status':'Already exists','code':'400'})
             }
             else{
-                let usernameimg = '',
+                var usernameimg = '',
                     followuserimg = '';
 
                 connection.query('SELECT userimg from login where username = ?',[username],function(error,results){
                     if (error) throw error;
                     // console.log();
                     usernameimg = results[0].userimg
+                    console.log(1);
                 })
 
                 connection.query('SELECT userimg from login where username = ?',[followuser],function(error,results){
@@ -472,6 +473,12 @@ app.post('/addmyfollows',async c=>{
                 })
             }
         })
+        // setTimeout(()=>{
+        //     connection.query('UPDATE fans SET usernameimg = ?,followuserimg = ? where username = ? and followuser = ?',[usernameimg,followuserimg,username,followuser],function(error,results){
+        //         if (error) throw error;
+        //         console.log(2);
+        //     })
+        // },2000)
     }) 
     c.res.body = result;
 })
